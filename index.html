@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigitalBlueprint — Webs que trabajan por tu negocio</title>
+  <meta name="description" content="Creamos y cuidamos la web de tu negocio. Diseño profesional, mantenimiento continuo y soporte 24/7.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='64' height='64' rx='12' fill='%230E2A47'/%3E%3Crect x='14' y='40' width='10' height='14' rx='1.5' fill='%23FFFFFF'/%3E%3Crect x='27' y='30' width='10' height='24' rx='1.5' fill='%23FFFFFF'/%3E%3Crect x='40' y='14' width='10' height='40' rx='1.5' fill='%2306B6D4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Figtree:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0E2A47;
+      --navy-light:  #163554;
+      --navy-deep:   #081929;
+      --cyan:        #06B6D4;
+      --cyan-glow:   rgba(6,182,212,0.18);
+      --gray:        #F4F6F8;
+      --white:       #FFFFFF;
+      --text:        #E8EEF4;
+      --text-dim:    rgba(232,238,244,0.65);
+      --text-muted:  rgba(232,238,244,0.38);
+      --glass:       rgba(255,255,255,0.04);
+      --glass-b:     rgba(6,182,212,0.18);
+      --shadow:      0 20px 60px rgba(0,0,0,0.5);
+      --r:           22px;
+      --r-sm:        12px;
+      --ease:        0.3s cubic-bezier(.4,0,.2,1);
+      --f-head:      'Syne', sans-serif;
+      --f-body:      'Figtree', sans-serif;
+      --f-mono:      'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--f-body);
+      background: var(--navy-deep);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+    /* ── BACKGROUND GRID ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(6,182,212,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── FLOATING BG ORBS ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 10s ease-in-out infinite;
+    }
+    .orb-1 { width: 420px; height: 420px; background: rgba(6,182,212,.07); top: 5%; left: -8%; animation-delay: 0s; }
+    .orb-2 { width: 280px; height: 280px; background: rgba(14,42,71,.8);   bottom: 15%; right: 3%; animation-delay: -4s; }
+    .orb-3 { width: 180px; height: 180px; background: rgba(6,182,212,.05); top: 55%; left: 35%; animation-delay: -7s; }
+
+    @keyframes floatOrb {
+      0%,100% { transform: translate(0,0); }
+      33%      { transform: translate(18px,-26px); }
+      66%      { transform: translate(-14px,18px); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--ease);
+    }
+    nav.scrolled {
+      background: rgba(8,25,41,.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-b);
+      padding: 14px 6%;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: inherit;
+    }
+    .nav-mark {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--cyan), #0891B2);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-head); font-weight: 800; font-size: 15px;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(6,182,212,.35);
+    }
+    .nav-name {
+      font-family: var(--f-head); font-weight: 700; font-size: 17px;
+      color: var(--white);
+    }
+    .nav-links {
+      list-style: none;
+      display: flex; align-items: center; gap: 30px;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 14px; font-weight: 500;
+      transition: color var(--ease);
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      background: var(--cyan) !important;
+      color: var(--navy-deep) !important;
+      font-weight: 700 !important;
+      padding: 9px 20px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 0 20px rgba(6,182,212,.35);
+      transition: all var(--ease) !important;
+    }
+    .nav-cta:hover { background: #09d1ee !important; box-shadow: 0 0 36px rgba(6,182,212,.5) !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--ease); }
+
+    .mobile-nav {
+      display: none; position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(8,25,41,.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-b);
+      padding: 20px 6%;
+      flex-direction: column; gap: 16px;
+      z-index: 99;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 16px; font-weight: 500;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(6,182,212,.1);
+      transition: color var(--ease);
+    }
+    .mobile-nav a:hover, .mobile-nav a:last-child { color: var(--cyan); border-bottom-color: transparent; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 130px 6% 90px;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 15%; right: 8%;
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(6,182,212,.11) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      width: 100%; max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-left  { animation: fadeUp .8s ease both; }
+    .hero-right { animation: fadeUp .8s ease .18s both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.28);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px; font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 26px;
+    }
+    .hero-chip-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan);
+      animation: blink 2s ease infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.4; transform:scale(.65); }
+    }
+
+    h1 {
+      font-family: var(--f-head);
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, var(--cyan) 0%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-dim);
+      max-width: 460px; margin-bottom: 42px;
+    }
+
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-main {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--cyan); color: var(--navy-deep);
+      font-family: var(--f-body); font-weight: 700; font-size: 15px;
+      padding: 14px 28px; border-radius: var(--r-sm);
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all var(--ease);
+      box-shadow: 0 0 32px rgba(6,182,212,.42), 0 4px 20px rgba(0,0,0,.3);
+      animation: glowPulse 3.5s ease-in-out infinite;
+    }
+    .btn-main:hover {
+      background: #09d1ee;
+      transform: translateY(-2px);
+      box-shadow: 0 0 52px rgba(6,182,212,.6), 0 8px 28px rgba(0,0,0,.4);
+    }
+    @keyframes glowPulse {
+      0%,100% { box-shadow: 0 0 32px rgba(6,182,212,.42), 0 4px 20px rgba(0,0,0,.3); }
+      50%      { box-shadow: 0 0 52px rgba(6,182,212,.62), 0 4px 20px rgba(0,0,0,.3); }
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text);
+      font-family: var(--f-body); font-weight: 600; font-size: 15px;
+      padding: 14px 28px; border-radius: var(--r-sm);
+      text-decoration: none;
+      border: 1px solid var(--glass-b);
+      transition: all var(--ease);
+    }
+    .btn-ghost:hover {
+      border-color: var(--cyan); color: var(--cyan);
+      background: rgba(6,182,212,.06);
+      transform: translateY(-2px);
+    }
+
+    /* ── IG CARD ── */
+    .ig-card {
+      background: var(--glass);
+      backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--r);
+      padding: 28px;
+      box-shadow: var(--shadow), 0 0 60px rgba(6,182,212,.1);
+      position: relative;
+      overflow: hidden;
+      animation: cardFloat 6s ease-in-out infinite;
+    }
+    @keyframes cardFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .ig-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+    .ig-card-top {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    /* Avatar with story ring */
+    .ig-av-wrap {
+      position: relative;
+      width: 72px; height: 72px;
+      flex-shrink: 0;
+    }
+    .ig-av-ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #F97316, #EC4899, #8B5CF6, #06B6D4, #F97316);
+      animation: ringSpin 4s linear infinite;
+    }
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .ig-av {
+      position: absolute; inset: 4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), #0E7490, #0E2A47);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-head); font-weight: 800; font-size: 20px;
+      color: #fff;
+    }
+
+    .ig-info {}
+    .ig-handle {
+      font-family: var(--f-head); font-weight: 700; font-size: 14px;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .ig-badge {
+      display: inline-block;
+      background: rgba(6,182,212,.14);
+      border: 1px solid rgba(6,182,212,.28);
+      color: var(--cyan);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 100px;
+    }
+
+    .ig-bio {
+      font-size: 12.5px; color: var(--text-dim);
+      line-height: 1.65;
+      padding-bottom: 16px; margin-bottom: 16px;
+      border-bottom: 1px solid rgba(6,182,212,.1);
+    }
+
+    .ig-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 8px; margin-bottom: 18px;
+    }
+    .ig-stat {
+      text-align: center;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(6,182,212,.08);
+      border-radius: 10px;
+      padding: 10px 4px;
+    }
+    .ig-num {
+      display: block;
+      font-family: var(--f-head); font-size: 17px; font-weight: 800;
+      color: var(--cyan);
+    }
+    .ig-lbl {
+      display: block;
+      font-size: 9.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .ig-btn {
+      display: block; width: 100%; text-align: center;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.28);
+      color: var(--cyan); font-weight: 700; font-size: 13px;
+      padding: 11px; border-radius: 10px;
+      text-decoration: none;
+      transition: all var(--ease);
+      letter-spacing: .02em;
+    }
+    .ig-btn:hover {
+      background: var(--cyan); color: var(--navy-deep);
+      box-shadow: 0 0 24px rgba(6,182,212,.4);
+    }
+
+    /* ── SECTION COMMON ── */
+    .sec {
+      position: relative; z-index: 1;
+      padding: 100px 6%;
+    }
+    .sec-inner { max-width: 1160px; margin: 0 auto; }
+
+    .divider {
+      max-width: 1160px; margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(6,182,212,.14), transparent);
+      position: relative; z-index: 1;
+    }
+
+    .sec-lbl {
+      display: inline-block;
+      font-family: var(--f-mono); font-size: 11px; font-weight: 500;
+      color: var(--cyan); text-transform: uppercase; letter-spacing: .12em;
+      margin-bottom: 14px;
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .sec-lbl::before { content: '// '; opacity: .45; }
+
+    .sec-h2 {
+      font-family: var(--f-head);
+      font-size: clamp(1.9rem, 3.8vw, 2.7rem);
+      font-weight: 800; line-height: 1.12;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: 14px;
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .6s ease .1s, transform .6s ease .1s;
+    }
+    .sec-sub {
+      font-size: .97rem; color: var(--text-dim);
+      max-width: 540px;
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .6s ease .2s, transform .6s ease .2s;
+    }
+    .sec-head { margin-bottom: 56px; }
+
+    .revealed .sec-lbl,
+    .revealed .sec-h2,
+    .revealed .sec-sub { opacity: 1; transform: translateY(0); }
+
+    /* ── SERVICES ── */
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 22px;
+    }
+    .svc-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--r);
+      padding: 38px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(28px);
+      transition: all .65s ease;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0; transition: opacity var(--ease);
+    }
+    .svc-card:hover::after { opacity: 1; }
+    .svc-card:hover {
+      background: rgba(6,182,212,.05);
+      border-color: rgba(6,182,212,.34);
+      transform: translateY(-6px) !important;
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(6,182,212,.1);
+    }
+    .svc-card.vis { opacity: 1; transform: translateY(0); }
+
+    .svc-tag {
+      position: absolute; top: 22px; right: 22px;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.22);
+      color: var(--cyan);
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: 3px 9px; border-radius: 100px;
+    }
+    .svc-icon {
+      width: 52px; height: 52px;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.18);
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+    .svc-name {
+      font-family: var(--f-head); font-size: 1.25rem; font-weight: 700;
+      color: var(--white); margin-bottom: 11px;
+    }
+    .svc-desc {
+      color: var(--text-dim); font-size: .93rem;
+      line-height: 1.72; margin-bottom: 26px;
+    }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .svc-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13.5px; color: var(--text-dim);
+    }
+    .svc-list li::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--cyan); flex-shrink: 0;
+    }
+
+    /* ── PROCESS ── */
+    .process-bg {
+      background: linear-gradient(180deg, transparent 0%, rgba(6,182,212,.025) 50%, transparent 100%);
+    }
+    .steps {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0; position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 35px; left: 16.7%; right: 16.7%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyan), rgba(6,182,212,.25), var(--cyan));
+    }
+    .step {
+      text-align: center; padding: 0 24px;
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateY(28px);
+      transition: all .65s ease;
+    }
+    .step.vis { opacity: 1; transform: translateY(0); }
+    .step:nth-child(2) { transition-delay: .14s; }
+    .step:nth-child(3) { transition-delay: .28s; }
+
+    .step-num {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: var(--navy-deep);
+      border: 2px solid var(--cyan);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 26px;
+      font-family: var(--f-mono); font-size: 17px; font-weight: 500;
+      color: var(--cyan);
+      box-shadow: 0 0 28px rgba(6,182,212,.22);
+      position: relative;
+    }
+    .step-num::after {
+      content: '';
+      position: absolute; inset: 5px; border-radius: 50%;
+      background: rgba(6,182,212,.07);
+    }
+    .step-emoji { font-size: 30px; margin-bottom: 16px; }
+    .step-title {
+      font-family: var(--f-head); font-size: 1.15rem; font-weight: 700;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .step-desc { color: var(--text-dim); font-size: 13.5px; line-height: 1.72; }
+
+    /* ── WHY US ── */
+    .feats {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 18px;
+    }
+    .feat {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex; gap: 18px; align-items: flex-start;
+      opacity: 0; transform: translateY(18px);
+      transition: all .6s ease;
+    }
+    .feat:hover {
+      background: rgba(6,182,212,.04);
+      border-color: rgba(6,182,212,.3);
+      transform: translateY(-4px) !important;
+    }
+    .feat.vis { opacity: 1; transform: translateY(0); }
+    .feat:nth-child(2) { transition-delay: .1s; }
+    .feat:nth-child(3) { transition-delay: .2s; }
+    .feat:nth-child(4) { transition-delay: .3s; }
+
+    .feat-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.18);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 21px;
+    }
+    .feat-title {
+      font-family: var(--f-head); font-size: .97rem; font-weight: 700;
+      color: var(--white); margin-bottom: 7px;
+    }
+    .feat-desc { font-size: 13.5px; color: var(--text-dim); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta-sec {
+      text-align: center;
+      padding: 120px 6%;
+    }
+    .cta-box {
+      max-width: 680px; margin: 0 auto;
+      position: relative;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute; inset: -80px;
+      background: radial-gradient(ellipse, rgba(6,182,212,.1) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .cta-h2 {
+      font-family: var(--f-head);
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--white); margin-bottom: 16px;
+      opacity: 0; transform: translateY(18px);
+      transition: all .6s ease;
+    }
+    .cta-h2 em { font-style: normal; color: var(--cyan); }
+    .cta-p {
+      color: var(--text-dim); font-size: 1rem;
+      margin-bottom: 38px;
+      opacity: 0; transform: translateY(18px);
+      transition: all .6s ease .1s;
+    }
+    .cta-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; transform: translateY(18px);
+      transition: all .6s ease .2s;
+    }
+    .cta-sec.revealed .cta-h2,
+    .cta-sec.revealed .cta-p,
+    .cta-sec.revealed .cta-btns { opacity: 1; transform: translateY(0); }
+
+    .btn-ig {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
+      color: #fff; font-weight: 700; font-size: 15px;
+      padding: 14px 30px; border-radius: var(--r-sm);
+      text-decoration: none;
+      transition: all var(--ease);
+      box-shadow: 0 4px 24px rgba(253,29,29,.25);
+    }
+    .btn-ig:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(253,29,29,.35); }
+
+    .btn-mail {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--text-dim);
+      font-weight: 600; font-size: 15px;
+      padding: 14px 30px; border-radius: var(--r-sm);
+      text-decoration: none;
+      border: 1px solid var(--glass-b);
+      transition: all var(--ease);
+    }
+    .btn-mail:hover {
+      color: var(--cyan); border-color: rgba(6,182,212,.4);
+      background: rgba(6,182,212,.06);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(6,182,212,.1);
+      padding: 44px 6%;
+    }
+    .foot-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .foot-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .foot-mark {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--cyan), #0891B2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-head); font-weight: 800; font-size: 13px;
+      color: #fff;
+    }
+    .foot-name {
+      font-family: var(--f-head); font-weight: 700; font-size: 15px;
+      color: var(--white);
+    }
+    .foot-links {
+      display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+    }
+    .foot-links a {
+      display: flex; align-items: center; gap: 7px;
+      text-decoration: none; color: var(--text-muted);
+      font-size: 13.5px; font-weight: 500;
+      transition: color var(--ease);
+    }
+    .foot-links a:hover { color: var(--cyan); }
+    .foot-copy {
+      color: var(--text-muted); font-size: 12px;
+      font-family: var(--f-mono);
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 24px;
+    }
+    .p-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--r);
+      overflow: hidden;
+      opacity: 0; transform: translateY(28px);
+      transition: all .65s ease;
+    }
+    .p-card:hover {
+      border-color: rgba(6,182,212,.34);
+      transform: translateY(-6px) !important;
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(6,182,212,.08);
+    }
+    .p-card.vis { opacity: 1; transform: translateY(0); }
+    .p-card:nth-child(2) { transition-delay: .15s; }
+
+    .p-chrome {
+      display: flex; align-items: center; gap: 5px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .p-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .p-dot-r { background: #FF5F56; }
+    .p-dot-y { background: #FFBD2E; }
+    .p-dot-g { background: #27C93F; }
+    .p-urlbar {
+      flex: 1; margin-left: 6px;
+      background: rgba(255,255,255,.05);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: var(--f-mono); font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* iframe previews */
+    .p-iframe-wrap {
+      position: relative;
+      width: 100%; height: 220px;
+      overflow: hidden;
+      background: #f4f4f4;
+    }
+    .p-iframe-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1280px; height: 800px;
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+    .p-site-link {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: flex-end; justify-content: flex-end;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,.35) 0%, transparent 60%);
+      opacity: 0; transition: opacity var(--ease);
+      text-decoration: none;
+    }
+    .p-iframe-wrap:hover .p-site-link { opacity: 1; }
+    .p-site-link span {
+      background: var(--cyan); color: var(--navy-deep);
+      font-weight: 700; font-size: 12px;
+      padding: 6px 12px; border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .p-info { padding: 22px 24px 26px; }
+    .p-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 11px; }
+    .p-tag {
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.2);
+      color: var(--cyan);
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: 3px 9px; border-radius: 100px;
+    }
+    .p-name {
+      font-family: var(--f-head); font-size: 1.15rem; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .p-desc { font-size: 13.5px; color: var(--text-dim); line-height: 1.65; margin-bottom: 18px; }
+    .p-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--cyan); font-weight: 700; font-size: 13.5px;
+      text-decoration: none; transition: gap var(--ease);
+    }
+    .p-link:hover { gap: 12px; }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .price-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--r);
+      padding: 36px 30px;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(28px);
+      transition: all .65s ease;
+    }
+    .price-card:hover {
+      border-color: rgba(6,182,212,.34);
+      transform: translateY(-6px) !important;
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(6,182,212,.1);
+    }
+    .price-card.vis { opacity: 1; transform: translateY(0); }
+    .price-card:nth-child(2) { transition-delay: .14s; }
+    .price-card:nth-child(3) { transition-delay: .28s; }
+    .price-card.featured {
+      border-color: rgba(6,182,212,.5);
+      background: rgba(6,182,212,.06);
+    }
+    .price-card.featured::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), #38BDF8);
+    }
+    .price-badge {
+      position: absolute; top: 18px; right: 18px;
+      background: var(--cyan); color: var(--navy-deep);
+      font-size: 10px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .price-icon { font-size: 28px; margin-bottom: 14px; }
+    .price-name {
+      font-family: var(--f-head); font-size: 1.1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .price-desc {
+      font-size: 13px; color: var(--text-dim); line-height: 1.65;
+      margin-bottom: 22px;
+    }
+    .price-range { margin-bottom: 26px; }
+    .price-from {
+      font-size: 10px; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: .1em; margin-bottom: 5px;
+      font-family: var(--f-mono);
+    }
+    .price-num {
+      font-family: var(--f-head); font-size: 1.55rem; font-weight: 800;
+      color: var(--white); line-height: 1.15;
+    }
+    .price-num span {
+      display: block;
+      font-size: .82rem; font-weight: 400; color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .price-list {
+      list-style: none; display: flex; flex-direction: column; gap: 9px;
+      margin-bottom: 28px;
+    }
+    .price-list li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13px; color: var(--text-dim);
+    }
+    .price-list li::before {
+      content: '✓';
+      color: var(--cyan); font-weight: 700; font-size: 12px;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .price-cta {
+      display: block; width: 100%; text-align: center;
+      font-weight: 700; font-size: 14px;
+      padding: 13px; border-radius: 10px;
+      text-decoration: none;
+      transition: all var(--ease);
+    }
+    .price-cta-main {
+      background: var(--cyan); color: var(--navy-deep);
+      box-shadow: 0 0 24px rgba(6,182,212,.35);
+    }
+    .price-cta-main:hover {
+      background: #09d1ee;
+      box-shadow: 0 0 40px rgba(6,182,212,.55);
+      transform: translateY(-1px);
+    }
+    .price-cta-ghost {
+      background: transparent; color: var(--cyan);
+      border: 1px solid rgba(6,182,212,.35);
+    }
+    .price-cta-ghost:hover {
+      background: rgba(6,182,212,.08);
+      border-color: rgba(6,182,212,.6);
+      transform: translateY(-1px);
+    }
+
+    /* soporte note */
+    .support-note {
+      margin-top: 20px; margin-bottom: 8px;
+      display: flex; align-items: flex-start; gap: 9px;
+      padding: 14px 20px;
+      background: rgba(6,182,212,.03);
+      border: 1px dashed rgba(6,182,212,.18);
+      border-radius: var(--r-sm);
+    }
+    .sn-dagger {
+      font-size: 15px; font-weight: 700;
+      color: var(--cyan); flex-shrink: 0;
+      margin-top: 1px; opacity: .8;
+    }
+    .support-note p {
+      font-size: 12.5px; color: var(--text-muted);
+      line-height: 1.7; margin: 0;
+    }
+    .support-note strong { color: var(--text-dim); font-weight: 600; }
+    .sn-sep { margin: 0 6px; opacity: .4; }
+
+    /* diff banner */
+    .diff-banner {
+      margin-top: 32px;
+      padding: 22px 28px;
+      background: rgba(6,182,212,.04);
+      border: 1px solid rgba(6,182,212,.16);
+      border-radius: var(--r-sm);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .diff-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .diff-text strong {
+      display: block; color: var(--white); font-size: .93rem;
+      margin-bottom: 5px;
+    }
+    .diff-text p { font-size: 13px; color: var(--text-dim); line-height: 1.72; }
+
+    /* ── PORTFOLIO PEEK PILL ── */
+    .pp-wrap {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      z-index: 200;
+      transform: translateY(90px);
+      opacity: 0;
+      transition: transform .6s cubic-bezier(.34,1.56,.64,1), opacity .4s ease;
+      pointer-events: none;
+    }
+    .pp-wrap.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .pp-wrap.hide {
+      transform: translateY(90px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pp-pill {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(8,25,41,.88);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(6,182,212,.35);
+      border-radius: 100px;
+      padding: 9px 20px 9px 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.45), 0 0 28px rgba(6,182,212,.14);
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    .pp-pill:hover {
+      border-color: rgba(6,182,212,.7);
+      box-shadow: 0 8px 40px rgba(0,0,0,.5), 0 0 44px rgba(6,182,212,.25);
+    }
+
+    /* 4 circular stacked thumbnails */
+    .pp-thumbs {
+      display: flex; align-items: center;
+    }
+    .pp-thumbs img {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid rgba(8,25,41,.9);
+      margin-left: -8px;
+      transition: transform .25s ease;
+    }
+    .pp-thumbs img:first-child { margin-left: 0; }
+    .pp-pill:hover .pp-thumbs img:nth-child(1) { transform: translateX(-3px) rotate(-6deg); }
+    .pp-pill:hover .pp-thumbs img:nth-child(2) { transform: translateX(-2px) rotate(-2deg); }
+    .pp-pill:hover .pp-thumbs img:nth-child(3) { transform: translateX( 2px) rotate( 2deg); }
+    .pp-pill:hover .pp-thumbs img:nth-child(4) { transform: translateX( 3px) rotate( 6deg); }
+
+    /* badge */
+    .pp-badge {
+      position: absolute;
+      top: -5px; left: 26px;
+      background: var(--cyan); color: var(--navy-deep);
+      font-size: 9px; font-weight: 900;
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(8,25,41,.8);
+      font-family: var(--f-head);
+    }
+
+    /* text */
+    .pp-text {
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    .pp-label {
+      font-family: var(--f-head); font-size: 13px; font-weight: 700;
+      color: var(--white); line-height: 1;
+    }
+    .pp-sub {
+      font-size: 10px; color: var(--text-muted);
+      font-family: var(--f-mono); letter-spacing: .04em;
+    }
+
+    /* arrow */
+    .pp-arrow {
+      color: var(--cyan); font-size: 16px; line-height: 1;
+      animation: ppBounce 1.6s ease-in-out infinite;
+    }
+    @keyframes ppBounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(5px); }
+    }
+
+    /* close button */
+    .pp-close {
+      position: absolute; top: -7px; right: -7px;
+      width: 20px; height: 20px;
+      background: rgba(6,182,212,.22);
+      border: 1px solid rgba(6,182,212,.4);
+      border-radius: 50%;
+      color: var(--text-dim); font-size: 9px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity .25s ease, background .2s ease;
+      z-index: 1;
+    }
+    .pp-close:hover { background: rgba(6,182,212,.5); color: #fff; }
+    .pp-wrap:hover .pp-close { opacity: 1; }
+
+    /* extra portfolio card delays */
+    .p-card:nth-child(3) { transition-delay: .30s; }
+    .p-card:nth-child(4) { transition-delay: .45s; }
+
+    /* ── PORTFOLIO SCREENSHOT PREVIEW ── */
+    .p-preview {
+      position: relative;
+      width: 100%; height: 220px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .p-preview img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+    }
+    .p-card:hover .p-preview img {
+      transform: scale(1.04);
+    }
+    .p-preview-link {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: flex-end; justify-content: flex-end;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,.52) 0%, rgba(0,0,0,.05) 55%, transparent 100%);
+      opacity: 0; transition: opacity var(--ease);
+      text-decoration: none;
+    }
+    .p-preview:hover .p-preview-link { opacity: 1; }
+    .p-preview-link span {
+      background: var(--cyan); color: var(--navy-deep);
+      font-weight: 700; font-size: 12px;
+      padding: 6px 14px; border-radius: 6px;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(6,182,212,.4);
+    }
+
+    /* ── COMPARE BLOCK ── */
+    .compare-block {
+      margin-top: 36px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(6,182,212,.12);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .compare-head {
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(6,182,212,.08);
+    }
+    .compare-head-title {
+      font-family: var(--f-head); font-weight: 700; font-size: .95rem;
+      color: var(--white); margin-bottom: 3px;
+    }
+    .compare-head-sub {
+      font-size: 12px; color: var(--text-muted);
+    }
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .compare-col { padding: 18px 22px; }
+    .compare-col:first-child { border-right: 1px solid rgba(6,182,212,.08); }
+    .compare-col-tag {
+      font-size: 10px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .1em; margin-bottom: 13px;
+      font-family: var(--f-mono);
+    }
+    .ci {
+      display: flex; align-items: flex-start; gap: 7px;
+      font-size: 12px; color: var(--text-dim); line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .ci-icon { flex-shrink: 0; font-weight: 700; font-size: 11px; margin-top: 1px; }
+    .ci-bad  .ci-icon { color: #f87171; }
+    .ci-good .ci-icon { color: var(--cyan); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .hero-right { order: -1; max-width: 360px; margin: 0 auto; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-chip { margin: 0 auto 26px; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-col:first-child { border-right: none; border-bottom: 1px solid rgba(6,182,212,.08); }
+      .steps { grid-template-columns: 1fr; gap: 44px; }
+      .steps::before { display: none; }
+      .feats { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 560px) {
+      .sec { padding: 80px 5%; }
+      .hero { padding: 110px 5% 70px; }
+      .cta-sec { padding: 80px 5%; }
+      footer { padding: 36px 5%; }
+      .foot-inner { flex-direction: column; align-items: flex-start; }
+      .foot-links { gap: 14px; }
+      h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BG ORBS -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">
+    <div class="nav-mark">
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="22" height="22" aria-hidden="true">
+          <line x1="40" y1="216" x2="216" y2="216" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+          <rect x="56" y="160" width="36" height="48" rx="6" fill="#fff"/>
+          <rect x="110" y="120" width="36" height="88" rx="6" fill="#fff"/>
+          <rect x="164" y="64" width="36" height="144" rx="6" fill="#fff"/>
+        </svg>
+      </div>
+    <span class="nav-name">DigitalBlueprint</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#contacto" class="nav-cta">Cotizar →</a></li>
+  </ul>
+  <button class="hamburger" id="hbg" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mnav">
+  <a href="#servicios" onclick="closeMnav()">Servicios</a>
+  <a href="#proceso"   onclick="closeMnav()">Proceso</a>
+  <a href="#precios"   onclick="closeMnav()">Precios</a>
+  <a href="#trabajos"  onclick="closeMnav()">Trabajos</a>
+  <a href="#contacto"  onclick="closeMnav()">Cotizar mi web →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-chip">
+        <div class="hero-chip-dot"></div>
+        Desarrollo Web · Argentina
+      </div>
+      <h1>Webs a medida que<br><em>venden de verdad</em></h1>
+      <p class="hero-sub">Código propio, diseño único, SEO real y deploy incluido. No plantillas ni copy-paste — cada web construida desde cero para que tu negocio destaque.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-main">✦ Cotizar mi web</a>
+        <a href="#servicios" class="btn-ghost">Ver servicios ↓</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — IG CARD -->
+    <div class="hero-right">
+      <div class="ig-card">
+        <div class="ig-card-top">
+          <div class="ig-av-wrap">
+            <div class="ig-av-ring"></div>
+            <div class="ig-av">
+          <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
+            <line x1="40" y1="216" x2="216" y2="216" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+            <rect x="56" y="160" width="36" height="48" rx="6" fill="#fff"/>
+            <rect x="110" y="120" width="36" height="88" rx="6" fill="#fff"/>
+            <rect x="164" y="64" width="36" height="144" rx="6" fill="#06B6D4"/>
+          </svg>
+        </div>
+          </div>
+          <div class="ig-info">
+            <div class="ig-handle">@digitalblue_print7</div>
+            <span class="ig-badge">✦ Nuevo perfil</span>
+          </div>
+        </div>
+        <p class="ig-bio">
+          🌐 Creamos y cuidamos la web de tu negocio<br>
+          ✅ Mantenimiento, cambios y soporte continuo<br>
+          👉 Escríbenos por DM para cotizar
+        </p>
+        <div class="ig-stats">
+          <div class="ig-stat">
+            <span class="ig-num">0</span>
+            <span class="ig-lbl">Posts</span>
+          </div>
+          <div class="ig-stat">
+            <span class="ig-num">∞</span>
+            <span class="ig-lbl">Potencial</span>
+          </div>
+          <div class="ig-stat">
+            <span class="ig-num">24/7</span>
+            <span class="ig-lbl">Soporte</span>
+          </div>
+        </div>
+        <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener" class="ig-btn">
+          Seguir en Instagram →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="servicios" class="sec">
+  <div class="sec-inner">
+    <div class="sec-head revealed" data-reveal>
+      <span class="sec-lbl">Servicios</span>
+      <h2 class="sec-h2">Todo lo que necesita<br>tu presencia digital</h2>
+      <p class="sec-sub">Desde el diseño hasta el soporte continuo — nos encargamos de todo para que vos te enfoques en tu negocio.</p>
+    </div>
+    <div class="svc-grid">
+
+      <div class="svc-card" data-card>
+        <span class="svc-tag">Más popular</span>
+        <div class="svc-icon">🌐</div>
+        <h3 class="svc-name">Creación de Páginas Web</h3>
+        <p class="svc-desc">Diseñamos y desarrollamos tu sitio desde cero. Moderno, rápido, mobile-friendly y pensado para convertir visitantes en clientes.</p>
+        <ul class="svc-list">
+          <li>Diseño único y personalizado</li>
+          <li>Optimizado para Google (SEO)</li>
+          <li>Compatible con móvil y tablet</li>
+          <li>Formulario de contacto integrado</li>
+          <li>Dominio y hosting asesorado</li>
+        </ul>
+      </div>
+
+      <div class="svc-card" data-card>
+        <div class="svc-icon">🔧</div>
+        <h3 class="svc-name">Mantenimiento y Soporte</h3>
+        <p class="svc-desc">Tu web siempre activa, segura y actualizada. Cambios de contenido, actualizaciones técnicas y soporte cuando lo necesitás.</p>
+        <ul class="svc-list">
+          <li>Actualizaciones de contenido</li>
+          <li>Soporte técnico continuo</li>
+          <li>Copias de seguridad regulares</li>
+          <li>Certificado SSL y seguridad</li>
+          <li>Reporte mensual de visitas</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section id="proceso" class="sec process-bg">
+  <div class="sec-inner">
+    <div class="sec-head" data-reveal>
+      <span class="sec-lbl">Proceso</span>
+      <h2 class="sec-h2">Así de simple es<br>empezar</h2>
+      <p class="sec-sub">En tres pasos tu negocio ya tiene presencia online profesional.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-card>
+        <div class="step-num">01</div>
+        <div class="step-emoji">💬</div>
+        <h3 class="step-title">Nos contactás</h3>
+        <p class="step-desc">Escribinos por Instagram o email. Charlamos sobre tu negocio y te damos presupuesto sin compromiso.</p>
+      </div>
+      <div class="step" data-card>
+        <div class="step-num">02</div>
+        <div class="step-emoji">🎨</div>
+        <h3 class="step-title">Diseñamos</h3>
+        <p class="step-desc">Creamos tu web personalizada con tu marca y contenido. Te mostramos el diseño antes de publicar y ajustamos lo que necesités.</p>
+      </div>
+      <div class="step" data-card>
+        <div class="step-num">03</div>
+        <div class="step-emoji">🚀</div>
+        <h3 class="step-title">Lanzamos</h3>
+        <p class="step-desc">Conectamos tu dominio propio (.com), publicamos con HTTPS y queda online. El dominio queda registrado a tu nombre — el sitio es 100% tuyo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY US -->
+<section id="nosotros" class="sec">
+  <div class="sec-inner">
+    <div class="sec-head" data-reveal>
+      <span class="sec-lbl">Por qué elegirnos</span>
+      <h2 class="sec-h2">Código propio,<br>no plantillas</h2>
+      <p class="sec-sub">Mientras otros venden plantillas genéricas, acá cada web se construye desde cero. El resultado se nota: más rápido, más único, mejor posicionado.</p>
+    </div>
+    <div class="feats">
+      <div class="feat" data-card>
+        <div class="feat-icon">✍️</div>
+        <div>
+          <h4 class="feat-title">Código escrito a mano</h4>
+          <p class="feat-desc">Cada línea de código es propia. Sin plantillas de $100k que cualquiera puede comprar y personalizar en 10 minutos.</p>
+        </div>
+      </div>
+      <div class="feat" data-card>
+        <div class="feat-icon">🔍</div>
+        <div>
+          <h4 class="feat-title">SEO real incluido</h4>
+          <p class="feat-desc">Metadatos, Schema.org, Open Graph, sitemap y rendimiento optimizado. Tu sitio aparece en Google desde el día uno.</p>
+        </div>
+      </div>
+      <div class="feat" data-card>
+        <div class="feat-icon">📱</div>
+        <div>
+          <h4 class="feat-title">100% Responsive</h4>
+          <p class="feat-desc">Diseñado y probado en celular, tablet y escritorio. El 70% de tus clientes navega desde el teléfono — tu web los captura.</p>
+        </div>
+      </div>
+      <div class="feat" data-card>
+        <div class="feat-icon">🚀</div>
+        <div>
+          <h4 class="feat-title">Deploy incluido</h4>
+          <p class="feat-desc">No entrego un ZIP y me olvido. Conecto tu dominio propio, publico con HTTPS y te acompaño con soporte técnico. El sitio queda a tu nombre, no al mío.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="precios" class="sec">
+  <div class="sec-inner">
+    <div class="sec-head" data-reveal>
+      <span class="sec-lbl">Precios</span>
+      <h2 class="sec-h2">Inversión clara,<br>resultados reales</h2>
+      <p class="sec-sub">Diseño 100% a medida, responsive, con SEO y deploy incluidos. Sin plantillas, sin sorpresas en el precio final.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Landing Page -->
+      <div class="price-card" data-card>
+        <div class="price-icon">🎯</div>
+        <h3 class="price-name">Landing Page</h3>
+        <p class="price-desc">Ideal para presentar tu negocio o servicio con impacto y capturar consultas al instante.</p>
+        <div class="price-range">
+          <div class="price-from">// desde</div>
+          <div class="price-num">$120.000 <span>hasta $180.000 ARS</span></div>
+        </div>
+        <ul class="price-list">
+          <li>Diseño custom, sin plantillas</li>
+          <li>1 página completa y estructurada</li>
+          <li>100% responsive (cel, tablet, PC)</li>
+          <li>SEO básico incluido</li>
+          <li>Formulario de contacto</li>
+          <li>Deploy en tu dominio propio (.com)</li>
+        </ul>
+        <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener" class="price-cta price-cta-ghost">Consultar →</a>
+      </div>
+
+      <!-- Sitio Web Profesional -->
+      <div class="price-card featured" data-card>
+        <span class="price-badge">⭐ Más popular</span>
+        <div class="price-icon">🌐</div>
+        <h3 class="price-name">Sitio Web Profesional</h3>
+        <p class="price-desc">Presencia online completa. Múltiples secciones, alto impacto visual y SEO que posiciona en Google.</p>
+        <div class="price-range">
+          <div class="price-from">// desde</div>
+          <div class="price-num">$350.000 <span>hasta $500.000 ARS</span></div>
+        </div>
+        <ul class="price-list">
+          <li>Diseño único y personalizado</li>
+          <li>Múltiples secciones / páginas</li>
+          <li>100% responsive</li>
+          <li>SEO completo (metadatos, Schema, OG)</li>
+          <li>Animaciones y transiciones custom</li>
+          <li>Dominio a tu nombre — te asesoramos</li>
+          <li>Deploy + 1 mes de soporte gratuito †</li>
+        </ul>
+        <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener" class="price-cta price-cta-main">¡Lo quiero! →</a>
+      </div>
+
+      <!-- E-commerce -->
+      <div class="price-card" data-card>
+        <div class="price-icon">🛒</div>
+        <h3 class="price-name">E-commerce Completo</h3>
+        <p class="price-desc">Tienda online lista para vender: catálogo, carrito, integración WhatsApp y pedidos de tus clientes.</p>
+        <div class="price-range">
+          <div class="price-from">// desde</div>
+          <div class="price-num">$600.000 <span>hasta $900.000 ARS</span></div>
+        </div>
+        <ul class="price-list">
+          <li>Tienda con catálogo completo</li>
+          <li>Carrito y proceso de pedido</li>
+          <li>Integración WhatsApp directo</li>
+          <li>Panel de administración</li>
+          <li>SEO avanzado para productos</li>
+          <li>Dominio a tu nombre — te asesoramos</li>
+          <li>Deploy + 1 mes de soporte gratuito †</li>
+        </ul>
+        <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener" class="price-cta price-cta-ghost">Consultar →</a>
+      </div>
+
+    </div>
+
+    <!-- Nota dominio -->
+    <div class="support-note">
+      <span class="sn-dagger">🌐</span>
+      <p>
+        <strong>Dominio (.com o .com.ar):</strong> lo registrás vos a tu nombre en NIC Argentina o Namecheap — cuesta entre $2.000 y $18.000 ARS por año según la extensión.
+        <span class="sn-sep">·</span>
+        Yo me encargo de conectarlo a tu web <strong>sin costo extra</strong>. El dominio siempre es tuyo, sin ataduras.
+      </p>
+    </div>
+
+    <!-- Nota soporte -->
+    <div class="support-note">
+      <span class="sn-dagger">†</span>
+      <p>
+        <strong>El mes de soporte incluye:</strong> corrección de bugs post-lanzamiento, cambios de contenido (textos, fotos, precios) y consultas técnicas.
+        <span class="sn-sep">·</span>
+        Agregar secciones nuevas, rediseños o integraciones se cotizan aparte.
+        <span class="sn-sep">·</span>
+        Desde el 2.° mes podés continuar con un <strong>plan de mantenimiento mensual</strong> — consultame el precio según tu proyecto.
+      </p>
+    </div>
+
+    <!-- Comparación -->
+    <div class="compare-block">
+      <div class="compare-head">
+        <div class="compare-head-title">No todos los sitios web son iguales</div>
+        <div class="compare-head-sub">La diferencia se ve en el resultado — y también la nota Google.</div>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-col-tag" style="color:#f87171;">✗ Plantilla genérica</div>
+          <div class="ci ci-bad"><span class="ci-icon">✗</span><span>Mismo diseño que miles de otros sitios</span></div>
+          <div class="ci ci-bad"><span class="ci-icon">✗</span><span>SEO mínimo o directamente ninguno</span></div>
+          <div class="ci ci-bad"><span class="ci-icon">✗</span><span>Te mandan el archivo ZIP y desaparecen</span></div>
+          <div class="ci ci-bad"><span class="ci-icon">✗</span><span>Sin probar en celular ni tablet</span></div>
+          <div class="ci ci-bad"><span class="ci-icon">✗</span><span>Costos extra que aparecen después</span></div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-tag" style="color:var(--cyan);">✓ DigitalBlueprint</div>
+          <div class="ci ci-good"><span class="ci-icon">✓</span><span>Diseño único creado para tu negocio</span></div>
+          <div class="ci ci-good"><span class="ci-icon">✓</span><span>SEO real: metadatos, Schema, Open Graph</span></div>
+          <div class="ci ci-good"><span class="ci-icon">✓</span><span>Deploy real + soporte post-lanzamiento</span></div>
+          <div class="ci ci-good"><span class="ci-icon">✓</span><span>Responsive probado en todos los dispositivos</span></div>
+          <div class="ci ci-good"><span class="ci-icon">✓</span><span>Precio claro desde la primera charla</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PORTFOLIO -->
+<section id="trabajos" class="sec">
+  <div class="sec-inner">
+    <div class="sec-head" data-reveal>
+      <span class="sec-lbl">Portfolio</span>
+      <h2 class="sec-h2">Trabajos<br>realizados</h2>
+      <p class="sec-sub">Proyectos reales que diseñamos y desarrollamos para nuestros clientes.</p>
+    </div>
+    <div class="portfolio-grid">
+
+      <!-- Woods Puppys -->
+      <div class="p-card" data-card>
+        <div class="p-chrome">
+          <span class="p-dot p-dot-r"></span>
+          <span class="p-dot p-dot-y"></span>
+          <span class="p-dot p-dot-g"></span>
+          <div class="p-urlbar">wood-puppys-ar.netlify.app</div>
+        </div>
+        <div class="p-preview">
+          <img src="assets/screenshots/woods-puppys.jpg" alt="Woods Puppys — preview del sitio" loading="lazy">
+          <a href="https://wood-puppys-ar.netlify.app/" target="_blank" rel="noopener" class="p-preview-link"><span>Abrir sitio ↗</span></a>
+        </div>
+        <div class="p-info">
+          <div class="p-tags">
+            <span class="p-tag">Sitio Web</span>
+            <span class="p-tag">SEO</span>
+            <span class="p-tag">Negocio Local</span>
+          </div>
+          <h3 class="p-name">Woods Puppys</h3>
+          <p class="p-desc">Sitio web profesional para criadero de Dachshund Mini en Argentina. SEO avanzado, lista de espera y diseño a medida.</p>
+          <a href="https://wood-puppys-ar.netlify.app/" target="_blank" rel="noopener" class="p-link">Ver sitio →</a>
+        </div>
+      </div>
+
+      <!-- MF Trámites Vehiculares -->
+      <div class="p-card" data-card>
+        <div class="p-chrome">
+          <span class="p-dot p-dot-r"></span>
+          <span class="p-dot p-dot-y"></span>
+          <span class="p-dot p-dot-g"></span>
+          <div class="p-urlbar">joelppraderio2023.github.io/mf-tramites-vehiculares</div>
+        </div>
+        <div class="p-preview">
+          <img src="assets/screenshots/mf-tramites.jpg" alt="MF Trámites Vehiculares — preview del sitio" loading="lazy">
+          <a href="https://joelppraderio2023.github.io/mf-tramites-vehiculares/" target="_blank" rel="noopener" class="p-preview-link"><span>Abrir sitio ↗</span></a>
+        </div>
+        <div class="p-info">
+          <div class="p-tags">
+            <span class="p-tag">Landing Page</span>
+            <span class="p-tag">Servicios</span>
+            <span class="p-tag">DNRPA</span>
+          </div>
+          <h3 class="p-name">MF Trámites Vehiculares</h3>
+          <p class="p-desc">Landing page de alto impacto para mandatario del automotor habilitado DNRPA. Diseño navy & gold, SEO local y WhatsApp directo.</p>
+          <a href="https://joelppraderio2023.github.io/mf-tramites-vehiculares/" target="_blank" rel="noopener" class="p-link">Ver sitio →</a>
+        </div>
+      </div>
+
+      <!-- Silvia Gómez Fotografía -->
+      <div class="p-card" data-card>
+        <div class="p-chrome">
+          <span class="p-dot p-dot-r"></span>
+          <span class="p-dot p-dot-y"></span>
+          <span class="p-dot p-dot-g"></span>
+          <div class="p-urlbar">silvia-gomez-fotografia.netlify.app</div>
+        </div>
+        <div class="p-preview">
+          <img src="assets/screenshots/silvia-fotografia.jpg" alt="Silvia Gómez Fotografía — preview del sitio" loading="lazy">
+          <a href="https://silvia-gomez-fotografia.netlify.app/" target="_blank" rel="noopener" class="p-preview-link"><span>Abrir sitio ↗</span></a>
+        </div>
+        <div class="p-info">
+          <div class="p-tags">
+            <span class="p-tag">Landing Page</span>
+            <span class="p-tag">Fotografía</span>
+            <span class="p-tag">Eventos</span>
+          </div>
+          <h3 class="p-name">Silvia Gómez Fotografía</h3>
+          <p class="p-desc">Landing page oscura y elegante para fotógrafa de eventos. XV años, casamientos, bautismos — con galería y contacto directo.</p>
+          <a href="https://silvia-gomez-fotografia.netlify.app/" target="_blank" rel="noopener" class="p-link">Ver sitio →</a>
+        </div>
+      </div>
+
+      <!-- La Buena Semilla -->
+      <div class="p-card" data-card>
+        <div class="p-chrome">
+          <span class="p-dot p-dot-r"></span>
+          <span class="p-dot p-dot-y"></span>
+          <span class="p-dot p-dot-g"></span>
+          <div class="p-urlbar">la-buenasemilla.netlify.app</div>
+        </div>
+        <div class="p-preview">
+          <img src="assets/screenshots/la-buena-semilla.jpg" alt="La Buena Semilla — preview del sitio" loading="lazy">
+          <a href="https://la-buenasemilla.netlify.app/" target="_blank" rel="noopener" class="p-preview-link"><span>Abrir sitio ↗</span></a>
+        </div>
+        <div class="p-info">
+          <div class="p-tags">
+            <span class="p-tag">E-commerce</span>
+            <span class="p-tag">Delivery</span>
+            <span class="p-tag">Catálogo Online</span>
+          </div>
+          <h3 class="p-name">La Buena Semilla</h3>
+          <p class="p-desc">Tienda online completa con catálogo, carrito de compras y entrega a domicilio para verdulería en Buenos Aires.</p>
+          <a href="https://la-buenasemilla.netlify.app/" target="_blank" rel="noopener" class="p-link">Ver sitio →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section id="contacto" class="cta-sec">
+  <div class="cta-box" data-cta>
+    <h2 class="cta-h2">¿Listo para tener<br>tu web <em>hoy</em>?</h2>
+    <p class="cta-p">Escribinos y en menos de 24 horas te respondemos con un presupuesto personalizado. Sin compromisos.</p>
+    <div class="cta-btns">
+      <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener" class="btn-ig">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Escribir por Instagram
+      </a>
+      <a href="mailto:joelpgaming2023@gmail.com?subject=Quiero%20cotizar%20mi%20web&body=Hola%20DigitalBlueprint%2C%20me%20interesa%20cotizar%20una%20web%20para%20mi%20negocio." class="btn-mail">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Enviar email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <a href="#" class="foot-brand">
+      <div class="foot-mark">
+        <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
+          <line x1="40" y1="216" x2="216" y2="216" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+          <rect x="56" y="160" width="36" height="48" rx="6" fill="#fff"/>
+          <rect x="110" y="120" width="36" height="88" rx="6" fill="#fff"/>
+          <rect x="164" y="64" width="36" height="144" rx="6" fill="#fff"/>
+        </svg>
+      </div>
+      <span class="foot-name">DigitalBlueprint</span>
+    </a>
+    <div class="foot-links">
+      <a href="https://instagram.com/digitalblue_print7" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @digitalblue_print7
+      </a>
+      <a href="mailto:joelpgaming2023@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        joelpgaming2023@gmail.com
+      </a>
+    </div>
+    <span class="foot-copy">© 2025 DigitalBlueprint</span>
+  </div>
+</footer>
+
+<!-- PORTFOLIO PEEK PILL -->
+<div class="pp-wrap" id="ppWrap">
+  <button class="pp-close" id="ppClose" aria-label="Cerrar">✕</button>
+  <a href="#trabajos" class="pp-pill" id="ppPill">
+    <div class="pp-thumbs">
+      <img src="assets/screenshots/woods-puppys.jpg"      alt="Woods Puppys">
+      <img src="assets/screenshots/mf-tramites.jpg"       alt="MF Trámites">
+      <img src="assets/screenshots/silvia-fotografia.jpg" alt="Silvia Foto">
+      <img src="assets/screenshots/la-buena-semilla.jpg"  alt="Verdulería">
+    </div>
+    <span class="pp-badge">4</span>
+    <div class="pp-text">
+      <span class="pp-label">Ver mis trabajos</span>
+      <span class="pp-sub">// portfolio</span>
+    </div>
+    <span class="pp-arrow">↓</span>
+  </a>
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+  // Mobile nav
+  const hbg  = document.getElementById('hbg');
+  const mnav = document.getElementById('mnav');
+  hbg.addEventListener('click', () => mnav.classList.toggle('open'));
+  function closeMnav() { mnav.classList.remove('open'); }
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      if (e.target.dataset.reveal !== undefined) {
+        e.target.classList.add('revealed');
+      }
+      if (e.target.dataset.cta !== undefined) {
+        e.target.closest('.cta-sec').classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  const cardIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('vis');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  document.querySelectorAll('[data-cta]').forEach(el => io.observe(el));
+  document.querySelectorAll('[data-card]').forEach(el => cardIO.observe(el));
+
+  // Scale iframes to fit their container
+  function scaleIframes() {
+    document.querySelectorAll('.p-iframe-wrap').forEach(wrap => {
+      const iframe = wrap.querySelector('iframe');
+      if (iframe) {
+        const scale = wrap.offsetWidth / 1280;
+        iframe.style.transform = `scale(${scale})`;
+      }
+    });
+  }
+  scaleIframes();
+  window.addEventListener('resize', scaleIframes);
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // ── PORTFOLIO PEEK PILL ──
+  const ppWrap    = document.getElementById('ppWrap');
+  const ppClose   = document.getElementById('ppClose');
+  const ppSection = document.getElementById('trabajos');
+  let ppDismissed = false;
+
+  // Aparece 1.2s después de cargar
+  setTimeout(() => {
+    if (!ppDismissed) ppWrap.classList.add('show');
+  }, 1200);
+
+  // Cerrar con la X
+  ppClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    ppDismissed = true;
+    ppWrap.classList.remove('show');
+    ppWrap.classList.add('hide');
+  });
+
+  // Se oculta automáticamente cuando el portfolio entra en pantalla
+  // y reaparece cuando el usuario vuelve arriba
+  const ppObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (ppDismissed) return;
+      if (e.isIntersecting) {
+        ppWrap.classList.remove('show');
+        ppWrap.classList.add('hide');
+      } else {
+        // Solo reaparece si el usuario está por encima del portfolio
+        const rect = ppSection.getBoundingClientRect();
+        if (rect.top > 0) {
+          ppWrap.classList.remove('hide');
+          ppWrap.classList.add('show');
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  if (ppSection) ppObserver.observe(ppSection);
+</script>
+</body>
+</html>

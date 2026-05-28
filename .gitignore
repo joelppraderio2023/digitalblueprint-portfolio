@@ -1,0 +1,9 @@
+node_modules/
+.claude/
+INSTRUCCIONES.md
+CLAUDE.md
+assets/.readme
+assets/instagram/
+fetch-instagram.js
+*.log
+.netlify/

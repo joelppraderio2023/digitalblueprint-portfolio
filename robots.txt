@@ -1,0 +1,10 @@
+# robots.txt — DigitalBlueprint
+# https://digitalblueprint.netlify.app
+
+User-agent: *
+Allow: /
+
+# Bloquear archivos de sistema
+Disallow: /.netlify/
+
+Sitemap: https://digitalblueprint.netlify.app/sitemap.xml

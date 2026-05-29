@@ -4,6 +4,7 @@ INSTRUCCIONES.md
 CLAUDE.md
 assets/.readme
 assets/instagram/
+assets/responsive-check/
 fetch-instagram.js
 *.log
 .netlify/

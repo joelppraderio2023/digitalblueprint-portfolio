@@ -4,7 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DigitalBlueprint — Webs que trabajan por tu negocio</title>
-  <meta name="description" content="Creamos y cuidamos la web de tu negocio. Diseño profesional, mantenimiento continuo y soporte 24/7.">
+  <meta name="description" content="Diseño web profesional en Argentina desde cero. Código propio, SEO real y deploy incluido. Landing Pages, sitios y tiendas online — sin plantillas, desde $120.000 ARS.">
+
+  <!-- ── SEO AVANZADO ── -->
+  <meta name="author" content="DigitalBlueprint">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#0E2A47">
+  <meta name="geo.region" content="AR">
+  <meta name="language" content="es-AR">
+
+  <!-- ── OPEN GRAPH ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DigitalBlueprint">
+  <meta property="og:title" content="DigitalBlueprint — Webs que trabajan por tu negocio">
+  <meta property="og:description" content="Diseño web profesional en Argentina desde cero. Código propio, SEO real y deploy incluido. Landing Pages, sitios y tiendas online.">
+  <meta property="og:url" content="https://digitalblueprint.netlify.app">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:image" content="https://digitalblueprint.netlify.app/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DigitalBlueprint — Desarrollo web profesional en Argentina">
+
+  <!-- ── TWITTER / X CARD ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DigitalBlueprint — Webs que trabajan por tu negocio">
+  <meta name="twitter:description" content="Diseño web profesional en Argentina. Código propio, SEO real y deploy incluido. Sin plantillas.">
+  <meta name="twitter:image" content="https://digitalblueprint.netlify.app/assets/og-image.jpg">
+  <meta name="twitter:image:alt" content="DigitalBlueprint — Desarrollo web profesional en Argentina">
+
+  <!-- ── CANONICAL ── -->
+  <link rel="canonical" href="https://digitalblueprint.netlify.app">
+
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='64' height='64' rx='12' fill='%230E2A47'/%3E%3Crect x='14' y='40' width='10' height='14' rx='1.5' fill='%23FFFFFF'/%3E%3Crect x='27' y='30' width='10' height='24' rx='1.5' fill='%23FFFFFF'/%3E%3Crect x='40' y='14' width='10' height='40' rx='1.5' fill='%2306B6D4'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1139,6 +1169,8 @@
       .feats { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      /* Peek pill oculto en mobile — el scroll es natural y el pill tapa contenido */
+      .pp-wrap { display: none !important; }
     }
     @media (max-width: 560px) {
       .sec { padding: 80px 5%; }
@@ -1150,6 +1182,181 @@
       h1 { font-size: 2.4rem; }
     }
   </style>
+
+  <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://digitalblueprint.netlify.app/#website",
+        "name": "DigitalBlueprint",
+        "url": "https://digitalblueprint.netlify.app",
+        "description": "Diseño y desarrollo web profesional en Argentina",
+        "inLanguage": "es",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://digitalblueprint.netlify.app/#contacto",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://digitalblueprint.netlify.app/#webpage",
+        "url": "https://digitalblueprint.netlify.app",
+        "name": "DigitalBlueprint — Webs que trabajan por tu negocio",
+        "description": "Diseño web profesional en Argentina desde cero. Código propio, SEO real y deploy incluido. Landing Pages, sitios y tiendas online.",
+        "isPartOf": { "@id": "https://digitalblueprint.netlify.app/#website" },
+        "inLanguage": "es",
+        "about": { "@id": "https://digitalblueprint.netlify.app/#business" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://digitalblueprint.netlify.app"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://digitalblueprint.netlify.app/#business",
+        "name": "DigitalBlueprint",
+        "description": "Agencia de desarrollo web en Argentina especializada en diseño custom, SEO real y deploy incluido. Construimos tu web desde cero, sin plantillas.",
+        "url": "https://digitalblueprint.netlify.app",
+        "email": "joelpgaming2023@gmail.com",
+        "sameAs": [
+          "https://www.instagram.com/digitalblue_print7/"
+        ],
+        "areaServed": {
+          "@type": "Country",
+          "name": "Argentina"
+        },
+        "knowsLanguage": "es-AR",
+        "priceRange": "$$",
+        "serviceType": [
+          "Diseño Web",
+          "Desarrollo Web",
+          "Landing Pages",
+          "E-commerce",
+          "SEO",
+          "Mantenimiento Web"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de Desarrollo Web",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Landing Page",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing Page Profesional",
+                "description": "Diseño y desarrollo de landing page desde cero. 100% responsive, SEO incluido y formulario de contacto.",
+                "provider": { "@id": "https://digitalblueprint.netlify.app/#business" }
+              },
+              "priceCurrency": "ARS",
+              "price": "120000",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": "120000",
+                "maxPrice": "180000",
+                "priceCurrency": "ARS"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Sitio Web Profesional",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sitio Web Profesional",
+                "description": "Sitio web completo con múltiples secciones, SEO avanzado (metadatos, Schema, OG), animaciones custom y deploy en dominio propio.",
+                "provider": { "@id": "https://digitalblueprint.netlify.app/#business" }
+              },
+              "priceCurrency": "ARS",
+              "price": "350000",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": "350000",
+                "maxPrice": "500000",
+                "priceCurrency": "ARS"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "E-commerce Completo",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Tienda Online Completa",
+                "description": "Tienda online con catálogo de productos, carrito de compras, integración WhatsApp y panel de administración.",
+                "provider": { "@id": "https://digitalblueprint.netlify.app/#business" }
+              },
+              "priceCurrency": "ARS",
+              "price": "600000",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": "600000",
+                "maxPrice": "900000",
+                "priceCurrency": "ARS"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Mantenimiento y Soporte Web",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mantenimiento Web Mensual",
+                "description": "Actualizaciones de contenido, soporte técnico, copias de seguridad, certificado SSL y reporte mensual de visitas.",
+                "provider": { "@id": "https://digitalblueprint.netlify.app/#business" }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta hacer una página web profesional en Argentina?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En DigitalBlueprint los precios dependen del tipo de proyecto: una Landing Page arranca desde $120.000 ARS, un Sitio Web Profesional completo desde $350.000 ARS y un E-commerce desde $600.000 ARS. Todos incluyen diseño custom (sin plantillas), SEO real y deploy en tu dominio propio."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El SEO está incluido en el desarrollo web?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Todos los proyectos incluyen SEO real: metadatos optimizados, Schema.org, Open Graph, sitemap XML y rendimiento web optimizado. Tu sitio está preparado para aparecer en Google desde el día del lanzamiento."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Usan plantillas o el diseño es único?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cada web se construye desde cero, línea por línea. No usamos plantillas de WordPress ni page builders. El resultado es un sitio único, más rápido, con código limpio y mejor posicionado en Google que los sitios basados en plantillas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa después de entregar la web?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Los planes Sitio Web Profesional y E-commerce incluyen 1 mes de soporte gratuito post-lanzamiento: corrección de bugs, cambios de contenido y consultas técnicas. Luego podés contratar un plan de mantenimiento mensual."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 

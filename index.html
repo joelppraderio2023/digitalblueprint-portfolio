@@ -1307,7 +1307,98 @@
       .foot-inner { flex-direction: column; align-items: flex-start; }
       .foot-links { gap: 14px; }
       h1 { font-size: 2.4rem; }
+      .hero-stats { margin-top: 26px; padding-top: 20px; }
+      .h-num { font-size: 1.2rem; }
+      .h-sep { margin: 0 14px; }
     }
+
+    /* ── CURSOR & INTERACTIVITY ── */
+    .svc-card, .feat, .price-card, .p-card { cursor: pointer; }
+
+    /* ── FOCUS VISIBLE ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      .orb, .ig-card, .hero-left, .hero-right { animation: none !important; }
+    }
+
+    /* ── NAV ACTIVE LINK (scroll spy) ── */
+    .nav-links a.active {
+      color: var(--cyan);
+      position: relative;
+    }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+
+    /* ── HERO STATS ── */
+    .hero-stats {
+      display: flex; align-items: center;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(6,182,212,.12);
+      max-width: 440px;
+    }
+    .h-stat { text-align: left; flex: 1; }
+    .h-num {
+      display: block;
+      font-family: var(--f-head); font-size: 1.5rem; font-weight: 800;
+      color: var(--white); letter-spacing: -.02em; line-height: 1.1;
+    }
+    .h-lbl {
+      display: block;
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--text-muted); margin-top: 4px;
+    }
+    .h-sep {
+      width: 1px; height: 30px; flex-shrink: 0;
+      background: rgba(6,182,212,.18);
+      margin: 0 22px;
+    }
+    @media (max-width: 900px) {
+      .hero-stats { max-width: 340px; margin-left: auto; margin-right: auto; }
+      .h-stat { text-align: center; }
+    }
+
+    /* ── WHATSAPP BUTTON ── */
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #25D366; color: #fff;
+      font-family: var(--f-body); font-weight: 700; font-size: 15px;
+      padding: 14px 30px; border-radius: var(--r-sm);
+      text-decoration: none;
+      transition: all var(--ease);
+      box-shadow: 0 4px 24px rgba(37,211,102,.25);
+    }
+    .btn-wa:hover {
+      background: #1fb358;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(37,211,102,.4);
+    }
+
+    /* ── SVG ICON SIZING ── */
+    .svc-icon svg  { width: 24px; height: 24px; color: var(--cyan); }
+    .step-emoji    { display: flex; align-items: center; justify-content: center; }
+    .step-emoji svg{ width: 30px; height: 30px; color: var(--cyan); }
+    .feat-icon svg { width: 22px; height: 22px; color: var(--cyan); }
+    .price-icon    { margin-bottom: 14px; display: flex; align-items: center; }
+    .price-icon svg{ width: 28px; height: 28px; color: var(--cyan); }
   </style>
 
   <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
@@ -1542,6 +1633,24 @@
         <a href="#contacto" class="btn-main">✦ Cotizar mi web</a>
         <a href="#servicios" class="btn-ghost">Ver servicios ↓</a>
       </div>
+
+      <!-- Stats — prueba social -->
+      <div class="hero-stats">
+        <div class="h-stat">
+          <span class="h-num">4+</span>
+          <span class="h-lbl">Proyectos</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-stat">
+          <span class="h-num">100%</span>
+          <span class="h-lbl">Código propio</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-stat">
+          <span class="h-num">&lt;24h</span>
+          <span class="h-lbl">Respuesta</span>
+        </div>
+      </div>
     </div>
 
     <!-- RIGHT — IG CARD -->
@@ -1606,7 +1715,7 @@
 
       <div class="svc-card" data-card>
         <span class="svc-tag">Más popular</span>
-        <div class="svc-icon">🌐</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3 class="svc-name">Creación de Páginas Web</h3>
         <p class="svc-desc">Diseñamos y desarrollamos tu sitio desde cero. Moderno, rápido, mobile-friendly y pensado para convertir visitantes en clientes.</p>
         <ul class="svc-list">
@@ -1619,7 +1728,7 @@
       </div>
 
       <div class="svc-card" data-card>
-        <div class="svc-icon">🔧</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
         <h3 class="svc-name">Mantenimiento y Soporte</h3>
         <p class="svc-desc">Tu web siempre activa, segura y actualizada. Cambios de contenido, actualizaciones técnicas y soporte cuando lo necesitás.</p>
         <ul class="svc-list">
@@ -1648,19 +1757,19 @@
     <div class="steps">
       <div class="step" data-card>
         <div class="step-num">01</div>
-        <div class="step-emoji">💬</div>
+        <div class="step-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3 class="step-title">Nos contactás</h3>
         <p class="step-desc">Escribinos por Instagram o email. Charlamos sobre tu negocio y te damos presupuesto sin compromiso.</p>
       </div>
       <div class="step" data-card>
         <div class="step-num">02</div>
-        <div class="step-emoji">🎨</div>
+        <div class="step-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
         <h3 class="step-title">Diseñamos</h3>
         <p class="step-desc">Creamos tu web personalizada con tu marca y contenido. Te mostramos el diseño antes de publicar y ajustamos lo que necesités.</p>
       </div>
       <div class="step" data-card>
         <div class="step-num">03</div>
-        <div class="step-emoji">🚀</div>
+        <div class="step-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
         <h3 class="step-title">Lanzamos</h3>
         <p class="step-desc">Conectamos tu dominio propio (.com), publicamos con HTTPS y queda online. El dominio queda registrado a tu nombre — el sitio es 100% tuyo.</p>
       </div>
@@ -1680,28 +1789,28 @@
     </div>
     <div class="feats">
       <div class="feat" data-card>
-        <div class="feat-icon">✍️</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
         <div>
           <h4 class="feat-title">Código escrito a mano</h4>
           <p class="feat-desc">Cada línea de código es propia. Sin plantillas de $100k que cualquiera puede comprar y personalizar en 10 minutos.</p>
         </div>
       </div>
       <div class="feat" data-card>
-        <div class="feat-icon">🔍</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
         <div>
           <h4 class="feat-title">SEO real incluido</h4>
           <p class="feat-desc">Metadatos, Schema.org, Open Graph, sitemap y rendimiento optimizado. Tu sitio aparece en Google desde el día uno.</p>
         </div>
       </div>
       <div class="feat" data-card>
-        <div class="feat-icon">📱</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
         <div>
           <h4 class="feat-title">100% Responsive</h4>
           <p class="feat-desc">Diseñado y probado en celular, tablet y escritorio. El 70% de tus clientes navega desde el teléfono — tu web los captura.</p>
         </div>
       </div>
       <div class="feat" data-card>
-        <div class="feat-icon">🚀</div>
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div>
           <h4 class="feat-title">Deploy incluido</h4>
           <p class="feat-desc">No entrego un ZIP y me olvido. Conecto tu dominio propio, publico con HTTPS y te acompaño con soporte técnico. El sitio queda a tu nombre, no al mío.</p>
@@ -1725,7 +1834,7 @@
 
       <!-- Landing Page -->
       <div class="price-card" data-card>
-        <div class="price-icon">🎯</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3 class="price-name">Landing Page</h3>
         <p class="price-desc">Ideal para presentar tu negocio o servicio con impacto y capturar consultas al instante.</p>
         <div class="price-range">
@@ -1747,7 +1856,7 @@
       <!-- Sitio Web Profesional -->
       <div class="price-card featured" data-card>
         <span class="price-badge">⭐ Más popular</span>
-        <div class="price-icon">🌐</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3 class="price-name">Sitio Web Profesional</h3>
         <p class="price-desc">Presencia online completa. Múltiples secciones, alto impacto visual y SEO que posiciona en Google.</p>
         <div class="price-range">
@@ -1769,7 +1878,7 @@
 
       <!-- E-commerce -->
       <div class="price-card" data-card>
-        <div class="price-icon">🛒</div>
+        <div class="price-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
         <h3 class="price-name">E-commerce Completo</h3>
         <p class="price-desc">Tienda online lista para vender: catálogo, carrito, integración WhatsApp y pedidos de tus clientes.</p>
         <div class="price-range">
@@ -2250,6 +2359,19 @@
   }, { threshold: 0.15 });
 
   if (ppSection) ppObserver.observe(ppSection);
+
+  // ── SCROLL SPY — resalta link activo en nav ──
+  const navLs   = document.querySelectorAll('.nav-links a[href^="#"]');
+  const spySecs = [...navLs]
+    .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+    .filter(Boolean);
+
+  function updateSpy() {
+    let cur = '';
+    spySecs.forEach(s => { if (scrollY >= s.offsetTop - 140) cur = s.id; });
+    navLs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }
+  window.addEventListener('scroll', updateSpy, { passive: true });
 </script>
 </body>
 </html>

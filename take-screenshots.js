@@ -28,6 +28,12 @@ const SITES = [
     waitFor: 3000,
     fallbackLocal: true,
   },
+  {
+    name: 'owen-house',
+    url: 'https://owen-house-criadero.pages.dev/',
+    width: 1280,
+    waitFor: 3000,
+  },
 ];
 
 const OUT = path.join(__dirname, 'assets', 'screenshots');

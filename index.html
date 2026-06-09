@@ -1299,6 +1299,53 @@
       box-shadow: 0 4px 16px rgba(6,182,212,.4);
     }
 
+    /* ── PORTFOLIO BENTO GRID ── */
+    .portfolio-bento {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+    }
+    .portfolio-bento .p-card:first-child { grid-column: span 2; }
+    .portfolio-bento .p-card:first-child .p-preview { height: 300px; }
+
+    .p-card { position: relative; }
+
+    /* cursor spotlight inside each card */
+    .p-card-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(320px circle at var(--cx,50%) var(--cy,50%), rgba(6,182,212,.18), transparent 62%);
+      mix-blend-mode: screen;
+      opacity: 0; transition: opacity .45s ease;
+      pointer-events: none; z-index: 10; border-radius: inherit;
+    }
+    .p-card:hover .p-card-glow { opacity: 1; }
+
+    /* top accent line */
+    .p-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0; transition: opacity .4s ease; z-index: 11;
+    }
+    .p-card:hover::before { opacity: 1; }
+
+    /* decorative project number */
+    .p-num {
+      position: absolute; bottom: 18px; right: 20px;
+      font-family: var(--f-head); font-size: 5rem; font-weight: 800;
+      color: rgba(6,182,212,.055); line-height: 1;
+      pointer-events: none; user-select: none;
+      transition: color .4s ease;
+    }
+    .p-card:hover .p-num { color: rgba(6,182,212,.14); }
+
+    /* enhanced hover */
+    .p-card:hover {
+      border-color: rgba(6,182,212,.5) !important;
+      box-shadow: 0 28px 70px rgba(0,0,0,.48), 0 0 55px rgba(6,182,212,.13) !important;
+    }
+
+    /* 5th card stagger */
+    .p-card:nth-child(5) { transition-delay: .60s; }
+
     /* ── COMPARE BLOCK ── */
     .compare-block {
       margin-top: 36px;
@@ -1348,6 +1395,8 @@
       .trust { justify-content: center; }
       .svc-grid { grid-template-columns: 1fr; }
       .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-bento { grid-template-columns: repeat(2,1fr); }
+      .portfolio-bento .p-card:first-child { grid-column: span 2; }
       .pricing-grid { grid-template-columns: 1fr; }
       .compare-grid { grid-template-columns: 1fr; }
       .compare-col:first-child { border-right: none; border-bottom: 1px solid rgba(6,182,212,.08); }
@@ -1367,6 +1416,9 @@
       .foot-inner { flex-direction: column; align-items: flex-start; }
       .foot-links { gap: 14px; }
       h1 { font-size: 2.4rem; }
+      .portfolio-bento { grid-template-columns: 1fr; }
+      .portfolio-bento .p-card:first-child { grid-column: span 1; }
+      .portfolio-bento .p-card:first-child .p-preview { height: 220px; }
     }
   </style>
 
@@ -1926,10 +1978,11 @@
       <h2 class="sec-h2">Trabajos<br>realizados</h2>
       <p class="sec-sub">Proyectos reales que diseñé y desarrollé para mis clientes.</p>
     </div>
-    <div class="portfolio-grid">
+    <div class="portfolio-bento">
 
-      <!-- Woods Puppys -->
+      <!-- 01 Woods Puppys — featured (2 cols) -->
       <div class="p-card" data-card>
+        <div class="p-num">01</div>
         <div class="p-chrome">
           <span class="p-dot p-dot-r"></span>
           <span class="p-dot p-dot-y"></span>
@@ -1950,15 +2003,17 @@
           <p class="p-desc">Sitio web para criadero de Dachshund Mini. Con galería de cachorros, lista de espera y diseño a medida para generar consultas reales.</p>
           <a href="https://woodspuppys.com.ar/" target="_blank" rel="noopener noreferrer" class="p-link">Ver sitio →</a>
         </div>
+        <div class="p-card-glow"></div>
       </div>
 
-      <!-- MF Trámites Vehiculares -->
+      <!-- 02 MF Trámites -->
       <div class="p-card" data-card>
+        <div class="p-num">02</div>
         <div class="p-chrome">
           <span class="p-dot p-dot-r"></span>
           <span class="p-dot p-dot-y"></span>
           <span class="p-dot p-dot-g"></span>
-          <div class="p-urlbar">joelppraderio2023.github.io/mf-tramites-vehiculares</div>
+          <div class="p-urlbar">joelppraderio2023.github.io/mf-tramites</div>
         </div>
         <div class="p-preview">
           <img src="assets/screenshots/mf-tramites.jpg" alt="MF Trámites Vehiculares — preview del sitio" loading="lazy">
@@ -1974,10 +2029,12 @@
           <p class="p-desc">Página de presentación para gestor de trámites vehiculares. Diseño llamativo, contacto directo por WhatsApp y presencia en Google desde el día uno.</p>
           <a href="https://joelppraderio2023.github.io/mf-tramites-vehiculares/" target="_blank" rel="noopener noreferrer" class="p-link">Ver sitio →</a>
         </div>
+        <div class="p-card-glow"></div>
       </div>
 
-      <!-- Silvia Gómez Fotografía -->
+      <!-- 03 Silvia Fotografía -->
       <div class="p-card" data-card>
+        <div class="p-num">03</div>
         <div class="p-chrome">
           <span class="p-dot p-dot-r"></span>
           <span class="p-dot p-dot-y"></span>
@@ -1998,10 +2055,12 @@
           <p class="p-desc">Página elegante para fotógrafa de eventos. XV años, casamientos, bautismos — con galería de trabajos y contacto directo para que los clientes lleguen solos.</p>
           <a href="https://silvia-gomez-fotografia.pages.dev/" target="_blank" rel="noopener noreferrer" class="p-link">Ver sitio →</a>
         </div>
+        <div class="p-card-glow"></div>
       </div>
 
-      <!-- La Buena Semilla -->
+      <!-- 04 La Buena Semilla -->
       <div class="p-card" data-card>
+        <div class="p-num">04</div>
         <div class="p-chrome">
           <span class="p-dot p-dot-r"></span>
           <span class="p-dot p-dot-y"></span>
@@ -2022,10 +2081,12 @@
           <p class="p-desc">Tienda online completa con catálogo, carrito de compras y entrega a domicilio para verdulería en Buenos Aires.</p>
           <a href="https://la-buenasemilla.netlify.app/" target="_blank" rel="noopener noreferrer" class="p-link">Ver sitio →</a>
         </div>
+        <div class="p-card-glow"></div>
       </div>
 
-      <!-- Owen House Criadero -->
+      <!-- 05 Owen House -->
       <div class="p-card" data-card>
+        <div class="p-num">05</div>
         <div class="p-chrome">
           <span class="p-dot p-dot-r"></span>
           <span class="p-dot p-dot-y"></span>
@@ -2046,6 +2107,7 @@
           <p class="p-desc">Sitio web para criadero de American Bully y Dachshund en Buenos Aires. Galería de perros, información de razas y contacto directo para que los interesados los encuentren en Google.</p>
           <a href="https://owen-house-criadero.pages.dev/" target="_blank" rel="noopener noreferrer" class="p-link">Ver sitio →</a>
         </div>
+        <div class="p-card-glow"></div>
       </div>
 
     </div>
@@ -2428,6 +2490,15 @@
   }, { threshold: 0.15 });
 
   if (ppSection) ppObserver.observe(ppSection);
+
+  // ── CARD GLOW (cursor spotlight) ──
+  document.querySelectorAll('.p-card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--cx', ((e.clientX - r.left) / r.width  * 100) + '%');
+      card.style.setProperty('--cy', ((e.clientY - r.top)  / r.height * 100) + '%');
+    });
+  });
 </script>
 </body>
 </html>

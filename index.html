@@ -2377,94 +2377,76 @@
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const COUNT = W < 600 ? 95 : 210;
-    const P = Array.from({ length: COUNT }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: 0, vy: 0,
-      sp: 0.6 + Math.random() * 1.25,
-      r:  0.8 + Math.random() * 1.7,
-      ph: Math.random() * 6.283,
-    }));
+    // Centro del warp (donde aparece el texto)
+    const CX = W / 2, CY = H * 0.46;
 
-    // Campo de flujo suave (sin librería de ruido)
-    function field(x, y, t) {
-      return (Math.sin(x * 0.0042 + t) +
-              Math.cos(y * 0.0046 - t * 0.8) +
-              Math.sin((x + y) * 0.0026 + t * 0.5)) * Math.PI;
-    }
+    const COUNT = W < 600 ? 130 : 280;
+    const stars = Array.from({ length: COUNT }, () => {
+      const z = 0.18 + Math.random() * 0.82;          // profundidad (cerca = grande/brillante/rápida)
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        z,
+        r: 0.5 + z * 1.9,                             // tamaño por profundidad
+        dvx: (Math.random() - .5) * 0.16,             // deriva lenta (parallax × z)
+        dvy: (Math.random() - .5) * 0.16,
+        ph: Math.random() * 6.283,                    // fase de titileo
+        ts: 1.6 + Math.random() * 2.4,                // velocidad de titileo
+        vx: 0, vy: 0,                                 // velocidad de warp
+      };
+    });
 
-    // Rayo eléctrico quebrado entre dos partículas
-    function bolt(a, b, alpha) {
-      const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
-      const nx = -dy / len, ny = dx / len;
-      const segs = 4 + (Math.random() * 3 | 0);
-      ctx.beginPath(); ctx.moveTo(a.x, a.y);
-      for (let s = 1; s < segs; s++) {
-        const tt = s / segs;
-        const off = (Math.random() - .5) * 16;
-        ctx.lineTo(a.x + dx * tt + nx * off, a.y + dy * tt + ny * off);
-      }
-      ctx.lineTo(b.x, b.y);
-      ctx.strokeStyle = `rgba(175,242,255,${alpha})`;
-      ctx.lineWidth = 1.1; ctx.stroke();
-    }
-
-    const ARC = W < 600 ? 64 : 78, ARC2 = ARC * ARC, MAXARC = W < 600 ? 4 : 8;
-
-    const bandY = H * 0.46;
-    const RELEASE = 3.1, END = 4.1;
+    const RELEASE = 3.2, END = 4.25;
     let start = null, released = false;
 
     function frame(ts) {
       if (!start) start = ts;
       const t = (ts - start) / 1000;
+      const warp = released ? (t - RELEASE) : 0;
 
-      // estela fluida: velo oscuro semitransparente en vez de borrar
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(5,18,30,0.15)';
-      ctx.fillRect(0, 0, W, H);
-
-      const gA   = released ? Math.max(0, 1 - (t - RELEASE) / 0.9) : Math.min(1, 0.3 + t * 0.85);
-      const bias = released ? 0 : Math.min(1, t / 1.8) * 0.5;
-      const ft   = t * 0.4;
-
-      ctx.globalCompositeOperation = 'lighter';
-      for (const p of P) {
-        const ang = field(p.x, p.y, ft);
-        let ax = Math.cos(ang) * p.sp;
-        let ay = Math.sin(ang) * p.sp;
-        // sesgo hacia la banda central (construye el "río" de luz)
-        ay += (bandY - p.y) * 0.0016 * bias;
-        if (released) {                       // al soltar: se expande hacia afuera
-          ax += (p.x - W / 2) * 0.0013;
-          ay += (p.y - H / 2) * 0.0013;
-        }
-        p.vx = p.vx * 0.86 + ax * 0.14;
-        p.vy = p.vy * 0.86 + ay * 0.14;
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -12) p.x = W + 12; else if (p.x > W + 12) p.x = -12;
-        if (p.y < -12) p.y = H + 12; else if (p.y > H + 12) p.y = -12;
-
-        const tw = 0.4 + 0.45 * Math.sin(p.ph + t * 3.4);   // titileo eléctrico
-        ctx.fillStyle = `rgba(120,235,255,${(0.26 + 0.42 * tw) * gA})`;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-        // chispa blanca ocasional (núcleo eléctrico)
-        if (Math.random() < 0.04) {
-          ctx.fillStyle = `rgba(235,252,255,${0.8 * gA})`;
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 0.6, 0, 6.283); ctx.fill();
-        }
+      // build-up: limpio y nítido. warp: velo suave → estelas largas
+      if (!released) {
+        ctx.clearRect(0, 0, W, H);
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(4,16,28,0.13)';
+        ctx.fillRect(0, 0, W, H);
       }
 
-      // arcos eléctricos crepitando entre partículas cercanas
-      let arcs = 0;
-      for (let i = 0; i < P.length && arcs < MAXARC; i++) {
-        for (let j = i + 1; j < P.length && arcs < MAXARC; j++) {
-          const a = P[i], b = P[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          if (dx * dx + dy * dy < ARC2 && Math.random() < 0.02) {
-            bolt(a, b, 0.5 * gA);
-            arcs++;
-          }
+      const gA = released ? Math.max(0, 1 - warp / 0.95) : Math.min(1, 0.25 + t * 0.9);
+
+      ctx.globalCompositeOperation = 'lighter';
+      for (const s of stars) {
+        if (!released) {
+          // deriva con parallax (las cercanas se mueven más)
+          s.x += s.dvx * s.z;
+          s.y += s.dvy * s.z;
+          if (s.x < -4) s.x = W + 4; else if (s.x > W + 4) s.x = -4;
+          if (s.y < -4) s.y = H + 4; else if (s.y > H + 4) s.y = -4;
+        } else {
+          // WARP: aceleración radial desde el centro (profundidad → más rápido)
+          let nx = s.x - CX, ny = s.y - CY;
+          const d = Math.hypot(nx, ny) || 1;
+          nx /= d; ny /= d;
+          const accel = (0.6 + warp * 9) * s.z;
+          s.vx += nx * accel; s.vy += ny * accel;
+          const px = s.x, py = s.y;
+          s.x += s.vx; s.y += s.vy;
+          // estela (streak) del warp
+          ctx.strokeStyle = `rgba(150,225,255,${0.7 * gA})`;
+          ctx.lineWidth = s.r;
+          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(s.x, s.y); ctx.stroke();
+        }
+
+        // estrella + titileo
+        const tw = 0.5 + 0.5 * Math.sin(s.ph + t * s.ts);
+        const a = (0.25 + 0.55 * tw * s.z) * gA;
+        ctx.fillStyle = `rgba(150,228,255,${a})`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+        // núcleo blanco en las más brillantes
+        if (s.z > 0.7) {
+          ctx.fillStyle = `rgba(240,252,255,${0.5 * tw * gA})`;
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 0.5, 0, 6.283); ctx.fill();
         }
       }
       ctx.globalCompositeOperation = 'source-over';

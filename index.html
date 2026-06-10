@@ -2393,6 +2393,24 @@
               Math.sin((x + y) * 0.0026 + t * 0.5)) * Math.PI;
     }
 
+    // Rayo eléctrico quebrado entre dos partículas
+    function bolt(a, b, alpha) {
+      const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len, ny = dx / len;
+      const segs = 4 + (Math.random() * 3 | 0);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y);
+      for (let s = 1; s < segs; s++) {
+        const tt = s / segs;
+        const off = (Math.random() - .5) * 16;
+        ctx.lineTo(a.x + dx * tt + nx * off, a.y + dy * tt + ny * off);
+      }
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = `rgba(175,242,255,${alpha})`;
+      ctx.lineWidth = 1.1; ctx.stroke();
+    }
+
+    const ARC = W < 600 ? 64 : 78, ARC2 = ARC * ARC, MAXARC = W < 600 ? 4 : 8;
+
     const bandY = H * 0.46;
     const RELEASE = 3.1, END = 4.1;
     let start = null, released = false;
@@ -2427,9 +2445,27 @@
         if (p.x < -12) p.x = W + 12; else if (p.x > W + 12) p.x = -12;
         if (p.y < -12) p.y = H + 12; else if (p.y > H + 12) p.y = -12;
 
-        const tw = 0.4 + 0.45 * Math.sin(p.ph + t * 2.2);   // titileo
-        ctx.fillStyle = `rgba(120,235,255,${(0.28 + 0.4 * tw) * gA})`;
+        const tw = 0.4 + 0.45 * Math.sin(p.ph + t * 3.4);   // titileo eléctrico
+        ctx.fillStyle = `rgba(120,235,255,${(0.26 + 0.42 * tw) * gA})`;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+        // chispa blanca ocasional (núcleo eléctrico)
+        if (Math.random() < 0.04) {
+          ctx.fillStyle = `rgba(235,252,255,${0.8 * gA})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 0.6, 0, 6.283); ctx.fill();
+        }
+      }
+
+      // arcos eléctricos crepitando entre partículas cercanas
+      let arcs = 0;
+      for (let i = 0; i < P.length && arcs < MAXARC; i++) {
+        for (let j = i + 1; j < P.length && arcs < MAXARC; j++) {
+          const a = P[i], b = P[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          if (dx * dx + dy * dy < ARC2 && Math.random() < 0.02) {
+            bolt(a, b, 0.5 * gA);
+            arcs++;
+          }
+        }
       }
       ctx.globalCompositeOperation = 'source-over';
 

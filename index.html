@@ -138,11 +138,11 @@
       to   { opacity: 1; letter-spacing: .42em; }
     }
 
-    /* Intro en móvil: nombre en dos líneas, sin desbordar */
-    @media (max-width: 600px) {
+    /* Intro en móvil y tablet: nombre en dos líneas, sin desbordar */
+    @media (max-width: 900px) {
       .flux-word {
         white-space: normal; line-height: 1.04;
-        font-size: clamp(1.9rem, 11vw, 3rem);
+        font-size: clamp(1.9rem, 9vw, 3.4rem);
         letter-spacing: .18em;
       }
       .flux-word span { display: block; }

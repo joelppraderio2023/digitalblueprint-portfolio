@@ -78,35 +78,64 @@
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-    /* ── INTRO PARTICLE ASSEMBLY ── */
+    /* ── INTRO FLUX ── */
     #intro {
-      position: fixed; inset: 0; z-index: 9999;
-      background: #061826;
-      transition: opacity .85s cubic-bezier(.4,0,.2,1), visibility .85s;
+      position: fixed; inset: 0; z-index: 9999; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 46%, #0a2236 0%, #061826 55%, #04111c 100%);
+      transition: opacity .9s cubic-bezier(.4,0,.2,1), visibility .9s;
     }
     #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
-    #introNet { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #intro::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 46%, transparent 42%, rgba(2,9,16,.62) 100%);
+    }
+    #introFlux { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-    .intro-brand {
-      position: absolute; left: 50%; top: 61%;
-      transform: translate(-50%, 0);
-      width: 100%; text-align: center; pointer-events: none;
-      opacity: 0; animation: introBrandIn .8s ease 1.4s forwards;
+    .flux-glow {
+      position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
+      width: min(82vw, 780px); height: min(42vh, 360px);
+      background: radial-gradient(ellipse, rgba(6,182,212,.22), transparent 70%);
+      filter: blur(22px); opacity: 0; z-index: 1; pointer-events: none;
+      animation: fluxGlow 1.7s ease 1s forwards;
     }
-    .intro-brand-name {
+    @keyframes fluxGlow { 0%{opacity:0} 60%{opacity:1} 100%{opacity:.7} }
+
+    .flux-word {
+      position: absolute; left: 50%; top: 46%;
+      transform: translate(-50%, -50%) scale(1.06);
+      margin: 0; white-space: nowrap; z-index: 2; pointer-events: none;
       font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(1.5rem, 5.5vw, 2.7rem);
-      color: var(--text); letter-spacing: -.02em;
+      font-size: clamp(2rem, 9vw, 5.4rem); letter-spacing: .5em;
+      background: linear-gradient(100deg,
+        #eaf6fb 0%, #eaf6fb 34%, #67e8f9 50%, #eaf6fb 66%, #eaf6fb 100%);
+      background-size: 250% 100%; background-position: 120% 0;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      opacity: 0; filter: blur(14px);
+      animation: fluxFocus 1.3s cubic-bezier(.2,.7,.2,1) 1s forwards,
+                 fluxSheen 1.2s ease 2.2s forwards;
     }
-    .intro-brand-name .accent { color: var(--cyan); }
-    .intro-brand-tag {
-      margin-top: .5rem; font-family: var(--f-mono);
-      font-size: clamp(.55rem, 1.7vw, .7rem);
-      letter-spacing: .3em; color: rgba(6,182,212,.5);
+    .flux-word .accent { -webkit-text-fill-color: var(--cyan); }
+    @keyframes fluxFocus {
+      to {
+        opacity: 1; filter: blur(0) drop-shadow(0 0 34px rgba(6,182,212,.4));
+        letter-spacing: -.01em;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
-    @keyframes introBrandIn {
-      from { opacity: 0; transform: translate(-50%, 8px); }
-      to   { opacity: 1; transform: translate(-50%, 0); }
+    @keyframes fluxSheen { to { background-position: -40% 0; } }
+
+    .flux-tag {
+      position: absolute; left: 50%; top: 46%;
+      transform: translate(-50%, 2.7em);
+      z-index: 2; pointer-events: none; white-space: nowrap;
+      font-family: var(--f-mono);
+      font-size: clamp(.55rem, 1.8vw, .74rem);
+      letter-spacing: .42em; color: rgba(170,225,240,.6);
+      opacity: 0; animation: fluxTagIn .9s ease 2.4s forwards;
+    }
+    @keyframes fluxTagIn {
+      from { opacity: 0; letter-spacing: .62em; }
+      to   { opacity: 1; letter-spacing: .42em; }
     }
 
     /* ── BACKGROUND GRID ── */
@@ -1630,13 +1659,12 @@
 </head>
 <body>
 
-<!-- ── INTRO PARTICLE ASSEMBLY ── -->
+<!-- ── INTRO FLUX ── -->
 <div id="intro" aria-hidden="true">
-  <canvas id="introNet"></canvas>
-  <div class="intro-brand">
-    <div class="intro-brand-name"><span>Digital</span><span class="accent">Blueprint</span></div>
-    <div class="intro-brand-tag">// PLANOS QUE TRABAJAN</div>
-  </div>
+  <canvas id="introFlux"></canvas>
+  <div class="flux-glow"></div>
+  <h1 class="flux-word"><span>Digital</span><span class="accent">Blueprint</span></h1>
+  <div class="flux-tag">DISEÑO · CÓDIGO · RESULTADOS</div>
 </div>
 
 <!-- BG FX -->
@@ -2333,13 +2361,13 @@
 </div>
 
 <script>
-  // ── INTRO PARTICLE ASSEMBLY (se funde con la red de fondo) ──
+  // ── INTRO FLUX: campo de flujo + tipografía cinética ──
   (function(){
-    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduce  = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = document.getElementById('intro');
-    const canvas  = document.getElementById('introNet');
+    const canvas  = document.getElementById('introFlux');
     if (!overlay || !canvas) return;
-    if (prefersReduced) { overlay.remove(); return; }
+    if (reduce) { overlay.remove(); return; }
 
     document.body.style.overflow = 'hidden';
     const ctx = canvas.getContext('2d');
@@ -2349,93 +2377,66 @@
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Geometría del isotipo (3 barras + baseline) en espacio 256
-    const bars = [
-      { x: 56,  y: 160, w: 36, h: 48  },
-      { x: 110, y: 120, w: 36, h: 88  },
-      { x: 164, y: 64,  w: 36, h: 144 },
-    ];
-    const step = (W < 600) ? 16 : 13;
-    const raw = [];
-    for (const b of bars) {
-      for (let px = b.x; px <= b.x + b.w; px += step)
-        for (let py = b.y; py <= b.y + b.h; py += step)
-          raw.push({ x: px, y: py });
+    const COUNT = W < 600 ? 95 : 210;
+    const P = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: 0, vy: 0,
+      sp: 0.6 + Math.random() * 1.25,
+      r:  0.8 + Math.random() * 1.7,
+      ph: Math.random() * 6.283,
+    }));
+
+    // Campo de flujo suave (sin librería de ruido)
+    function field(x, y, t) {
+      return (Math.sin(x * 0.0042 + t) +
+              Math.cos(y * 0.0046 - t * 0.8) +
+              Math.sin((x + y) * 0.0026 + t * 0.5)) * Math.PI;
     }
-    for (let px = 40; px <= 216; px += step) raw.push({ x: px, y: 216 });
 
-    // bbox del logo + mapeo a pantalla
-    const minX = 40, maxX = 216, minY = 64, maxY = 216;
-    const lcx = (minX + maxX) / 2, lcy = (minY + maxY) / 2;
-    const targetH = Math.min(H * 0.34, 300);
-    const scale = targetH / (maxY - minY);
-    const cx = W / 2, cy = H * 0.40;
-    const spacing = step * scale;
-    const LINK = spacing * 1.7;
-
-    const particles = raw.map(p => {
-      const ang = Math.random() * Math.PI * 2;
-      const r = Math.max(W, H) * (0.55 + Math.random() * 0.35);
-      return {
-        tx: cx + (p.x - lcx) * scale,
-        ty: cy + (p.y - lcy) * scale,
-        x: cx + Math.cos(ang) * r,
-        y: cy + Math.sin(ang) * r,
-        vx: 0, vy: 0,
-      };
-    });
-
-    const RELEASE = 2.5, END = 3.45;
+    const bandY = H * 0.46;
+    const RELEASE = 3.1, END = 4.1;
     let start = null, released = false;
 
     function frame(ts) {
       if (!start) start = ts;
       const t = (ts - start) / 1000;
-      ctx.clearRect(0, 0, W, H);
+
+      // estela fluida: velo oscuro semitransparente en vez de borrar
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = 'rgba(5,18,30,0.15)';
+      ctx.fillRect(0, 0, W, H);
+
+      const gA   = released ? Math.max(0, 1 - (t - RELEASE) / 0.9) : Math.min(1, 0.3 + t * 0.85);
+      const bias = released ? 0 : Math.min(1, t / 1.8) * 0.5;
+      const ft   = t * 0.4;
+
+      ctx.globalCompositeOperation = 'lighter';
+      for (const p of P) {
+        const ang = field(p.x, p.y, ft);
+        let ax = Math.cos(ang) * p.sp;
+        let ay = Math.sin(ang) * p.sp;
+        // sesgo hacia la banda central (construye el "río" de luz)
+        ay += (bandY - p.y) * 0.0016 * bias;
+        if (released) {                       // al soltar: se expande hacia afuera
+          ax += (p.x - W / 2) * 0.0013;
+          ay += (p.y - H / 2) * 0.0013;
+        }
+        p.vx = p.vx * 0.86 + ax * 0.14;
+        p.vy = p.vy * 0.86 + ay * 0.14;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -12) p.x = W + 12; else if (p.x > W + 12) p.x = -12;
+        if (p.y < -12) p.y = H + 12; else if (p.y > H + 12) p.y = -12;
+
+        const tw = 0.4 + 0.45 * Math.sin(p.ph + t * 2.2);   // titileo
+        ctx.fillStyle = `rgba(120,235,255,${(0.28 + 0.4 * tw) * gA})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
 
       if (t >= RELEASE && !released) {
         released = true;
-        for (const p of particles) {
-          const a = Math.atan2(p.y - cy, p.x - cx) + (Math.random() - .5) * 0.7;
-          const sp = 0.6 + Math.random() * 1.5;
-          p.vx = Math.cos(a) * sp; p.vy = Math.sin(a) * sp;
-        }
-        overlay.classList.add('out');           // el fondo oscuro se desvanece → aparece la web
+        overlay.classList.add('out');         // el velo se disuelve → aparece la web
         document.body.style.overflow = '';
-      }
-
-      for (const p of particles) {
-        if (!released) {
-          const k = 0.085;
-          p.vx = (p.vx + (p.tx - p.x) * k) * 0.76;
-          p.vy = (p.vy + (p.ty - p.y) * k) * 0.76;
-        } else {
-          p.vx *= 0.995; p.vy *= 0.995;
-        }
-        p.x += p.vx; p.y += p.vy;
-      }
-
-      // opacidad global: entra al ensamblar, sale al dispersarse
-      const alpha = released
-        ? Math.max(0, 1 - (t - RELEASE) / 0.85)
-        : Math.min(1, t / 1.1);
-
-      // enlaces tipo constelación
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i], b = particles[j];
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < LINK) {
-            ctx.strokeStyle = `rgba(6,182,212,${(1 - d / LINK) * 0.5 * alpha})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      }
-      // puntos
-      for (const p of particles) {
-        ctx.fillStyle = `rgba(103,232,249,${0.85 * alpha})`;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 1.9, 0, Math.PI * 2); ctx.fill();
       }
 
       if (t < END) requestAnimationFrame(frame);

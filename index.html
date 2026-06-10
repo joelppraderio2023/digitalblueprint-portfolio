@@ -78,77 +78,79 @@
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-    /* ── INTRO DECODE ── */
+    /* ── INTRO BLUEPRINT DRAW ── */
     #intro {
       position: fixed; inset: 0; z-index: 9999;
-      background: #040D14;
+      background: #061826;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity .65s cubic-bezier(.4,0,.2,1), visibility .65s;
+      transition: opacity .7s cubic-bezier(.4,0,.2,1), visibility .7s;
     }
     #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    .intro-scan {
-      position: absolute; inset: 0; pointer-events: none;
-      background: repeating-linear-gradient(
-        0deg, transparent, transparent 3px,
-        rgba(0,0,0,.18) 3px, rgba(0,0,0,.18) 4px
-      );
-      animation: introScanMove 12s linear infinite;
-    }
-    @keyframes introScanMove { from{background-position:0 0} to{background-position:0 200px} }
-
-    .intro-grid {
+    .bp-grid {
       position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(6,182,212,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6,182,212,.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-      animation: introGridFade 2s ease forwards;
+        linear-gradient(rgba(6,182,212,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,.07) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0;
+      animation: bpGridIn .9s ease .1s forwards;
     }
-    @keyframes introGridFade { 0%{opacity:0} 30%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+    @keyframes bpGridIn { to { opacity: 1; } }
 
-    .intro-content {
+    .bp-stage {
       position: relative; z-index: 1;
-      text-align: center;
       display: flex; flex-direction: column; align-items: center;
     }
-    .intro-label {
+    .bp-svg { width: min(80vw, 440px); height: auto; overflow: visible; }
+
+    .bp-baseline, .bp-bar {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    .bp-baseline { animation: bpDraw .55s ease forwards; }
+    .bp-bar { fill: var(--cyan); fill-opacity: 0; }
+    .bp-bar.b1 { animation: bpDraw .6s ease .45s forwards, bpFillIn .55s ease 1.05s forwards; }
+    .bp-bar.b2 { animation: bpDraw .6s ease .75s forwards, bpFillIn .55s ease 1.25s forwards; }
+    .bp-bar.b3 { animation: bpDraw .6s ease 1.05s forwards, bpFillIn .55s ease 1.45s forwards; }
+    @keyframes bpDraw   { to { stroke-dashoffset: 0; } }
+    @keyframes bpFillIn { to { fill-opacity: .9; } }
+
+    .bp-marks path { stroke: rgba(6,182,212,.4); stroke-width: 1.5; stroke-linecap: round; }
+    .bp-marks { opacity: 0; animation: bpFade .7s ease .25s forwards; }
+
+    .bp-dim .bp-line { stroke: rgba(6,182,212,.5); stroke-width: 1; fill: none; }
+    .bp-dim text {
+      fill: rgba(6,182,212,.62);
       font-family: var(--f-mono);
-      font-size: clamp(.6rem, 2vw, .78rem);
-      color: rgba(6,182,212,.5);
-      letter-spacing: .28em;
-      margin-bottom: 1.1rem;
-      opacity: 0;
-      animation: introFadeUp .35s ease .15s forwards;
+      font-size: 11px; letter-spacing: .04em;
     }
-    .intro-text {
-      font-family: var(--f-head);
-      font-size: clamp(2.2rem, 9vw, 5.8rem);
-      font-weight: 800;
-      color: var(--cyan);
-      letter-spacing: -.02em;
-      line-height: 1;
+    .bp-dim { opacity: 0; }
+    .bp-dim.d1 { animation: bpFade .5s ease 1.55s forwards; }
+    .bp-dim.d2 { animation: bpFade .5s ease 1.75s forwards; }
+    @keyframes bpFade { to { opacity: 1; } }
+
+    .bp-name {
+      margin-top: 1.5rem;
+      font-family: var(--f-head); font-weight: 800;
+      font-size: clamp(1.6rem, 6vw, 3rem);
+      color: var(--text); letter-spacing: -.02em;
+      opacity: 0; animation: bpUp .6s ease 1.75s forwards;
     }
-    .intro-cursor {
-      display: inline-block;
-      font-family: var(--f-mono);
-      font-size: clamp(1.5rem, 6vw, 3.8rem);
-      color: var(--cyan);
-      vertical-align: baseline;
-      animation: introBlink .7s step-end infinite;
-      margin-left: 1px;
-      line-height: 1;
-    }
-    .intro-sub {
-      margin-top: 1.4rem;
+    .bp-name .accent { color: var(--cyan); }
+    .bp-tag {
+      margin-top: .55rem;
       font-family: var(--f-mono);
       font-size: clamp(.55rem, 1.8vw, .72rem);
-      color: rgba(6,182,212,.4);
-      letter-spacing: .32em;
-      min-height: 1.2em;
+      letter-spacing: .3em; color: rgba(6,182,212,.45);
+      opacity: 0; animation: bpUp .6s ease 2.05s forwards;
     }
-    @keyframes introBlink { 0%,100%{opacity:1} 50%{opacity:0} }
-    @keyframes introFadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+    @keyframes bpUp { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
 
     /* ── BACKGROUND GRID ── */
     body::before {
@@ -1671,14 +1673,37 @@
 </head>
 <body>
 
-<!-- ── INTRO DECODE ANIMATION ── -->
+<!-- ── INTRO BLUEPRINT DRAW ── -->
 <div id="intro" aria-hidden="true">
-  <div class="intro-scan"></div>
-  <div class="intro-grid"></div>
-  <div class="intro-content">
-    <div class="intro-label">// initializing</div>
-    <div class="intro-text" id="introText"></div><span class="intro-cursor" id="introCursor">_</span>
-    <div class="intro-sub" id="introSub"></div>
+  <div class="bp-grid"></div>
+  <div class="bp-stage">
+    <svg class="bp-svg" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- marcas de registro -->
+      <g class="bp-marks">
+        <path d="M18 18 h18 M18 18 v18"/>
+        <path d="M382 18 h-18 M382 18 v18"/>
+        <path d="M18 262 h18 M18 262 v-18"/>
+        <path d="M382 262 h-18 M382 262 v-18"/>
+      </g>
+      <!-- baseline -->
+      <path class="bp-baseline" d="M60 210 H340" pathLength="1"/>
+      <!-- barras del isotipo -->
+      <rect class="bp-bar b1" x="100" y="170" width="44" height="40"  rx="5" pathLength="1"/>
+      <rect class="bp-bar b2" x="178" y="120" width="44" height="90"  rx="5" pathLength="1"/>
+      <rect class="bp-bar b3" x="256" y="60"  width="44" height="150" rx="5" pathLength="1"/>
+      <!-- cota vertical -->
+      <g class="bp-dim d1">
+        <path class="bp-line" d="M322 60 H334 M322 210 H334 M328 60 V210"/>
+        <text x="340" y="139">15.0</text>
+      </g>
+      <!-- cota horizontal -->
+      <g class="bp-dim d2">
+        <path class="bp-line" d="M100 232 V220 M300 232 V220 M100 226 H300"/>
+        <text x="200" y="250" text-anchor="middle">24.0</text>
+      </g>
+    </svg>
+    <div class="bp-name"><span>Digital</span><span class="accent">Blueprint</span></div>
+    <div class="bp-tag">// PLANOS QUE TRABAJAN</div>
   </div>
 </div>
 
@@ -2376,84 +2401,19 @@
 </div>
 
 <script>
-  // ── INTRO DECODE ANIMATION ──
+  // ── INTRO BLUEPRINT DRAW ──
   (function(){
     const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const overlay  = document.getElementById('intro');
-    const textEl   = document.getElementById('introText');
-    const subEl    = document.getElementById('introSub');
-    const cursorEl = document.getElementById('introCursor');
+    const overlay = document.getElementById('intro');
     if (!overlay) return;
-
-    if (prefersReduced) { overlay.classList.add('out'); return; }
-
-    const word    = 'DigitalBlueprint';
-    const CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!?><';
-    const subText = '// SISTEMA INICIADO';
-    const rand    = () => CHARS[Math.floor(Math.random() * CHARS.length)];
+    if (prefersReduced) { overlay.remove(); return; }
 
     document.body.style.overflow = 'hidden';
-
-    // Build letter spans
-    const spans = word.split('').map(letter => {
-      const s = document.createElement('span');
-      s.textContent = rand();
-      s.style.display = 'inline-block';
-      textEl.appendChild(s);
-      return { el: s, letter, settled: false };
-    });
-
-    // Scramble unsettled chars
-    const scramble = setInterval(() => {
-      spans.forEach(({ el, settled }) => { if (!settled) el.textContent = rand(); });
-    }, 70);
-
-    // Settle one char every 55ms
-    let idx = 0;
-    function settleNext() {
-      if (idx >= spans.length) {
-        clearInterval(scramble);
-        cursorEl.style.animationPlayState = 'paused';
-        cursorEl.style.opacity = '0';
-        // Type subtitle
-        let si = 0;
-        const typer = setInterval(() => {
-          subEl.textContent = subText.slice(0, ++si);
-          if (si >= subText.length) {
-            clearInterval(typer);
-            setTimeout(dismiss, 900);
-          }
-        }, 50);
-        return;
-      }
-      const s = spans[idx];
-      s.el.textContent = s.letter;
-      s.el.style.color = '#fff';
-      // Flash back to cyan after brief white
-      setTimeout(() => { s.el.style.color = ''; }, 180);
-      s.settled = true;
-      idx++;
-      setTimeout(settleNext, 135);
-    }
-    setTimeout(settleNext, 450);
-
-    // Occasional glitch on already-settled chars
-    const reglitch = setInterval(() => {
-      const done = spans.filter(s => s.settled);
-      if (done.length < 2) return;
-      const pick = done[Math.floor(Math.random() * done.length)];
-      const orig = pick.letter;
-      pick.el.textContent = rand();
-      pick.el.style.color = 'rgba(6,182,212,.9)';
-      setTimeout(() => { pick.el.textContent = orig; pick.el.style.color = ''; }, 70);
-    }, 480);
-
-    function dismiss() {
-      clearInterval(reglitch);
+    setTimeout(() => {
       overlay.classList.add('out');
       document.body.style.overflow = '';
-      setTimeout(() => overlay.remove(), 750);
-    }
+      setTimeout(() => overlay.remove(), 800);
+    }, 3300);
   })();
 
   // ===== Cursor → spotlight + grilla reactiva =====

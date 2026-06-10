@@ -78,79 +78,36 @@
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-    /* ── INTRO BLUEPRINT DRAW ── */
+    /* ── INTRO PARTICLE ASSEMBLY ── */
     #intro {
       position: fixed; inset: 0; z-index: 9999;
       background: #061826;
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity .7s cubic-bezier(.4,0,.2,1), visibility .7s;
+      transition: opacity .85s cubic-bezier(.4,0,.2,1), visibility .85s;
     }
     #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
+    #introNet { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-    .bp-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(6,182,212,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6,182,212,.07) 1px, transparent 1px);
-      background-size: 34px 34px;
-      opacity: 0;
-      animation: bpGridIn .9s ease .1s forwards;
+    .intro-brand {
+      position: absolute; left: 50%; top: 61%;
+      transform: translate(-50%, 0);
+      width: 100%; text-align: center; pointer-events: none;
+      opacity: 0; animation: introBrandIn .8s ease 1.4s forwards;
     }
-    @keyframes bpGridIn { to { opacity: 1; } }
-
-    .bp-stage {
-      position: relative; z-index: 1;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .bp-svg { width: min(80vw, 440px); height: auto; overflow: visible; }
-
-    .bp-baseline, .bp-bar {
-      fill: none;
-      stroke: var(--cyan);
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-    }
-    .bp-baseline { animation: bpDraw .55s ease forwards; }
-    .bp-bar { fill: var(--cyan); fill-opacity: 0; }
-    .bp-bar.b1 { animation: bpDraw .6s ease .45s forwards, bpFillIn .55s ease 1.05s forwards; }
-    .bp-bar.b2 { animation: bpDraw .6s ease .75s forwards, bpFillIn .55s ease 1.25s forwards; }
-    .bp-bar.b3 { animation: bpDraw .6s ease 1.05s forwards, bpFillIn .55s ease 1.45s forwards; }
-    @keyframes bpDraw   { to { stroke-dashoffset: 0; } }
-    @keyframes bpFillIn { to { fill-opacity: .9; } }
-
-    .bp-marks path { stroke: rgba(6,182,212,.4); stroke-width: 1.5; stroke-linecap: round; }
-    .bp-marks { opacity: 0; animation: bpFade .7s ease .25s forwards; }
-
-    .bp-dim .bp-line { stroke: rgba(6,182,212,.5); stroke-width: 1; fill: none; }
-    .bp-dim text {
-      fill: rgba(6,182,212,.62);
-      font-family: var(--f-mono);
-      font-size: 11px; letter-spacing: .04em;
-    }
-    .bp-dim { opacity: 0; }
-    .bp-dim.d1 { animation: bpFade .5s ease 1.55s forwards; }
-    .bp-dim.d2 { animation: bpFade .5s ease 1.75s forwards; }
-    @keyframes bpFade { to { opacity: 1; } }
-
-    .bp-name {
-      margin-top: 1.5rem;
+    .intro-brand-name {
       font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(1.6rem, 6vw, 3rem);
+      font-size: clamp(1.5rem, 5.5vw, 2.7rem);
       color: var(--text); letter-spacing: -.02em;
-      opacity: 0; animation: bpUp .6s ease 1.75s forwards;
     }
-    .bp-name .accent { color: var(--cyan); }
-    .bp-tag {
-      margin-top: .55rem;
-      font-family: var(--f-mono);
-      font-size: clamp(.55rem, 1.8vw, .72rem);
-      letter-spacing: .3em; color: rgba(6,182,212,.45);
-      opacity: 0; animation: bpUp .6s ease 2.05s forwards;
+    .intro-brand-name .accent { color: var(--cyan); }
+    .intro-brand-tag {
+      margin-top: .5rem; font-family: var(--f-mono);
+      font-size: clamp(.55rem, 1.7vw, .7rem);
+      letter-spacing: .3em; color: rgba(6,182,212,.5);
     }
-    @keyframes bpUp { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+    @keyframes introBrandIn {
+      from { opacity: 0; transform: translate(-50%, 8px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
 
     /* ── BACKGROUND GRID ── */
     body::before {
@@ -1673,37 +1630,12 @@
 </head>
 <body>
 
-<!-- ── INTRO BLUEPRINT DRAW ── -->
+<!-- ── INTRO PARTICLE ASSEMBLY ── -->
 <div id="intro" aria-hidden="true">
-  <div class="bp-grid"></div>
-  <div class="bp-stage">
-    <svg class="bp-svg" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- marcas de registro -->
-      <g class="bp-marks">
-        <path d="M18 18 h18 M18 18 v18"/>
-        <path d="M382 18 h-18 M382 18 v18"/>
-        <path d="M18 262 h18 M18 262 v-18"/>
-        <path d="M382 262 h-18 M382 262 v-18"/>
-      </g>
-      <!-- baseline -->
-      <path class="bp-baseline" d="M60 210 H340" pathLength="1"/>
-      <!-- barras del isotipo -->
-      <rect class="bp-bar b1" x="100" y="170" width="44" height="40"  rx="5" pathLength="1"/>
-      <rect class="bp-bar b2" x="178" y="120" width="44" height="90"  rx="5" pathLength="1"/>
-      <rect class="bp-bar b3" x="256" y="60"  width="44" height="150" rx="5" pathLength="1"/>
-      <!-- cota vertical -->
-      <g class="bp-dim d1">
-        <path class="bp-line" d="M322 60 H334 M322 210 H334 M328 60 V210"/>
-        <text x="340" y="139">15.0</text>
-      </g>
-      <!-- cota horizontal -->
-      <g class="bp-dim d2">
-        <path class="bp-line" d="M100 232 V220 M300 232 V220 M100 226 H300"/>
-        <text x="200" y="250" text-anchor="middle">24.0</text>
-      </g>
-    </svg>
-    <div class="bp-name"><span>Digital</span><span class="accent">Blueprint</span></div>
-    <div class="bp-tag">// PLANOS QUE TRABAJAN</div>
+  <canvas id="introNet"></canvas>
+  <div class="intro-brand">
+    <div class="intro-brand-name"><span>Digital</span><span class="accent">Blueprint</span></div>
+    <div class="intro-brand-tag">// PLANOS QUE TRABAJAN</div>
   </div>
 </div>
 
@@ -2401,19 +2333,115 @@
 </div>
 
 <script>
-  // ── INTRO BLUEPRINT DRAW ──
+  // ── INTRO PARTICLE ASSEMBLY (se funde con la red de fondo) ──
   (function(){
     const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = document.getElementById('intro');
-    if (!overlay) return;
+    const canvas  = document.getElementById('introNet');
+    if (!overlay || !canvas) return;
     if (prefersReduced) { overlay.remove(); return; }
 
     document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      overlay.classList.add('out');
-      document.body.style.overflow = '';
-      setTimeout(() => overlay.remove(), 800);
-    }, 3300);
+    const ctx = canvas.getContext('2d');
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const W = innerWidth, H = innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Geometría del isotipo (3 barras + baseline) en espacio 256
+    const bars = [
+      { x: 56,  y: 160, w: 36, h: 48  },
+      { x: 110, y: 120, w: 36, h: 88  },
+      { x: 164, y: 64,  w: 36, h: 144 },
+    ];
+    const step = (W < 600) ? 16 : 13;
+    const raw = [];
+    for (const b of bars) {
+      for (let px = b.x; px <= b.x + b.w; px += step)
+        for (let py = b.y; py <= b.y + b.h; py += step)
+          raw.push({ x: px, y: py });
+    }
+    for (let px = 40; px <= 216; px += step) raw.push({ x: px, y: 216 });
+
+    // bbox del logo + mapeo a pantalla
+    const minX = 40, maxX = 216, minY = 64, maxY = 216;
+    const lcx = (minX + maxX) / 2, lcy = (minY + maxY) / 2;
+    const targetH = Math.min(H * 0.34, 300);
+    const scale = targetH / (maxY - minY);
+    const cx = W / 2, cy = H * 0.40;
+    const spacing = step * scale;
+    const LINK = spacing * 1.7;
+
+    const particles = raw.map(p => {
+      const ang = Math.random() * Math.PI * 2;
+      const r = Math.max(W, H) * (0.55 + Math.random() * 0.35);
+      return {
+        tx: cx + (p.x - lcx) * scale,
+        ty: cy + (p.y - lcy) * scale,
+        x: cx + Math.cos(ang) * r,
+        y: cy + Math.sin(ang) * r,
+        vx: 0, vy: 0,
+      };
+    });
+
+    const RELEASE = 2.5, END = 3.45;
+    let start = null, released = false;
+
+    function frame(ts) {
+      if (!start) start = ts;
+      const t = (ts - start) / 1000;
+      ctx.clearRect(0, 0, W, H);
+
+      if (t >= RELEASE && !released) {
+        released = true;
+        for (const p of particles) {
+          const a = Math.atan2(p.y - cy, p.x - cx) + (Math.random() - .5) * 0.7;
+          const sp = 0.6 + Math.random() * 1.5;
+          p.vx = Math.cos(a) * sp; p.vy = Math.sin(a) * sp;
+        }
+        overlay.classList.add('out');           // el fondo oscuro se desvanece → aparece la web
+        document.body.style.overflow = '';
+      }
+
+      for (const p of particles) {
+        if (!released) {
+          const k = 0.085;
+          p.vx = (p.vx + (p.tx - p.x) * k) * 0.76;
+          p.vy = (p.vy + (p.ty - p.y) * k) * 0.76;
+        } else {
+          p.vx *= 0.995; p.vy *= 0.995;
+        }
+        p.x += p.vx; p.y += p.vy;
+      }
+
+      // opacidad global: entra al ensamblar, sale al dispersarse
+      const alpha = released
+        ? Math.max(0, 1 - (t - RELEASE) / 0.85)
+        : Math.min(1, t / 1.1);
+
+      // enlaces tipo constelación
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < LINK) {
+            ctx.strokeStyle = `rgba(6,182,212,${(1 - d / LINK) * 0.5 * alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      // puntos
+      for (const p of particles) {
+        ctx.fillStyle = `rgba(103,232,249,${0.85 * alpha})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.9, 0, Math.PI * 2); ctx.fill();
+      }
+
+      if (t < END) requestAnimationFrame(frame);
+      else overlay.remove();
+    }
+    requestAnimationFrame(frame);
   })();
 
   // ===== Cursor → spotlight + grilla reactiva =====

@@ -78,6 +78,78 @@
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
+    /* ── INTRO DECODE ── */
+    #intro {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #040D14;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .65s cubic-bezier(.4,0,.2,1), visibility .65s;
+    }
+    #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .intro-scan {
+      position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(0,0,0,.18) 3px, rgba(0,0,0,.18) 4px
+      );
+      animation: introScanMove 12s linear infinite;
+    }
+    @keyframes introScanMove { from{background-position:0 0} to{background-position:0 200px} }
+
+    .intro-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(6,182,212,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      animation: introGridFade 2s ease forwards;
+    }
+    @keyframes introGridFade { 0%{opacity:0} 30%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+
+    .intro-content {
+      position: relative; z-index: 1;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .intro-label {
+      font-family: var(--f-mono);
+      font-size: clamp(.6rem, 2vw, .78rem);
+      color: rgba(6,182,212,.5);
+      letter-spacing: .28em;
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: introFadeUp .35s ease .15s forwards;
+    }
+    .intro-text {
+      font-family: var(--f-head);
+      font-size: clamp(2.2rem, 9vw, 5.8rem);
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .intro-cursor {
+      display: inline-block;
+      font-family: var(--f-mono);
+      font-size: clamp(1.5rem, 6vw, 3.8rem);
+      color: var(--cyan);
+      vertical-align: baseline;
+      animation: introBlink .7s step-end infinite;
+      margin-left: 1px;
+      line-height: 1;
+    }
+    .intro-sub {
+      margin-top: 1.4rem;
+      font-family: var(--f-mono);
+      font-size: clamp(.55rem, 1.8vw, .72rem);
+      color: rgba(6,182,212,.4);
+      letter-spacing: .32em;
+      min-height: 1.2em;
+    }
+    @keyframes introBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes introFadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
     /* ── BACKGROUND GRID ── */
     body::before {
       content: '';
@@ -1599,6 +1671,17 @@
 </head>
 <body>
 
+<!-- ── INTRO DECODE ANIMATION ── -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-scan"></div>
+  <div class="intro-grid"></div>
+  <div class="intro-content">
+    <div class="intro-label">// initializing</div>
+    <div class="intro-text" id="introText"></div><span class="intro-cursor" id="introCursor">_</span>
+    <div class="intro-sub" id="introSub"></div>
+  </div>
+</div>
+
 <!-- BG FX -->
 <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
 <canvas id="net"></canvas>
@@ -2293,6 +2376,86 @@
 </div>
 
 <script>
+  // ── INTRO DECODE ANIMATION ──
+  (function(){
+    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const overlay  = document.getElementById('intro');
+    const textEl   = document.getElementById('introText');
+    const subEl    = document.getElementById('introSub');
+    const cursorEl = document.getElementById('introCursor');
+    if (!overlay) return;
+
+    if (prefersReduced) { overlay.classList.add('out'); return; }
+
+    const word    = 'DigitalBlueprint';
+    const CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!?><';
+    const subText = '// SISTEMA INICIADO';
+    const rand    = () => CHARS[Math.floor(Math.random() * CHARS.length)];
+
+    document.body.style.overflow = 'hidden';
+
+    // Build letter spans
+    const spans = word.split('').map(letter => {
+      const s = document.createElement('span');
+      s.textContent = rand();
+      s.style.display = 'inline-block';
+      textEl.appendChild(s);
+      return { el: s, letter, settled: false };
+    });
+
+    // Scramble unsettled chars at 55fps
+    const scramble = setInterval(() => {
+      spans.forEach(({ el, settled }) => { if (!settled) el.textContent = rand(); });
+    }, 55);
+
+    // Settle one char every 55ms
+    let idx = 0;
+    function settleNext() {
+      if (idx >= spans.length) {
+        clearInterval(scramble);
+        cursorEl.style.animationPlayState = 'paused';
+        cursorEl.style.opacity = '0';
+        // Type subtitle
+        let si = 0;
+        const typer = setInterval(() => {
+          subEl.textContent = subText.slice(0, ++si);
+          if (si >= subText.length) {
+            clearInterval(typer);
+            setTimeout(dismiss, 420);
+          }
+        }, 28);
+        return;
+      }
+      const s = spans[idx];
+      s.el.textContent = s.letter;
+      s.el.style.color = '#fff';
+      // Flash back to cyan after brief white
+      setTimeout(() => { s.el.style.color = ''; }, 120);
+      s.settled = true;
+      idx++;
+      setTimeout(settleNext, 55);
+    }
+    setTimeout(settleNext, 320);
+
+    // Occasional glitch on already-settled chars
+    const reglitch = setInterval(() => {
+      const done = spans.filter(s => s.settled);
+      if (done.length < 2) return;
+      const pick = done[Math.floor(Math.random() * done.length)];
+      const orig = pick.letter;
+      pick.el.textContent = rand();
+      pick.el.style.color = 'rgba(6,182,212,.9)';
+      setTimeout(() => { pick.el.textContent = orig; pick.el.style.color = ''; }, 75);
+    }, 220);
+
+    function dismiss() {
+      clearInterval(reglitch);
+      overlay.classList.add('out');
+      document.body.style.overflow = '';
+      setTimeout(() => overlay.remove(), 750);
+    }
+  })();
+
   // ===== Cursor → spotlight + grilla reactiva =====
   const _root = document.documentElement;
   window.addEventListener('pointermove', e => {

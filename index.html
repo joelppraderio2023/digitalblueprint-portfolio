@@ -2403,10 +2403,10 @@
       return { el: s, letter, settled: false };
     });
 
-    // Scramble unsettled chars at 55fps
+    // Scramble unsettled chars
     const scramble = setInterval(() => {
       spans.forEach(({ el, settled }) => { if (!settled) el.textContent = rand(); });
-    }, 55);
+    }, 70);
 
     // Settle one char every 55ms
     let idx = 0;
@@ -2421,21 +2421,21 @@
           subEl.textContent = subText.slice(0, ++si);
           if (si >= subText.length) {
             clearInterval(typer);
-            setTimeout(dismiss, 420);
+            setTimeout(dismiss, 900);
           }
-        }, 28);
+        }, 50);
         return;
       }
       const s = spans[idx];
       s.el.textContent = s.letter;
       s.el.style.color = '#fff';
       // Flash back to cyan after brief white
-      setTimeout(() => { s.el.style.color = ''; }, 120);
+      setTimeout(() => { s.el.style.color = ''; }, 180);
       s.settled = true;
       idx++;
-      setTimeout(settleNext, 55);
+      setTimeout(settleNext, 135);
     }
-    setTimeout(settleNext, 320);
+    setTimeout(settleNext, 450);
 
     // Occasional glitch on already-settled chars
     const reglitch = setInterval(() => {
@@ -2445,8 +2445,8 @@
       const orig = pick.letter;
       pick.el.textContent = rand();
       pick.el.style.color = 'rgba(6,182,212,.9)';
-      setTimeout(() => { pick.el.textContent = orig; pick.el.style.color = ''; }, 75);
-    }, 220);
+      setTimeout(() => { pick.el.textContent = orig; pick.el.style.color = ''; }, 70);
+    }, 480);
 
     function dismiss() {
       clearInterval(reglitch);

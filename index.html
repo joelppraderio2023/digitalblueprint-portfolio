@@ -78,83 +78,66 @@
     ::-webkit-scrollbar-track { background: var(--navy-deep); }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-    /* ── INTRO FLUX ── */
+    /* ── INTRO POWER-ON: cartel de neón sobre la ciudad apagada ── */
     #intro {
-      position: fixed; inset: 0; z-index: 9999; overflow: hidden;
-      background: radial-gradient(ellipse at 50% 46%, #0a2236 0%, #061826 55%, #04111c 100%);
-      transition: opacity .9s cubic-bezier(.4,0,.2,1), visibility .9s;
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: opacity 1s ease, visibility 1s;
     }
-    #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
-    #intro::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse at 50% 46%, transparent 42%, rgba(2,9,16,.62) 100%);
-    }
-    #introFlux { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #intro.out { opacity: 0; visibility: hidden; }
 
-    .flux-glow {
-      position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
-      width: min(82vw, 780px); height: min(42vh, 360px);
-      background: radial-gradient(ellipse, rgba(6,182,212,.22), transparent 70%);
-      filter: blur(22px); opacity: 0; z-index: 1; pointer-events: none;
-      animation: fluxGlow 1.7s ease 1s forwards;
-    }
-    @keyframes fluxGlow { 0%{opacity:0} 60%{opacity:1} 100%{opacity:.7} }
+    /* durante la intro, el contenido de la página está oculto (la ciudad se ve detrás) */
+    body.intro-on > :not(#intro):not(#city):not(.city-dim) { opacity: 0 !important; }
+    body.intro-done > :not(#intro):not(#city):not(.city-dim) { transition: opacity 1.2s ease; }
 
-    .flux-word {
-      position: absolute; left: 50%; top: 46%;
-      transform: translate(-50%, -50%) scale(1.06);
-      margin: 0; white-space: nowrap; z-index: 2; pointer-events: none;
+    .neon-sign {
+      margin: 0; white-space: nowrap;
       font-family: var(--f-head); font-weight: 800;
-      font-size: clamp(2rem, 9vw, 5.4rem); letter-spacing: .5em;
-      background: linear-gradient(100deg,
-        #eaf6fb 0%, #eaf6fb 34%, #67e8f9 50%, #eaf6fb 66%, #eaf6fb 100%);
-      background-size: 250% 100%; background-position: 120% 0;
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      opacity: 0; filter: blur(14px);
-      animation: fluxFocus 1.3s cubic-bezier(.2,.7,.2,1) 1s forwards,
-                 fluxSheen 1.2s ease 2.2s forwards;
+      font-size: clamp(2rem, 8.5vw, 5rem);
+      letter-spacing: -.01em; line-height: 1.08;
     }
-    .flux-word .accent { -webkit-text-fill-color: var(--cyan); }
-    @keyframes fluxFocus {
-      to {
-        opacity: 1; filter: blur(0) drop-shadow(0 0 34px rgba(6,182,212,.4));
-        letter-spacing: -.01em;
-        transform: translate(-50%, -50%) scale(1);
-      }
+    .neon-sign span { opacity: 0; }
+    .neon-sign .n1 {
+      color: #f3fbff;
+      text-shadow: 0 0 7px rgba(190,240,255,.9), 0 0 26px rgba(103,232,249,.55), 0 0 70px rgba(6,182,212,.35);
+      animation: neonOn 1.7s steps(1, end) .5s forwards;
     }
-    @keyframes fluxSheen { to { background-position: -40% 0; } }
-
-    .flux-tag {
-      position: absolute; left: 50%; top: 46%;
-      transform: translate(-50%, 2.7em);
-      z-index: 2; pointer-events: none; white-space: nowrap;
+    .neon-sign .n2 {
+      color: #9ff1ff;
+      text-shadow: 0 0 7px rgba(120,235,255,.95), 0 0 30px rgba(6,182,212,.75), 0 0 80px rgba(6,182,212,.45);
+      animation: neonOn 1.7s steps(1, end) .75s forwards;
+    }
+    @keyframes neonOn {
+      0%  { opacity: 0; }
+      7%  { opacity: .55; } 10% { opacity: .08; }
+      13% { opacity: .75; } 15% { opacity: .15; }
+      18% { opacity: 1; }   26% { opacity: 1; } 28% { opacity: .25; }
+      31% { opacity: 1; }   100% { opacity: 1; }
+    }
+    .neon-tag {
+      margin-top: 1rem;
       font-family: var(--f-mono);
       font-size: clamp(.55rem, 1.8vw, .74rem);
-      letter-spacing: .42em; color: rgba(170,225,240,.6);
-      opacity: 0; animation: fluxTagIn .9s ease 2.4s forwards;
+      letter-spacing: .4em; color: rgba(255,170,190,.85);
+      text-shadow: 0 0 12px rgba(236,72,153,.6);
+      opacity: 0;
+      animation: tagOn .8s ease 2.5s forwards;
     }
-    @keyframes fluxTagIn {
-      from { opacity: 0; letter-spacing: .62em; }
-      to   { opacity: 1; letter-spacing: .42em; }
+    @keyframes tagOn {
+      from { opacity: 0; letter-spacing: .6em; }
+      to   { opacity: 1; letter-spacing: .4em; }
     }
 
-    /* Intro en móvil y tablet: nombre en dos líneas, sin desbordar */
+    /* móvil y tablet: nombre en dos líneas centrado */
     @media (max-width: 900px) {
-      .flux-word {
-        white-space: normal; line-height: 1.04;
-        font-size: clamp(1.9rem, 9vw, 3.4rem);
-        letter-spacing: .18em;
+      .neon-sign { white-space: normal; text-align: center; }
+      .neon-sign span { display: block; }
+      .neon-tag {
+        font-size: .58rem; letter-spacing: .26em;
+        text-align: center; padding: 0 16px;
       }
-      .flux-word span { display: block; }
-      .flux-tag {
-        font-size: .58rem; letter-spacing: .28em;
-        transform: translate(-50%, 4.2rem);
-        animation-name: fluxTagInM;
-      }
-    }
-    @keyframes fluxTagInM {
-      from { opacity: 0; letter-spacing: .42em; }
-      to   { opacity: 1; letter-spacing: .28em; }
     }
 
     /* ── BACKGROUND GRID ── */
@@ -1705,15 +1688,14 @@
   }
   </script>
 </head>
-<body>
+<body class="intro-on">
 
-<!-- ── INTRO FLUX ── -->
+<!-- ── INTRO POWER-ON ── -->
 <div id="intro" aria-hidden="true">
-  <canvas id="introFlux"></canvas>
-  <div class="flux-glow"></div>
-  <h1 class="flux-word"><span>Digital</span><span class="accent">Blueprint</span></h1>
-  <div class="flux-tag">DISEÑO · CÓDIGO · RESULTADOS</div>
+  <h1 class="neon-sign"><span class="n1">Digital</span><span class="n2">Blueprint</span></h1>
+  <div class="neon-tag">// ENCENDEMOS TU PRESENCIA DIGITAL</div>
 </div>
+<noscript><style>body.intro-on > * { opacity: 1 !important; } #intro { display: none; }</style></noscript>
 
 <!-- BG FX: NEO-CIUDAD -->
 <canvas id="city"></canvas>
@@ -2408,106 +2390,31 @@
 </div>
 
 <script>
-  // ── INTRO FLUX: campo de flujo + tipografía cinética ──
+  // ── INTRO POWER-ON: el cartel se enciende y la ciudad despierta ──
   (function(){
     const reduce  = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = document.getElementById('intro');
-    const canvas  = document.getElementById('introFlux');
-    if (!overlay || !canvas) return;
-    if (reduce) { overlay.remove(); return; }
+    if (!overlay){ document.body.classList.remove('intro-on'); return; }
+    if (reduce){
+      overlay.remove();
+      document.body.classList.remove('intro-on');
+      return;
+    }
 
     document.body.style.overflow = 'hidden';
-    const ctx = canvas.getContext('2d');
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    const W = innerWidth, H = innerHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // Centro del warp (donde aparece el texto)
-    const CX = W / 2, CY = H * 0.46;
+    // el cartel termina de encender (~2.2s) → la ciudad despierta en cadena
+    setTimeout(() => { if (window.__cityPowerOn) window.__cityPowerOn(); }, 2300);
 
-    const COUNT = W < 600 ? 130 : 280;
-    const stars = Array.from({ length: COUNT }, () => {
-      const z = 0.18 + Math.random() * 0.82;          // profundidad (cerca = grande/brillante/rápida)
-      return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        z,
-        r: 0.5 + z * 1.9,                             // tamaño por profundidad
-        dvx: (Math.random() - .5) * 0.16,             // deriva lenta (parallax × z)
-        dvy: (Math.random() - .5) * 0.16,
-        ph: Math.random() * 6.283,                    // fase de titileo
-        ts: 1.6 + Math.random() * 2.4,                // velocidad de titileo
-        vx: 0, vy: 0,                                 // velocidad de warp
-      };
-    });
+    // el contenido vuelve mientras la ciudad termina de despertar
+    setTimeout(() => {
+      document.body.classList.add('intro-done');
+      document.body.classList.remove('intro-on');
+      document.body.style.overflow = '';
+      overlay.classList.add('out');
+    }, 3700);
 
-    const RELEASE = 3.2, END = 4.25;
-    let start = null, released = false;
-
-    function frame(ts) {
-      if (!start) start = ts;
-      const t = (ts - start) / 1000;
-      const warp = released ? (t - RELEASE) : 0;
-
-      // build-up: limpio y nítido. warp: velo suave → estelas largas
-      if (!released) {
-        ctx.clearRect(0, 0, W, H);
-      } else {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = 'rgba(4,16,28,0.13)';
-        ctx.fillRect(0, 0, W, H);
-      }
-
-      const gA = released ? Math.max(0, 1 - warp / 0.95) : Math.min(1, 0.25 + t * 0.9);
-
-      ctx.globalCompositeOperation = 'lighter';
-      for (const s of stars) {
-        if (!released) {
-          // deriva con parallax (las cercanas se mueven más)
-          s.x += s.dvx * s.z;
-          s.y += s.dvy * s.z;
-          if (s.x < -4) s.x = W + 4; else if (s.x > W + 4) s.x = -4;
-          if (s.y < -4) s.y = H + 4; else if (s.y > H + 4) s.y = -4;
-        } else {
-          // WARP: aceleración radial desde el centro (profundidad → más rápido)
-          let nx = s.x - CX, ny = s.y - CY;
-          const d = Math.hypot(nx, ny) || 1;
-          nx /= d; ny /= d;
-          const accel = (0.6 + warp * 9) * s.z;
-          s.vx += nx * accel; s.vy += ny * accel;
-          const px = s.x, py = s.y;
-          s.x += s.vx; s.y += s.vy;
-          // estela (streak) del warp
-          ctx.strokeStyle = `rgba(150,225,255,${0.7 * gA})`;
-          ctx.lineWidth = s.r;
-          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(s.x, s.y); ctx.stroke();
-        }
-
-        // estrella + titileo
-        const tw = 0.5 + 0.5 * Math.sin(s.ph + t * s.ts);
-        const a = (0.25 + 0.55 * tw * s.z) * gA;
-        ctx.fillStyle = `rgba(150,228,255,${a})`;
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
-        // núcleo blanco en las más brillantes
-        if (s.z > 0.7) {
-          ctx.fillStyle = `rgba(240,252,255,${0.5 * tw * gA})`;
-          ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 0.5, 0, 6.283); ctx.fill();
-        }
-      }
-      ctx.globalCompositeOperation = 'source-over';
-
-      if (t >= RELEASE && !released) {
-        released = true;
-        overlay.classList.add('out');         // el velo se disuelve → aparece la web
-        document.body.style.overflow = '';
-      }
-
-      if (t < END) requestAnimationFrame(frame);
-      else overlay.remove();
-    }
-    requestAnimationFrame(frame);
+    setTimeout(() => overlay.remove(), 4900);
   })();
 
   // ===== Z-SPACE: scroll suave con inercia (solo puntero fino) =====
@@ -2570,6 +2477,11 @@
     const fine   = matchMedia('(pointer: fine)').matches;
     const MOBILE = innerWidth < 768;
 
+    // POWER-ON: la ciudad arranca apagada (siluetas) y despierta cuando la intro lo pide
+    let wake = (reduce || !document.getElementById('intro')) ? 1 : 0;
+    let powerOnAt = null;
+    window.__cityPowerOn = () => { powerOnAt = performance.now(); };
+
     let W, H, CX, HY, F;
     const DPR = Math.min(devicePixelRatio || 1, 1.5);
     function resize(){
@@ -2606,6 +2518,7 @@
       const b = {
         x: bx + (Math.random() - .5) * 26, z: bz, w, d, h, pal,
         seed: Math.random() * 1000,
+        wakeD: Math.random(),
         cols: Math.max(3, Math.floor(w / 13)),
         rws:  Math.max(3, Math.floor(h / 18)),
       };
@@ -2733,11 +2646,18 @@
       if (al <= 0.02) return;
       const C = PAL[b.pal];
 
+      // factor de encendido por edificio (despertar en oleadas + parpadeo al prender)
+      let lf = 1;
+      if (wake < 1){
+        lf = Math.max(0, Math.min(1, (wake - b.wakeD * 0.55) / 0.3));
+        if (lf > 0 && lf < 1) lf *= 0.5 + 0.5 * Math.abs(Math.sin(t * 30 * (0.5 + b.wakeD) + b.seed));
+      }
+
       if (!MOBILE && fA.rz < FAR * 0.5){
         const rC = proj(x1, b.h * 0.8, z0), rD = proj(x0, b.h * 0.8, z0);
         if (rC && rD){
           const rg = ctx.createLinearGradient(0, fA.y, 0, rD.y);
-          rg.addColorStop(0, `rgba(${C.g},${0.20 * al})`);
+          rg.addColorStop(0, `rgba(${C.g},${0.20 * al * lf})`);
           rg.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.fillStyle = rg;
           ctx.beginPath();
@@ -2759,9 +2679,9 @@
         ctx.fillStyle = 'rgba(8,10,26,.97)'; ctx.fill();
         const lg = ctx.createLinearGradient(0, e0.y, 0, e1.y);
         lg.addColorStop(0, 'rgba(0,0,0,0)');
-        lg.addColorStop(1, `rgba(${C.g},${0.15 * al})`);
+        lg.addColorStop(1, `rgba(${C.g},${0.15 * al * lf})`);
         ctx.fillStyle = lg; ctx.fill();
-        ctx.strokeStyle = `rgba(${C.g},${al * 0.4})`;
+        ctx.strokeStyle = `rgba(${C.g},${al * (0.1 + 0.3 * lf)})`;
         ctx.lineWidth = 1; ctx.stroke();
       }
 
@@ -2772,10 +2692,10 @@
       ctx.fillStyle = 'rgba(11,13,32,.97)'; ctx.fill();
       const fg2 = ctx.createLinearGradient(0, fA.y, 0, fC.y);
       fg2.addColorStop(0, 'rgba(40,18,52,.30)');
-      fg2.addColorStop(0.55, `rgba(${C.g},${0.08 * al})`);
-      fg2.addColorStop(1, `rgba(${C.g},${0.32 * al})`);
+      fg2.addColorStop(0.55, `rgba(${C.g},${0.08 * al * lf})`);
+      fg2.addColorStop(1, `rgba(${C.g},${0.32 * al * lf})`);
       ctx.fillStyle = fg2; ctx.fill();
-      ctx.strokeStyle = `rgba(${C.e},${al * 0.65})`;
+      ctx.strokeStyle = `rgba(${C.e},${al * (0.15 + 0.5 * lf)})`;
       ctx.lineWidth = 1.1; ctx.stroke();
 
       let topY = yT, topD = fD, topC = fC;
@@ -2791,13 +2711,13 @@
           ctx.closePath();
           ctx.fillStyle = 'rgba(10,12,30,.97)'; ctx.fill();
           ctx.fillStyle = fg2; ctx.fill();
-          ctx.strokeStyle = `rgba(${C.e},${al * 0.6})`;
+          ctx.strokeStyle = `rgba(${C.e},${al * (0.15 + 0.45 * lf)})`;
           ctx.lineWidth = 1; ctx.stroke();
           topY = yU; topD = uD; topC = uC;
         }
       }
 
-      if (fA.rz < FAR * 0.55 && (fB.x - fA.x) > 15){
+      if (lf > 0.04 && fA.rz < FAR * 0.55 && (fB.x - fA.x) > 15){
         for (let i = 0; i < b.cols; i++){
           for (let j = 0; j < b.rws; j++){
             const n = Math.sin(b.seed + i * 12.9898 + j * 78.233) * 43758.5453;
@@ -2812,18 +2732,18 @@
             const flick = 0.74 + 0.26 * Math.sin(b.seed * 7 + t * (0.7 + fr * 2.2) + i * 1.7 + j);
             if (fr > 0.44){
               const tv = 0.3 + 0.7 * Math.abs(Math.sin(t * 11 + n * 7) * Math.sin(t * 3.7 + i * 2));
-              ctx.fillStyle = `rgba(150,195,255,${al * 0.8 * tv})`;
+              ctx.fillStyle = `rgba(150,195,255,${al * 0.8 * tv * lf})`;
             } else {
               ctx.fillStyle = fr < 0.22
-                ? `rgba(255,196,130,${al * 0.85 * flick})`
-                : `rgba(165,225,255,${al * 0.7 * flick})`;
+                ? `rgba(255,196,130,${al * 0.85 * flick * lf})`
+                : `rgba(165,225,255,${al * 0.7 * flick * lf})`;
             }
             ctx.fillRect(pa.x, pb.y, Math.max(1, pb.x - pa.x), Math.max(1, pa.y - pb.y));
           }
         }
       }
 
-      if (b.screen !== undefined && fA.rz < FAR * 0.42){
+      if (b.screen !== undefined && lf > 0.55 && fA.rz < FAR * 0.42){
         const sx0 = x0 + b.w * 0.16, sx1 = x1 - b.w * 0.16;
         const sy0 = yT * 0.82, sy1 = yT * 0.5;
         const pa = proj(sx0, sy0, z0), pb = proj(sx1, sy1, z0);
@@ -2879,7 +2799,7 @@
         }
       }
 
-      if (b.sign && fA.rz < FAR * 0.5){
+      if (b.sign && lf > 0.35 && fA.rz < FAR * 0.5){
         const ax = b.x < 0 ? x1 + 7 : x0 - 7;
         const n = b.sign.txt.length;
         const yTop = yT * 0.78;
@@ -2933,9 +2853,9 @@
       }
 
       ctx.globalCompositeOperation = 'lighter';
-      ctx.strokeStyle = `rgba(${C.e},${0.28 * al})`; ctx.lineWidth = 5;
+      ctx.strokeStyle = `rgba(${C.e},${0.28 * al * lf})`; ctx.lineWidth = 5;
       ctx.beginPath(); ctx.moveTo(topD.x, topD.y); ctx.lineTo(topC.x, topC.y); ctx.stroke();
-      ctx.strokeStyle = `rgba(${C.e},${0.9 * al})`; ctx.lineWidth = 1.6;
+      ctx.strokeStyle = `rgba(${C.e},${0.9 * al * lf})`; ctx.lineWidth = 1.6;
       ctx.beginPath(); ctx.moveTo(topD.x, topD.y); ctx.lineTo(topC.x, topC.y); ctx.stroke();
       ctx.globalCompositeOperation = 'source-over';
 
@@ -2946,7 +2866,7 @@
           ctx.strokeStyle = `rgba(${C.e},${al * 0.55})`;
           ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(rc.x, rc.y); ctx.lineTo(tip.x, tip.y); ctx.stroke();
-          if (Math.sin(t * 2.6 + b.seed) > 0.3){
+          if (lf > 0.5 && Math.sin(t * 2.6 + b.seed) > 0.3){
             ctx.fillStyle = `rgba(255,70,100,${al * 0.95})`;
             ctx.beginPath(); ctx.arc(tip.x, tip.y, 2.1, 0, 6.283); ctx.fill();
             ctx.fillStyle = `rgba(255,70,100,${al * 0.22})`;
@@ -2955,7 +2875,7 @@
         }
       }
 
-      if (b.beam && !MOBILE && al > 0.25){
+      if (b.beam && !MOBILE && al > 0.25 && lf > 0.85){
         const tip = proj(b.x, topY - 4, z0 + b.d / 2);
         if (tip){
           const ang = -Math.PI / 2 + Math.sin(t * 0.45 + b.seed) * 0.85;
@@ -3021,7 +2941,7 @@
         if (!p) continue;
         const al = fog(p.rz);
         const tw = 0.6 + 0.4 * Math.sin(t * 3 + u * 20 + z);
-        ctx.fillStyle = `rgba(255,205,150,${0.85 * al * tw})`;
+        ctx.fillStyle = `rgba(255,205,150,${0.85 * al * tw * wake})`;
         ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.8, 1.6 * p.s), 0, 6.283); ctx.fill();
       }
     }
@@ -3054,7 +2974,7 @@
         ctx.fillRect(p.x, p.y, 1.6, 1.6);
       }
       const cycle = (t * 0.085 + zB * 0.0007) % 1;
-      if (cycle < 0.4){
+      if (cycle < 0.4 && wake > 0.7){
         const dirB = (Math.floor(zB / 1500) % 2) ? 1 : -1;
         const prog = cycle / 0.4;
         const trainX = (-820 + 1640 * prog) * dirB;
@@ -3100,7 +3020,8 @@
       const p1 = proj(c.x, c.y, z);
       const p2 = proj(c.x - c.dir * 46, c.y, z);
       if (!p1 || !p2) return;
-      const al = fog(p1.rz);
+      const al = fog(p1.rz) * Math.min(1, wake * 1.4);
+      if (al < 0.02) return;
       ctx.globalCompositeOperation = 'lighter';
       ctx.strokeStyle = `rgba(${c.col},${0.5 * al})`;
       ctx.lineWidth = Math.max(1, 2.2 * p1.s);
@@ -3120,7 +3041,8 @@
       if (rz < 0) c.z += FAR; else if (rz > FAR) c.z -= FAR;
       const a = proj(c.x, -3, c.z), b = proj(c.x, -3, c.z + (c.dir > 0 ? 34 : -34));
       if (!a || !b) return;
-      const al = fog(a.rz);
+      const al = fog(a.rz) * Math.min(1, wake * 1.4);
+      if (al < 0.02) return;
       const col = c.dir > 0 ? '255,120,160' : '120,235,255';
       ctx.globalCompositeOperation = 'lighter';
       ctx.strokeStyle = `rgba(${col},${al * 0.25})`; ctx.lineWidth = 6;
@@ -3135,6 +3057,12 @@
       const dt = Math.min((ts - last) / 1000, 0.05) || 0.016;
       last = ts;
       const t = ts / 1000;
+
+      // despertar progresivo tras el power-on
+      if (wake < 1 && powerOnAt !== null){
+        const wt = Math.max(0, Math.min(1, (ts - powerOnAt) / 2400));
+        wake = wt * wt * (3 - 2 * wt);
+      }
 
       camZ += (36 + boost) * dt;
       boost *= Math.pow(0.18, dt);
@@ -3170,20 +3098,22 @@
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
 
-      const sunX = CX, sunY = hy + 4;
       const sunR = Math.min(W, H) * 0.10;
+      const sunX = CX, sunY = hy + 4 + (1 - wake) * sunR * 2.2;   // el sol asoma al despertar
       let sg = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunR * 4.5);
-      sg.addColorStop(0, 'rgba(255,170,90,.5)');
-      sg.addColorStop(0.25, 'rgba(255,120,90,.16)');
+      sg.addColorStop(0, `rgba(255,170,90,${0.5 * wake})`);
+      sg.addColorStop(0.25, `rgba(255,120,90,${0.16 * wake})`);
       sg.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'source-over';
-      let sd = ctx.createRadialGradient(sunX, sunY - sunR * 0.2, sunR * 0.2, sunX, sunY, sunR);
-      sd.addColorStop(0, '#ffe7b8');
-      sd.addColorStop(0.7, '#ffb169');
-      sd.addColorStop(1, 'rgba(255,140,80,0)');
-      ctx.fillStyle = sd;
-      ctx.beginPath(); ctx.arc(sunX, sunY, sunR, 0, 6.283); ctx.fill();
+      if (wake > 0.02){
+        let sd = ctx.createRadialGradient(sunX, sunY - sunR * 0.2, sunR * 0.2, sunX, sunY, sunR);
+        sd.addColorStop(0, '#ffe7b8');
+        sd.addColorStop(0.7, '#ffb169');
+        sd.addColorStop(1, 'rgba(255,140,80,0)');
+        ctx.fillStyle = sd;
+        ctx.beginPath(); ctx.arc(sunX, sunY, sunR, 0, 6.283); ctx.fill();
+      }
 
       for (const s of stars){
         const tw = 0.4 + 0.6 * Math.abs(Math.sin(s.ph + t * s.ts));
@@ -3277,7 +3207,7 @@
         }
       }
 
-      {
+      if (wake > 0.5){
         const bx = (((blimpSeed + t * 0.0045) % 1.3) - 0.15) * W - yaw * 200;
         const by = hy * 0.40 + pitch * 22 + Math.sin(t * 0.5) * 6;
         const sc = Math.min(W, 900) / 900;
@@ -3410,7 +3340,7 @@
       }
 
       const sunRef = ctx.createLinearGradient(0, hy, 0, H);
-      sunRef.addColorStop(0, 'rgba(255,150,90,.16)');
+      sunRef.addColorStop(0, `rgba(255,150,90,${0.16 * wake})`);
       sunRef.addColorStop(1, 'rgba(255,150,90,0)');
       ctx.fillStyle = sunRef;
       ctx.fillRect(sunX - sunR * 0.9, hy, sunR * 1.8, H - hy);
@@ -3445,17 +3375,17 @@
       for (const lx of [-ROADW, ROADW]){
         const a = proj(lx, -1, camZ + 12), b = proj(lx, -1, camZ + FAR * 0.9);
         if (!a || !b) continue;
-        ctx.strokeStyle = 'rgba(6,182,212,.10)'; ctx.lineWidth = 6;
+        ctx.strokeStyle = `rgba(6,182,212,${0.10 * wake})`; ctx.lineWidth = 6;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        ctx.strokeStyle = 'rgba(103,232,249,.45)'; ctx.lineWidth = 1.4;
+        ctx.strokeStyle = `rgba(103,232,249,${0.45 * wake})`; ctx.lineWidth = 1.4;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
       for (const lx of [-55, 55]){
         const a = proj(lx, -1, camZ + 14), b = proj(lx, -1, camZ + FAR * 0.85);
         if (!a || !b) continue;
-        ctx.strokeStyle = 'rgba(255,110,150,.10)'; ctx.lineWidth = 7;
+        ctx.strokeStyle = `rgba(255,110,150,${0.10 * wake})`; ctx.lineWidth = 7;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        ctx.strokeStyle = 'rgba(255,130,170,.5)'; ctx.lineWidth = 1.6;
+        ctx.strokeStyle = `rgba(255,130,170,${0.5 * wake})`; ctx.lineWidth = 1.6;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       }
       ctx.globalCompositeOperation = 'source-over';
@@ -3516,6 +3446,12 @@
       haze.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = haze;
       ctx.fillRect(0, hy - H * 0.06, W, H * 0.16);
+
+      // oscuridad pre-encendido (la ciudad apagada durante la intro)
+      if (wake < 1){
+        ctx.fillStyle = `rgba(2,6,14,${0.72 * (1 - wake)})`;
+        ctx.fillRect(0, 0, W, H);
+      }
 
       // velo de legibilidad: la ciudad es fondo, el contenido manda
       ctx.fillStyle = 'rgba(4,9,18,.40)';

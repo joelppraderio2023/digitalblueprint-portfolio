@@ -102,19 +102,22 @@
     .neon-sign .n1 {
       color: #f3fbff;
       text-shadow: 0 0 7px rgba(190,240,255,.9), 0 0 26px rgba(103,232,249,.55), 0 0 70px rgba(6,182,212,.35);
-      animation: neonOn 1.7s steps(1, end) .5s forwards;
+      animation: neonOn 2.6s steps(1, end) .6s forwards;
     }
     .neon-sign .n2 {
       color: #9ff1ff;
       text-shadow: 0 0 7px rgba(120,235,255,.95), 0 0 30px rgba(6,182,212,.75), 0 0 80px rgba(6,182,212,.45);
-      animation: neonOn 1.7s steps(1, end) .75s forwards;
+      animation: neonOn 2.6s steps(1, end) 1.05s forwards;
     }
     @keyframes neonOn {
       0%  { opacity: 0; }
-      7%  { opacity: .55; } 10% { opacity: .08; }
-      13% { opacity: .75; } 15% { opacity: .15; }
-      18% { opacity: 1; }   26% { opacity: 1; } 28% { opacity: .25; }
-      31% { opacity: 1; }   100% { opacity: 1; }
+      5%  { opacity: .4; }  7%  { opacity: 0; }
+      11% { opacity: .6; }  13% { opacity: .05; }
+      16% { opacity: .85; } 18% { opacity: .12; }
+      21% { opacity: 1; }   30% { opacity: 1; }
+      32% { opacity: .2; }  34% { opacity: 1; }
+      44% { opacity: 1; }   46% { opacity: .35; }
+      48% { opacity: 1; }   100% { opacity: 1; }
     }
     .neon-tag {
       margin-top: 1rem;
@@ -123,7 +126,7 @@
       letter-spacing: .4em; color: rgba(255,170,190,.85);
       text-shadow: 0 0 12px rgba(236,72,153,.6);
       opacity: 0;
-      animation: tagOn .8s ease 2.5s forwards;
+      animation: tagOn .9s ease 3.6s forwards;
     }
     @keyframes tagOn {
       from { opacity: 0; letter-spacing: .6em; }
@@ -2403,8 +2406,8 @@
 
     document.body.style.overflow = 'hidden';
 
-    // el cartel termina de encender (~2.2s) → la ciudad despierta en cadena
-    setTimeout(() => { if (window.__cityPowerOn) window.__cityPowerOn(); }, 2300);
+    // el cartel termina de encender (~3.7s) → la ciudad despierta en cadena
+    setTimeout(() => { if (window.__cityPowerOn) window.__cityPowerOn(); }, 3800);
 
     // el contenido vuelve mientras la ciudad termina de despertar
     setTimeout(() => {
@@ -2412,9 +2415,9 @@
       document.body.classList.remove('intro-on');
       document.body.style.overflow = '';
       overlay.classList.add('out');
-    }, 3700);
+    }, 5600);
 
-    setTimeout(() => overlay.remove(), 4900);
+    setTimeout(() => overlay.remove(), 7000);
   })();
 
   // ===== Z-SPACE: scroll suave con inercia (solo puntero fino) =====
@@ -3060,7 +3063,7 @@
 
       // despertar progresivo tras el power-on
       if (wake < 1 && powerOnAt !== null){
-        const wt = Math.max(0, Math.min(1, (ts - powerOnAt) / 2400));
+        const wt = Math.max(0, Math.min(1, (ts - powerOnAt) / 3800));
         wake = wt * wt * (3 - 2 * wt);
       }
 
@@ -3449,7 +3452,7 @@
 
       // oscuridad pre-encendido (la ciudad apagada durante la intro)
       if (wake < 1){
-        ctx.fillStyle = `rgba(2,6,14,${0.72 * (1 - wake)})`;
+        ctx.fillStyle = `rgba(2,6,14,${0.8 * (1 - wake)})`;
         ctx.fillRect(0, 0, W, H);
       }
 

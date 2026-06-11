@@ -48,6 +48,9 @@
       --navy-deep:   #081929;
       --cyan:        #06B6D4;
       --cyan-glow:   rgba(6,182,212,0.18);
+      --rosa:        #EC4899;
+      --rosa-l:      #FF6EA0;
+      --warm:        #FFB169;
       --gray:        #F4F6F8;
       --white:       #FFFFFF;
       --text:        #E8EEF4;
@@ -65,6 +68,19 @@
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
+
+    ::selection { background: rgba(236,72,153,.4); color: #fff; }
+
+    ::-webkit-scrollbar { width: 11px; }
+    ::-webkit-scrollbar-track { background: #081929; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #06B6D4, #8B5CF6, #EC4899);
+      border-radius: 6px;
+      border: 2px solid #081929;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #22d3ee, #a78bfa, #f472b6);
+    }
 
     body {
       font-family: var(--f-body);
@@ -226,7 +242,7 @@
       display: flex; align-items: center; justify-content: center;
       font-family: var(--f-head); font-weight: 800; font-size: 15px;
       color: #fff;
-      box-shadow: 0 0 20px rgba(6,182,212,.35);
+      box-shadow: 0 0 20px rgba(6,182,212,.4), 0 0 40px rgba(236,72,153,.16);
     }
     .nav-name {
       font-family: var(--f-head); font-weight: 700; font-size: 17px;
@@ -375,10 +391,11 @@
       letter-spacing: -.025em;
       color: var(--white);
       margin-bottom: 20px;
+      text-shadow: 0 0 34px rgba(6,182,212,.22);
     }
     h1 em {
       font-style: normal;
-      background: linear-gradient(110deg, #06B6D4 20%, #67E8F9 40%, #38BDF8 55%, #06B6D4 80%);
+      background: linear-gradient(110deg, #06B6D4 15%, #67E8F9 38%, #FF6EA0 62%, #EC4899 85%);
       background-size: 220% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -552,7 +569,11 @@
     .divider {
       max-width: 1160px; margin: 0 auto;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(6,182,212,.14), transparent);
+      background: linear-gradient(90deg,
+        transparent, rgba(6,182,212,.22) 30%,
+        rgba(139,92,246,.20) 50%,
+        rgba(236,72,153,.18) 70%, transparent);
+      box-shadow: 0 0 14px rgba(103,232,249,.12);
       position: relative; z-index: 1;
     }
 
@@ -639,6 +660,26 @@
       box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(6,182,212,.1);
     }
     .svc-card.vis { opacity: 1; transform: translateY(0); }
+
+    /* cada card con su color de torre (como el skyline) */
+    .svc-grid .svc-card:nth-child(2)::after { background: linear-gradient(90deg, transparent, var(--rosa), transparent); }
+    .svc-grid .svc-card:nth-child(2):hover {
+      background: rgba(236,72,153,.05);
+      border-color: rgba(236,72,153,.34);
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(236,72,153,.1);
+    }
+    .svc-grid .svc-card:nth-child(3)::after { background: linear-gradient(90deg, transparent, #8B5CF6, transparent); }
+    .svc-grid .svc-card:nth-child(3):hover {
+      background: rgba(139,92,246,.05);
+      border-color: rgba(139,92,246,.36);
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(139,92,246,.1);
+    }
+    .svc-grid .svc-card:nth-child(4)::after { background: linear-gradient(90deg, transparent, #3B82F6, transparent); }
+    .svc-grid .svc-card:nth-child(4):hover {
+      background: rgba(59,130,246,.05);
+      border-color: rgba(59,130,246,.36);
+      box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 40px rgba(59,130,246,.1);
+    }
 
     .svc-tag {
       position: absolute; top: 22px; right: 22px;
@@ -775,7 +816,10 @@
     .cta-box::before {
       content: '';
       position: absolute; inset: -80px;
-      background: radial-gradient(ellipse, rgba(6,182,212,.1) 0%, transparent 68%);
+      background:
+        radial-gradient(ellipse at 38% 50%, rgba(6,182,212,.10) 0%, transparent 60%),
+        radial-gradient(ellipse at 65% 60%, rgba(255,140,100,.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 35%, rgba(236,72,153,.06) 0%, transparent 50%);
       pointer-events: none;
     }
     .cta-h2 {
@@ -1430,6 +1474,8 @@
       transition: color .4s ease;
     }
     .p-card:hover .p-num { color: rgba(6,182,212,.14); }
+    .portfolio-bento .p-card:nth-child(even) .p-num { color: rgba(236,72,153,.06); }
+    .portfolio-bento .p-card:nth-child(even):hover .p-num { color: rgba(236,72,153,.15); }
 
     /* enhanced hover */
     .p-card:hover {
@@ -1749,8 +1795,8 @@
         <div class="hero-chip-dot"></div>
         Desarrollo Web · Argentina
       </div>
-      <h1>Webs a medida que<br><em>venden de verdad</em></h1>
-      <p class="hero-sub">Código propio, diseño único y publicación incluida. No plantillas ni copy-paste — cada web construida desde cero para que tu negocio destaque.</p>
+      <h1>Tu negocio,<br><em>encendido en la web</em></h1>
+      <p class="hero-sub">Código propio, diseño único y publicación incluida. Nada de plantillas apagadas — cada web construida desde cero para que tu marca brille y venda de verdad.</p>
       <div class="hero-btns">
         <a href="#contacto" class="btn-main">✦ Cotizar mi web</a>
         <a href="#servicios" class="btn-ghost">Ver servicios ↓</a>

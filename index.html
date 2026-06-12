@@ -3118,7 +3118,7 @@
       yaw   += (tYaw - yaw) * Math.min(1, dt * 3.5);
       pitch += (tPitch - pitch) * Math.min(1, dt * 3.5);
       cosY = Math.cos(yaw); sinY = Math.sin(yaw);
-      hy = HY + pitch * H * 0.09;
+      hy = HY;
 
       for (const r of rows){
         if (r.z < camZ - SPACING){

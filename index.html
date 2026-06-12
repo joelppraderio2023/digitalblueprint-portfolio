@@ -2525,6 +2525,7 @@
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fine   = matchMedia('(pointer: fine)').matches;
     const MOBILE = innerWidth < 768;
+    const TABLET = !MOBILE && innerWidth < 1100;
 
     // POWER-ON: la ciudad arranca apagada (siluetas) y despierta cuando la intro lo pide
     let wake = (reduce || !document.getElementById('intro')) ? 1 : 0;
@@ -2532,7 +2533,7 @@
     window.__cityPowerOn = () => { powerOnAt = performance.now(); };
 
     let W, H, CX, HY, F;
-    const DPR = Math.min(devicePixelRatio || 1, 1.5);
+    const DPR = Math.min(devicePixelRatio || 1, MOBILE ? 1.0 : 1.5);
     function resize(){
       W = innerWidth; H = innerHeight;
       cv.width = W * DPR; cv.height = H * DPR;
@@ -2543,7 +2544,7 @@
     resize(); addEventListener('resize', resize);
 
     const SPACING = 150;
-    const ROWS    = MOBILE ? 13 : 22;
+    const ROWS    = MOBILE ? 13 : TABLET ? 17 : 22;
     const FAR     = ROWS * SPACING;
     const LANE    = 115;
     const EYE     = -135;
@@ -2588,7 +2589,7 @@
     function mkRow(z){
       const out = { z, b: [], bridges: [], cable: Math.random() < 0.3 };
       for (const side of [-1, 1]){
-        const lanes = MOBILE ? 3 : 5;
+        const lanes = MOBILE ? 3 : TABLET ? 4 : 5;
         const arr = [];
         for (let l = 2; l < 2 + lanes; l++){
           if (Math.random() < 0.16) continue;
@@ -2612,7 +2613,7 @@
     const rows = [];
     for (let i = 0; i < ROWS; i++) rows.push(mkRow(i * SPACING));
 
-    const stars = Array.from({ length: MOBILE ? 30 : 60 }, () => ({
+    const stars = Array.from({ length: MOBILE ? 30 : TABLET ? 42 : 60 }, () => ({
       x: Math.random(), y: Math.random() * 0.36,
       r: 0.4 + Math.random() * 1.1, ph: Math.random() * 6.28, ts: 1 + Math.random() * 2.5,
     }));
@@ -2620,30 +2621,30 @@
       cx: Math.random(), dy: 30 + i * 34 + Math.random() * 20,
       sc: 0.7 + Math.random() * 0.7, sp: 0.004 + Math.random() * 0.006,
     }));
-    const cars = Array.from({ length: MOBILE ? 5 : 10 }, (_, i) => ({
+    const cars = Array.from({ length: MOBILE ? 5 : TABLET ? 7 : 10 }, (_, i) => ({
       dir: i % 2 ? 1 : -1,
       x: (i % 2 ? 38 : -38) + (Math.random() - .5) * 22,
       z: Math.random() * FAR,
       sp: 170 + Math.random() * 240,
     }));
-    const stains = Array.from({ length: MOBILE ? 20 : 40 }, () => ({
+    const stains = Array.from({ length: MOBILE ? 20 : TABLET ? 28 : 40 }, () => ({
       x: (Math.random() - .5) * 320,
       z: Math.random() * FAR,
       w: 18 + Math.random() * 55,
       d: 26 + Math.random() * 80,
       a: 0.05 + Math.random() * 0.10,
     }));
-    const manholes = Array.from({ length: MOBILE ? 7 : 12 }, () => ({
+    const manholes = Array.from({ length: MOBILE ? 7 : TABLET ? 9 : 12 }, () => ({
       x: (Math.random() < .5 ? -1 : 1) * (25 + Math.random() * 110),
       z: Math.random() * FAR,
       r: 7 + Math.random() * 3,
     }));
-    const vents = Array.from({ length: MOBILE ? 3 : 5 }, () => ({
+    const vents = Array.from({ length: MOBILE ? 3 : TABLET ? 4 : 5 }, () => ({
       x: (Math.random() < .5 ? -1 : 1) * (LANE * 1.7 - 22),
       z: Math.random() * FAR,
       seed: Math.random() * 6.28,
     }));
-    const flycars = Array.from({ length: MOBILE ? 9 : 20 }, () => ({
+    const flycars = Array.from({ length: MOBILE ? 9 : TABLET ? 13 : 20 }, () => ({
       relZ: 200 + Math.random() * FAR * 0.7,
       y: -(210 + Math.random() * 420),
       x: (Math.random() - .5) * 2800,
@@ -2702,7 +2703,7 @@
         if (lf > 0 && lf < 1) lf *= 0.5 + 0.5 * Math.abs(Math.sin(t * 30 * (0.5 + b.wakeD) + b.seed));
       }
 
-      if (!MOBILE && fA.rz < FAR * 0.5){
+      if (!MOBILE && !TABLET && fA.rz < FAR * 0.5){
         const rC = proj(x1, b.h * 0.8, z0), rD = proj(x0, b.h * 0.8, z0);
         if (rC && rD){
           const rg = ctx.createLinearGradient(0, fA.y, 0, rD.y);
@@ -2802,7 +2803,7 @@
           ctx.beginPath(); ctx.rect(rx, ry, rw, rh); ctx.clip();
           ctx.fillStyle = `rgba(6,12,38,${0.88 * al})`;
           ctx.fillRect(rx, ry, rw, rh);
-          const glitch = !MOBILE && Math.sin(t * 1.7 + b.seed * 3) > 0.96;
+          const glitch = !MOBILE && !TABLET && Math.sin(t * 1.7 + b.seed * 3) > 0.96;
           const gdx = glitch ? (Math.random() - .5) * 8 : 0;
           const type = b.screen;
           if (type === 0){
@@ -2864,7 +2865,7 @@
           const fs = Math.max(5, Math.min(26, 13 * pT.s));
           ctx.font = `700 ${fs}px 'Cascadia Code', Consolas, monospace`;
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-          const useGlow = !MOBILE && pT.s > 0.7;
+          const useGlow = !MOBILE && !TABLET && pT.s > 0.7;
           if (useGlow){ ctx.shadowColor = `rgb(${b.sign.col})`; ctx.shadowBlur = 9; }
           const flick = Math.sin(t * 9 + b.seed * 13) > -0.92 ? 1 : 0.3;
           ctx.fillStyle = `rgba(${b.sign.col},${0.95 * al * flick})`;
@@ -2924,7 +2925,7 @@
         }
       }
 
-      if (b.beam && !MOBILE && al > 0.25 && lf > 0.85){
+      if (b.beam && !MOBILE && !TABLET && al > 0.25 && lf > 0.85){
         const tip = proj(b.x, topY - 4, z0 + b.d / 2);
         if (tip){
           const ang = -Math.PI / 2 + Math.sin(t * 0.45 + b.seed) * 0.85;
@@ -3101,8 +3102,14 @@
       ctx.globalCompositeOperation = 'source-over';
     }
 
-    let last = 0;
+    const FPS_MIN_DT = (MOBILE || TABLET) ? 1000 / 30 : 0;
+    let last = 0, rafId;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { cancelAnimationFrame(rafId); rafId = 0; }
+      else if (!rafId) rafId = requestAnimationFrame(frame);
+    });
     function frame(ts){
+      if (FPS_MIN_DT && ts - last < FPS_MIN_DT - 1) { rafId = requestAnimationFrame(frame); return; }
       const dt = Math.min((ts - last) / 1000, 0.05) || 0.016;
       last = ts;
       const t = ts / 1000;
@@ -3506,9 +3513,9 @@
       ctx.fillStyle = 'rgba(4,9,18,.40)';
       ctx.fillRect(0, 0, W, H);
 
-      if (!reduce) requestAnimationFrame(frame);
+      if (!reduce) rafId = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
   })();
 
   // ===== Tilt 3D de la card de Instagram =====

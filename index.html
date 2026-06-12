@@ -3140,7 +3140,7 @@
       ctx.fillRect(0, 0, W, H);
 
       ctx.globalCompositeOperation = 'lighter';
-      let g = ctx.createRadialGradient(CX, hy, 0, CX, hy, W * 0.55);
+      let g = ctx.createRadialGradient(CX, HY, 0, CX, HY, W * 0.55);
       g.addColorStop(0, 'rgba(6,182,212,.15)');
       g.addColorStop(0.35, 'rgba(139,92,246,.07)');
       g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -3148,7 +3148,7 @@
       ctx.fillRect(0, 0, W, H);
 
       const sunR = Math.min(W, H) * 0.10;
-      const sunX = CX, sunY = hy + 4 + (1 - wake) * sunR * 2.2;   // el sol asoma al despertar
+      const sunX = CX, sunY = HY + 4 + (1 - wake) * sunR * 2.2;   // el sol asoma al despertar
       let sg = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunR * 4.5);
       sg.addColorStop(0, `rgba(255,170,90,${0.5 * wake})`);
       sg.addColorStop(0.25, `rgba(255,120,90,${0.16 * wake})`);

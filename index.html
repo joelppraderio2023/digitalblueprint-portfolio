@@ -1603,37 +1603,20 @@
       html { cursor: none; }
       a, button { cursor: none; }
 
-      .cursor-dot {
+      .cursor-inv {
         position: fixed; z-index: 99999; pointer-events: none;
-        width: 5px; height: 5px; border-radius: 50%;
-        background: var(--cyan);
+        width: 40px; height: 40px; border-radius: 50%;
+        background: #fff;
+        mix-blend-mode: difference;
         top: 0; left: 0;
         will-change: transform;
         opacity: 0;
-        transition: width .18s ease, height .18s ease, background .18s ease, opacity .3s ease;
+        transition: width .28s cubic-bezier(.25,.46,.45,.94),
+                    height .28s cubic-bezier(.25,.46,.45,.94),
+                    opacity .3s ease;
       }
-      .cursor-ring {
-        position: fixed; z-index: 99998; pointer-events: none;
-        width: 30px; height: 30px; border-radius: 50%;
-        border: 1.5px solid rgba(6,182,212,.45);
-        top: 0; left: 0;
-        will-change: transform;
-        opacity: 0;
-        transition: width .32s ease, height .32s ease, border-color .3s ease,
-                    background .3s ease, opacity .3s ease;
-      }
-      .cursor-hover .cursor-dot {
-        width: 9px; height: 9px; background: #fff;
-      }
-      .cursor-hover .cursor-ring {
-        width: 48px; height: 48px;
-        border-color: rgba(6,182,212,.75);
-        background: rgba(6,182,212,.06);
-      }
-      /* cursor sobre texto: ring se aplana */
-      .cursor-text .cursor-ring {
-        width: 52px; height: 24px;
-        border-color: rgba(6,182,212,.5);
+      .cursor-hover .cursor-inv {
+        width: 72px; height: 72px;
       }
     }
 
@@ -1922,8 +1905,7 @@
 <!-- GRAIN TEXTURE -->
 <div class="grain" aria-hidden="true"></div>
 <!-- CURSOR (desktop only) -->
-<div class="cursor-dot"  id="cursorDot"  aria-hidden="true"></div>
-<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+<div class="cursor-inv" id="cursorInv" aria-hidden="true"></div>
 
 <!-- ── INTRO FLUX ── -->
 <div id="intro" aria-hidden="true">
@@ -3074,34 +3056,19 @@
   })();
 
 
-  // ── CUSTOM CURSOR ──
+  // ── CUSTOM CURSOR (blend mode difference) ──
   (function(){
     if (!matchMedia('(pointer: fine)').matches) return;
-    const dot  = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    if (!dot || !ring) return;
+    const inv = document.getElementById('cursorInv');
+    if (!inv) return;
 
-    let mx = 0, my = 0, rx = 0, ry = 0, ready = false;
+    let ready = false;
 
     document.addEventListener('pointermove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
-      if (!ready) {
-        ready = true;
-        rx = mx; ry = my;
-        dot.style.opacity  = '1';
-        ring.style.opacity = '1';
-      }
+      inv.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+      if (!ready) { ready = true; inv.style.opacity = '1'; }
     });
 
-    (function animRing(){
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
-      requestAnimationFrame(animRing);
-    })();
-
-    // Hover: links y botones
     document.addEventListener('mouseover', e => {
       if (e.target.closest('a, button, [data-card], .price-card, .svc-card, .p-card'))
         document.body.classList.add('cursor-hover');
@@ -3111,9 +3078,8 @@
         document.body.classList.remove('cursor-hover');
     });
 
-    // Ocultar al salir de la ventana
-    document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; ready = false; });
-    document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+    document.addEventListener('mouseleave', () => { inv.style.opacity = '0'; ready = false; });
+    document.addEventListener('mouseenter', () => { inv.style.opacity = '1'; });
   })();
 
 </script>

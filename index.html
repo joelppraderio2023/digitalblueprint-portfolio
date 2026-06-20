@@ -1558,6 +1558,85 @@
       .portfolio-bento .p-card:first-child .p-preview { height: 220px; }
     }
 
+    /* ── GRAIN TEXTURE ── */
+    .grain {
+      position: fixed; inset: 0; z-index: 9997;
+      pointer-events: none;
+      opacity: .042;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(6,182,212,.1);
+      border-bottom: 1px solid rgba(6,182,212,.1);
+      padding: 14px 0;
+      position: relative; z-index: 1;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    }
+    .marquee-track {
+      display: flex; align-items: center;
+      width: max-content;
+      animation: marquee 34s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--f-mono); font-size: 11px; font-weight: 500;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: .13em;
+      padding: 0 20px; white-space: nowrap;
+    }
+    .marquee-track .ms {
+      color: var(--cyan); font-size: 9px; padding: 0 2px; opacity: .55;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation-play-state: paused; }
+    }
+
+    /* ── CUSTOM CURSOR (solo desktop con mouse) ── */
+    @media (pointer: fine) {
+      html { cursor: none; }
+      a, button { cursor: none; }
+
+      .cursor-dot {
+        position: fixed; z-index: 99999; pointer-events: none;
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--cyan);
+        top: 0; left: 0;
+        will-change: transform;
+        opacity: 0;
+        transition: width .18s ease, height .18s ease, background .18s ease, opacity .3s ease;
+      }
+      .cursor-ring {
+        position: fixed; z-index: 99998; pointer-events: none;
+        width: 30px; height: 30px; border-radius: 50%;
+        border: 1.5px solid rgba(6,182,212,.45);
+        top: 0; left: 0;
+        will-change: transform;
+        opacity: 0;
+        transition: width .32s ease, height .32s ease, border-color .3s ease,
+                    background .3s ease, opacity .3s ease;
+      }
+      .cursor-hover .cursor-dot {
+        width: 9px; height: 9px; background: #fff;
+      }
+      .cursor-hover .cursor-ring {
+        width: 48px; height: 48px;
+        border-color: rgba(6,182,212,.75);
+        background: rgba(6,182,212,.06);
+      }
+      /* cursor sobre texto: ring se aplana */
+      .cursor-text .cursor-ring {
+        width: 52px; height: 24px;
+        border-color: rgba(6,182,212,.5);
+      }
+    }
+
     /* ── MOBILE: SAFE AREAS + TOUCH ── */
 
     /* touch-action: elimina el delay de 300ms en iOS */
@@ -1840,6 +1919,12 @@
 </head>
 <body>
 
+<!-- GRAIN TEXTURE -->
+<div class="grain" aria-hidden="true"></div>
+<!-- CURSOR (desktop only) -->
+<div class="cursor-dot"  id="cursorDot"  aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
 <!-- ── INTRO FLUX ── -->
 <div id="intro" aria-hidden="true">
   <canvas id="introFlux"></canvas>
@@ -1972,7 +2057,27 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Diseño Web</span><span class="ms">✦</span>
+    <span>SEO Real</span><span class="ms">✦</span>
+    <span>Deploy Incluido</span><span class="ms">✦</span>
+    <span>Sin Plantillas</span><span class="ms">✦</span>
+    <span>Código Propio</span><span class="ms">✦</span>
+    <span>Mobile First</span><span class="ms">✦</span>
+    <span>Desde $120K</span><span class="ms">✦</span>
+    <span>Buenos Aires</span><span class="ms">✦</span>
+    <span>Diseño Web</span><span class="ms">✦</span>
+    <span>SEO Real</span><span class="ms">✦</span>
+    <span>Deploy Incluido</span><span class="ms">✦</span>
+    <span>Sin Plantillas</span><span class="ms">✦</span>
+    <span>Código Propio</span><span class="ms">✦</span>
+    <span>Mobile First</span><span class="ms">✦</span>
+    <span>Desde $120K</span><span class="ms">✦</span>
+    <span>Buenos Aires</span><span class="ms">✦</span>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section id="servicios" class="sec">
@@ -2966,6 +3071,49 @@
         if (!isNaN(val) && val > 0) { em.textContent = '0'; countUp(em, val); }
       });
     }, 3600);
+  })();
+
+
+  // ── CUSTOM CURSOR ──
+  (function(){
+    if (!matchMedia('(pointer: fine)').matches) return;
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    if (!dot || !ring) return;
+
+    let mx = 0, my = 0, rx = 0, ry = 0, ready = false;
+
+    document.addEventListener('pointermove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+      if (!ready) {
+        ready = true;
+        rx = mx; ry = my;
+        dot.style.opacity  = '1';
+        ring.style.opacity = '1';
+      }
+    });
+
+    (function animRing(){
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
+      requestAnimationFrame(animRing);
+    })();
+
+    // Hover: links y botones
+    document.addEventListener('mouseover', e => {
+      if (e.target.closest('a, button, [data-card], .price-card, .svc-card, .p-card'))
+        document.body.classList.add('cursor-hover');
+    });
+    document.addEventListener('mouseout', e => {
+      if (e.target.closest('a, button, [data-card], .price-card, .svc-card, .p-card'))
+        document.body.classList.remove('cursor-hover');
+    });
+
+    // Ocultar al salir de la ventana
+    document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; ready = false; });
+    document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
   })();
 
 </script>

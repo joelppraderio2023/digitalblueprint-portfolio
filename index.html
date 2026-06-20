@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>DigitalBlueprint — Webs que trabajan por tu negocio</title>
   <meta name="description" content="Diseño web profesional en Argentina desde cero. Código propio, SEO real y deploy incluido. Landing Pages, sitios y tiendas online — sin plantillas, desde $120.000 ARS.">
 
@@ -1556,6 +1556,72 @@
       .portfolio-bento { grid-template-columns: 1fr; }
       .portfolio-bento .p-card:first-child { grid-column: span 1; }
       .portfolio-bento .p-card:first-child .p-preview { height: 220px; }
+    }
+
+    /* ── MOBILE: SAFE AREAS + TOUCH ── */
+
+    /* touch-action: elimina el delay de 300ms en iOS */
+    a, button { touch-action: manipulation; }
+
+    /* Zonas seguras para nav fijo (notch / Dynamic Island) */
+    nav {
+      padding-left: max(6%, env(safe-area-inset-left, 0px));
+      padding-right: max(6%, env(safe-area-inset-right, 0px));
+    }
+    nav.scrolled {
+      padding-left: max(6%, env(safe-area-inset-left, 0px));
+      padding-right: max(6%, env(safe-area-inset-right, 0px));
+    }
+
+    /* Footer con zona segura inferior (Home Indicator) */
+    footer {
+      padding-bottom: max(44px, calc(36px + env(safe-area-inset-bottom, 0px)));
+    }
+
+    /* WA flotante: pegado al borde correcto en mobile, respeta Home Indicator */
+    @media (max-width: 900px) {
+      .wa-btn {
+        bottom: max(24px, calc(16px + env(safe-area-inset-bottom, 0px)));
+        right: max(20px, env(safe-area-inset-right, 20px));
+      }
+    }
+
+    /* Mobile nav: links con altura mínima táctil de 44px */
+    .mobile-nav a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 11px 0;
+    }
+    /* CTA del menú mobile como botón */
+    .mobile-nav a:last-child {
+      background: var(--cyan);
+      color: var(--navy-deep) !important;
+      font-weight: 700 !important;
+      border-radius: 8px;
+      padding: 13px 16px !important;
+      justify-content: center;
+      border-bottom: none !important;
+      margin-top: 4px;
+      box-shadow: 0 0 20px rgba(6,182,212,.3);
+    }
+
+    /* Badges y etiquetas: mínimo 11px en mobile */
+    @media (max-width: 900px) {
+      .ig-lbl      { font-size: 11px; }
+      .ig-badge    { font-size: 11px; padding: 4px 10px; }
+      .svc-tag     { font-size: 11px; }
+      .p-tag       { font-size: 11px; }
+      .price-badge { font-size: 11px; }
+      .hero-chip   { font-size: 12px; }
+      .sec-lbl     { font-size: 12px; }
+      .price-from  { font-size: 11px; }
+    }
+
+    /* Footer links: área táctil mínima */
+    .foot-links a {
+      min-height: 44px;
+      align-items: center;
     }
 
     /* ── HERO URGENCY ── */

@@ -888,6 +888,14 @@
       color: var(--text-muted); font-size: 12px;
       font-family: var(--f-mono);
     }
+    .foot-made {
+      color: var(--text-muted); font-size: 11px;
+      font-family: var(--f-mono); opacity: 0.6;
+      letter-spacing: 0.02em;
+    }
+    .foot-made strong {
+      color: var(--cyan); font-weight: 600; opacity: 1;
+    }
 
     /* ── PORTFOLIO ── */
     .portfolio-grid {
@@ -1070,7 +1078,8 @@
       flex-shrink: 0; margin-top: 1px;
     }
     .price-cta {
-      display: block; width: 100%; text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      width: 100%;
       font-weight: 700; font-size: 14px;
       padding: 13px; border-radius: 10px;
       text-decoration: none;
@@ -1522,6 +1531,44 @@
       .portfolio-bento .p-card:first-child { grid-column: span 1; }
       .portfolio-bento .p-card:first-child .p-preview { height: 220px; }
     }
+
+    /* ── HERO URGENCY ── */
+    .hero-urgency {
+      font-size: 12.5px; color: var(--text-muted);
+      margin-top: 12px; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-urgency .hu-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(34,197,94,.6);
+      animation: blink 2.2s ease infinite;
+    }
+    .hero-urgency strong { color: var(--text); font-weight: 600; }
+    @media (max-width: 900px) { .hero-urgency { justify-content: center; } }
+
+    /* ── MINI CTA POST-PORTFOLIO ── */
+    .mini-cta-sec {
+      position: relative; z-index: 1;
+      padding: 52px 6%;
+      background: rgba(6,182,212,.025);
+      border-top: 1px solid rgba(6,182,212,.1);
+      border-bottom: 1px solid rgba(6,182,212,.1);
+    }
+    .mini-cta-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 28px; flex-wrap: wrap;
+    }
+    .mini-cta-h {
+      font-family: var(--f-head); font-size: 1.45rem; font-weight: 700;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .mini-cta-p { color: var(--text-dim); font-size: .95rem; }
+    @media (max-width: 700px) {
+      .mini-cta-inner { flex-direction: column; text-align: center; }
+    }
   </style>
 
   <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
@@ -1637,11 +1684,11 @@
                 "provider": { "@id": "https://digitalblueprint-portfolio.pages.dev/#business" }
               },
               "priceCurrency": "ARS",
-              "price": "350000",
+              "price": "500000",
               "priceSpecification": {
                 "@type": "PriceSpecification",
-                "minPrice": "350000",
-                "maxPrice": "350000",
+                "minPrice": "500000",
+                "maxPrice": "500000",
                 "priceCurrency": "ARS"
               }
             },
@@ -1666,7 +1713,7 @@
             "name": "¿Cuánto cuesta hacer una página web profesional en Argentina?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "En DigitalBlueprint los precios dependen del tipo de proyecto: una Landing Page arranca desde $120.000 ARS, un Sitio Web Profesional completo desde $350.000 ARS y un E-commerce desde $600.000 ARS. Todos incluyen diseño custom (sin plantillas), SEO real y deploy en tu dominio propio."
+              "text": "En DigitalBlueprint los precios dependen del tipo de proyecto: una Landing Page arranca desde $120.000 ARS, un Sitio Web Profesional completo desde $350.000 ARS y un E-commerce desde $500.000 ARS. Todos incluyen diseño custom (sin plantillas), SEO real y deploy en tu dominio propio."
             }
           },
           {
@@ -1765,6 +1812,10 @@
         <a href="#contacto" class="btn-main">✦ Cotizar mi web</a>
         <a href="#servicios" class="btn-ghost">Ver servicios ↓</a>
       </div>
+      <p class="hero-urgency">
+        <span class="hu-dot"></span>
+        <strong>2 cupos disponibles</strong>&nbsp;este mes — entrega en 72 hs
+      </p>
       <div class="trust">
         <div class="trust-item"><span class="trust-num"><em>5</em></span><span class="trust-lbl">Proyectos online</span></div>
         <div class="trust-item"><span class="trust-num"><em>72</em>hs</span><span class="trust-lbl">Una landing lista</span></div>
@@ -1805,16 +1856,16 @@
         </p>
         <div class="ig-stats">
           <div class="ig-stat">
-            <span class="ig-num">14</span>
-            <span class="ig-lbl">Posts</span>
+            <span class="ig-num">5</span>
+            <span class="ig-lbl">Proyectos</span>
           </div>
           <div class="ig-stat">
-            <span class="ig-num">1</span>
-            <span class="ig-lbl">Seguidor</span>
+            <span class="ig-num">72hs</span>
+            <span class="ig-lbl">Entrega</span>
           </div>
           <div class="ig-stat">
-            <span class="ig-num">2</span>
-            <span class="ig-lbl">Seguidos</span>
+            <span class="ig-num">100%</span>
+            <span class="ig-lbl">Custom</span>
           </div>
         </div>
         <a href="https://instagram.com/digitalblueprint_ar" target="_blank" rel="noopener noreferrer" class="ig-btn">
@@ -1976,7 +2027,10 @@
           <li>Formulario de contacto</li>
           <li>Publicación en tu propio dominio (.com)</li>
         </ul>
-        <a href="https://instagram.com/digitalblueprint_ar" target="_blank" rel="noopener noreferrer" class="price-cta price-cta-ghost">Consultar →</a>
+        <a href="https://wa.me/5491126565906?text=Hola%21%20Vi%20tu%20portfolio%20y%20me%20interesa%20cotizar%20una%20Landing%20Page%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" class="price-cta price-cta-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Cotizar Landing →
+        </a>
       </div>
 
       <!-- Sitio Web Profesional -->
@@ -1999,7 +2053,10 @@
           <li>Dominio a tu nombre — te asesoramos</li>
           <li>Publicación + 1 mes de soporte gratuito †</li>
         </ul>
-        <a href="https://instagram.com/digitalblueprint_ar" target="_blank" rel="noopener noreferrer" class="price-cta price-cta-main">¡Lo quiero! →</a>
+        <a href="https://wa.me/5491126565906?text=Hola%21%20Vi%20tu%20portfolio%20y%20me%20interesa%20cotizar%20un%20Sitio%20Web%20Profesional." target="_blank" rel="noopener noreferrer" class="price-cta price-cta-main">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          ¡Lo quiero! →
+        </a>
       </div>
 
       <!-- E-commerce -->
@@ -2009,7 +2066,7 @@
         <p class="price-desc">Tienda online lista para vender: catálogo, carrito, integración WhatsApp y pedidos de tus clientes.</p>
         <div class="price-range">
           <div class="price-from">// desde</div>
-          <div class="price-num">$350.000 <span>ARS</span></div>
+          <div class="price-num">$500.000 <span>ARS</span></div>
           <div class="price-hint">El precio varía según cantidad de productos, integración de MercadoPago, complejidad del panel de administración, optimización de fotos y plazo de entrega.</div>
         </div>
         <ul class="price-list">
@@ -2021,7 +2078,10 @@
           <li>Dominio a tu nombre — te asesoramos</li>
           <li>Publicación + 1 mes de soporte gratuito †</li>
         </ul>
-        <a href="https://instagram.com/digitalblueprint_ar" target="_blank" rel="noopener noreferrer" class="price-cta price-cta-ghost">Consultar →</a>
+        <a href="https://wa.me/5491126565906?text=Hola%21%20Vi%20tu%20portfolio%20y%20me%20interesa%20cotizar%20una%20Tienda%20Online%20completa." target="_blank" rel="noopener noreferrer" class="price-cta price-cta-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Cotizar E-commerce →
+        </a>
       </div>
 
     </div>
@@ -2044,7 +2104,7 @@
           <span class="sn-sep">·</span>
           Secciones nuevas o rediseños se cotizan aparte.
           <span class="sn-sep">·</span>
-          Desde el 2.° mes: mantenimiento mensual <strong>$30.000</strong> (landing) · <strong>$60.000</strong> (e-commerce).
+          Desde el 2.° mes: mantenimiento mensual <strong>$30.000</strong> (landing) · <strong>$50.000</strong> (e-commerce).
         </p>
       </div>
     </div>
@@ -2224,6 +2284,20 @@
   </div>
 </section>
 
+<!-- MINI CTA POST-PORTFOLIO -->
+<section class="mini-cta-sec">
+  <div class="mini-cta-inner">
+    <div>
+      <h3 class="mini-cta-h">¿Querés un sitio así para tu negocio?</h3>
+      <p class="mini-cta-p">Escribime hoy y en menos de 24 horas tenés tu presupuesto — sin vueltas, sin compromiso.</p>
+    </div>
+    <a href="https://wa.me/5491126565906?text=Hola%21%20Vi%20tu%20portfolio%20y%20me%20interesa%20cotizar%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" class="btn-wa" style="white-space:nowrap;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Cotizar por WhatsApp
+    </a>
+  </div>
+</section>
+
 <div class="divider"></div>
 
 <!-- FAQ -->
@@ -2291,7 +2365,7 @@
         </button>
         <div class="faq-a">
           <div class="faq-a-inner">
-            Sí. Durante el <strong>primer mes de soporte incluido</strong> podés pedirme cambios de contenido, ajustes de diseño y correcciones sin costo adicional. A partir del segundo mes, podés continuar con un plan de mantenimiento mensual ($30.000 o $60.000/mes según el proyecto) o contratarme cambios puntuales.
+            Sí. Durante el <strong>primer mes de soporte incluido</strong> podés pedirme cambios de contenido, ajustes de diseño y correcciones sin costo adicional. A partir del segundo mes, podés continuar con un plan de mantenimiento mensual ($30.000 o $50.000/mes según el proyecto) o contratarme cambios puntuales.
           </div>
         </div>
       </div>
@@ -2368,7 +2442,8 @@
         joelpgaming2023@gmail.com
       </a>
     </div>
-    <span class="foot-copy">© 2025 DigitalBlueprint</span>
+    <span class="foot-copy">© 2026 DigitalBlueprint</span>
+    <span class="foot-made">Diseñado y desarrollado por <strong>Digital Blueprint</strong></span>
   </div>
 </footer>
 
@@ -2402,6 +2477,8 @@
   </a>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script>
   // ── INTRO FLUX: campo de flujo + tipografía cinética ──
   (function(){
@@ -2653,15 +2730,27 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-  const cardIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('vis');
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
   document.querySelectorAll('[data-cta]').forEach(el => io.observe(el));
-  document.querySelectorAll('[data-card]').forEach(el => cardIO.observe(el));
+
+  // GSAP ScrollTrigger: cards aparecen en secuencia (stagger)
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    ['.svc-grid', '.steps', '.feats', '.pricing-grid', '.portfolio-bento', '.faq-list'].forEach(sel => {
+      const ct = document.querySelector(sel);
+      if (!ct) return;
+      const cards = [...ct.querySelectorAll('[data-card]')];
+      ScrollTrigger.create({
+        trigger: ct, start: 'top 84%', once: true,
+        onEnter: () => cards.forEach((c, i) => gsap.delayedCall(i * 0.13, () => c.classList.add('vis')))
+      });
+    });
+  } else {
+    const cardIO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-card]').forEach(el => cardIO.observe(el));
+  }
 
   // Scale iframes to fit their container
   function scaleIframes() {
@@ -2757,6 +2846,28 @@
       card.style.setProperty('--cy', ((e.clientY - r.top)  / r.height * 100) + '%');
     });
   });
+
+  // ── COUNT-UP: números del hero ──
+  (function() {
+    function countUp(el, target) {
+      const t0 = performance.now(), dur = 1300;
+      const tick = now => {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = p * p * (3 - 2 * p); // smoothstep
+        el.textContent = Math.round(target * e);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(tick);
+    }
+    setTimeout(() => {
+      document.querySelectorAll('.trust-num em').forEach(em => {
+        const val = parseInt(em.textContent, 10);
+        if (!isNaN(val) && val > 0) { em.textContent = '0'; countUp(em, val); }
+      });
+    }, 3600);
+  })();
+
 </script>
 </body>
 </html>

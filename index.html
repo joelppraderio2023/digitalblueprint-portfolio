@@ -1670,6 +1670,39 @@
       }
     }
 
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--cyan);
+      z-index: 99998; pointer-events: none;
+      box-shadow: 0 0 10px rgba(6,182,212,.7);
+    }
+
+    /* ── CARD GLOW (spotlight radial seguidor del cursor) ── */
+    .svc-card, .feat, .p-card, .price-card {
+      --cx: 50%; --cy: 50%;
+    }
+    .feat { position: relative; }
+    .svc-card::after, .feat::after, .p-card::after, .price-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at var(--cx) var(--cy), rgba(6,182,212,.10) 0%, transparent 58%);
+      opacity: 0;
+      transition: opacity .4s ease;
+      pointer-events: none;
+    }
+    .svc-card:hover::after, .feat:hover::after, .p-card:hover::after, .price-card:hover::after {
+      opacity: 1;
+    }
+
+    /* ── TEXT REVEAL (líneas del sec-h2) ── */
+    .rl { display: block; overflow: hidden; line-height: 1.14; }
+    .rl-in { display: block; transform: translateY(108%); transition: transform .72s cubic-bezier(.22,1,.36,1); }
+    .sec-head.revealed .rl-in { transform: translateY(0); }
+    .rl:nth-child(2) .rl-in { transition-delay: .14s; }
+    .rl:nth-child(3) .rl-in { transition-delay: .26s; }
+
     /* ── MOBILE: SAFE AREAS + TOUCH ── */
 
     /* touch-action: elimina el delay de 300ms en iOS */
@@ -1953,6 +1986,7 @@
 <body>
 
 <!-- GRAIN TEXTURE -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <!-- CURSOR (desktop only) -->
 <div class="cursor-inv" id="cursorInv" aria-hidden="true"></div>
@@ -3109,13 +3143,52 @@
 
   if (ppSection) ppObserver.observe(ppSection);
 
-  // ── CARD GLOW (cursor spotlight) ──
-  document.querySelectorAll('.p-card').forEach(card => {
+  // ── SCROLL PROGRESS ──
+  (function(){
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  // ── CARD GLOW (spotlight radial seguidor del cursor) ──
+  document.querySelectorAll('.svc-card, .feat, .p-card, .price-card').forEach(card => {
     card.addEventListener('pointermove', e => {
       const r = card.getBoundingClientRect();
       card.style.setProperty('--cx', ((e.clientX - r.left) / r.width  * 100) + '%');
       card.style.setProperty('--cy', ((e.clientY - r.top)  / r.height * 100) + '%');
     });
+  });
+
+  // ── TILT 3D (portfolio cards, solo mouse) ──
+  if (matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.p-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform .14s ease-out, box-shadow .3s ease, background .3s ease, border-color .3s ease, filter .6s ease, opacity .6s ease';
+      });
+      card.addEventListener('mousemove', e => {
+        if (!card.classList.contains('vis')) return;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg) scale(1.025)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = '';
+        card.style.transform  = '';
+      });
+    });
+  }
+
+  // ── TEXT REVEAL (split sec-h2 por líneas) ──
+  document.querySelectorAll('.sec-h2').forEach(h2 => {
+    const parts = h2.innerHTML.split(/<br\s*\/?>/i);
+    if (parts.length < 2) return;
+    h2.innerHTML = parts
+      .map((p, i) => `<span class="rl"><span class="rl-in" style="transition-delay:${i * 0.14}s">${p.trim()}</span></span>`)
+      .join('');
   });
 
   // ── COUNT-UP: números del hero ──

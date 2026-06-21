@@ -3023,7 +3023,7 @@
   // GSAP ScrollTrigger: cards aparecen en secuencia (stagger)
   if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
-    ['.svc-grid', '.steps', '.feats', '.pricing-grid', '.portfolio-bento', '.faq-list'].forEach(sel => {
+    ['.svc-grid', '.steps', '.feats', '.pricing-grid', '.portfolio-bento', '.faq-chat'].forEach(sel => {
       const ct = document.querySelector(sel);
       if (!ct) return;
       const cards = [...ct.querySelectorAll('[data-card]')];

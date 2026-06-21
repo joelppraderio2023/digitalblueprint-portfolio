@@ -1216,57 +1216,57 @@
     }
     .diff-text p { font-size: 13px; color: var(--text-dim); line-height: 1.72; }
 
-    /* ── FAQ ── */
-    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 780px; margin: 0 auto; }
+    /* ── FAQ CHAT ── */
+    .faq-chat {
+      max-width: 660px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 22px;
+    }
+    .faq-pair {
+      display: flex; flex-direction: column; gap: 9px;
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .faq-pair.vis { opacity: 1; transform: none; }
+    .faq-pair:nth-child(2) { transition-delay: .07s; }
+    .faq-pair:nth-child(3) { transition-delay: .13s; }
+    .faq-pair:nth-child(4) { transition-delay: .19s; }
+    .faq-pair:nth-child(5) { transition-delay: .25s; }
+    .faq-pair:nth-child(6) { transition-delay: .31s; }
+    .faq-pair:nth-child(7) { transition-delay: .37s; }
 
-    .faq-item {
-      background: var(--glass);
-      border: 1px solid var(--glass-b);
-      border-radius: var(--r-sm);
-      overflow: hidden;
-      transition: border-color var(--ease);
-    }
-    .faq-item.open {
-      border-color: rgba(6,182,212,.4);
-    }
+    .faq-msg { display: flex; gap: 10px; align-items: flex-start; max-width: 85%; }
+    .faq-msg.a { align-self: flex-end; flex-direction: row-reverse; }
 
-    .faq-q {
-      width: 100%; background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 20px 24px;
-      text-align: left;
-      font-family: var(--f-body); font-size: .95rem; font-weight: 600;
-      color: var(--white);
-      transition: color var(--ease);
+    .faq-av {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
     }
-    .faq-q:hover { color: var(--cyan); }
-    .faq-item.open .faq-q { color: var(--cyan); }
-
-    .faq-icon {
-      width: 22px; height: 22px; flex-shrink: 0;
-      border: 1.5px solid rgba(6,182,212,.4);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: var(--cyan);
-      transition: transform var(--ease), background var(--ease);
+    .faq-msg.q .faq-av {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      background: rgba(6,182,212,.12);
+    .faq-msg.a .faq-av {
+      background: linear-gradient(135deg, var(--cyan), #0891B2);
+      font-size: 11px; font-weight: 800; color: var(--navy-deep); letter-spacing: -.02em;
     }
 
-    .faq-a {
-      max-height: 0; overflow: hidden;
-      transition: max-height .38s cubic-bezier(.4,0,.2,1);
+    .faq-bubble {
+      padding: 13px 17px; border-radius: 18px;
+      font-size: 14px; line-height: 1.68;
     }
-    .faq-a-inner {
-      padding: 0 24px 20px;
-      font-size: .9rem; color: var(--text-dim);
-      line-height: 1.75;
-      border-top: 1px solid rgba(6,182,212,.07);
-      padding-top: 14px;
+    .faq-msg.q .faq-bubble {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.09);
+      color: var(--white); font-weight: 600; font-size: 14.5px;
+      border-top-left-radius: 4px;
     }
-    .faq-a-inner strong { color: var(--white); }
+    .faq-msg.a .faq-bubble {
+      background: rgba(6,182,212,.07);
+      border: 1px solid rgba(6,182,212,.17);
+      color: var(--text-dim);
+      border-top-right-radius: 4px;
+    }
+    .faq-msg.a .faq-bubble strong { color: var(--white); }
 
     /* ── WHATSAPP FLOTANTE ── */
     .wa-btn {
@@ -2591,93 +2591,87 @@
 <section id="faq" class="sec">
   <div class="sec-inner">
     <div class="sec-head" data-reveal>
-      <span class="sec-lbl">FAQ</span>
-      <h2 class="sec-h2">Preguntas<br>frecuentes</h2>
-      <p class="sec-sub">Todo lo que querés saber antes de arrancar.</p>
+      <span class="sec-lbl">Dudas frecuentes</span>
+      <h2 class="sec-h2">Te respondo<br>todo</h2>
+      <p class="sec-sub">Las preguntas que más me hacen antes de arrancar.</p>
     </div>
-    <div class="faq-list">
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-1">
-          ¿Cuánto tarda en estar lista mi web?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-1">
-          <div class="faq-a-inner">
-            Depende del tipo de proyecto. Una <strong>landing page</strong> la tenés lista en <strong>72 horas</strong>. Un <strong>sitio web completo</strong> o un <strong>e-commerce</strong> en <strong>1 semana</strong>. Los tiempos arrancan una vez que tenés el contenido (textos, fotos, datos) listo para darme.
-          </div>
+    <div class="faq-chat">
+
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">⏱️ ¿Cuánto tarda en tener lista mi web?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Una landing page la tenés en <strong>72 horas</strong>. Un sitio completo o e-commerce, en <strong>1 semana</strong>. El único requisito es que me des el contenido desde el inicio — de ahí me encargo yo de todo.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-2">
-          ¿Cómo es el proceso de pago?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-2">
-          <div class="faq-a-inner">
-            Trabajo con <strong>50% al inicio y 50% antes de publicar el sitio</strong>. Acepto transferencia bancaria o MercadoPago. Una vez que acordamos el proyecto y el precio, te mando los datos y arrancamos.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">💳 ¿Tengo que pagar todo antes de empezar?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Para nada. Es <strong>50% para arrancar</strong> y el otro <strong>50% cuando te mostramos el sitio terminado</strong> y estás conforme. Podés pagar por transferencia o MercadoPago.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-3">
-          ¿Necesito tener dominio (.com) antes de empezar?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-3">
-          <div class="faq-a-inner">
-            No es obligatorio. Si no querés dominio, el sitio queda publicado en <strong>tu-negocio.pages.dev</strong> sin costo y funciona perfectamente. Si en algún momento querés tu propio dominio, lo comprás vos a tu nombre en <strong>NIC Argentina</strong>, <strong>Donweb</strong> o <strong>Namecheap</strong> (.com.ar ~$3.000/año · .com ~$15.000/año) y yo lo conecto <strong>en 10 minutos sin costo extra</strong>.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">🌐 ¿Necesito un dominio (.com) para empezar?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">No es necesario. Sin dominio, tu sitio queda publicado en <strong>tunegocio.pages.dev</strong> sin costo y funciona perfecto. Cuando quieras tu propia dirección, la comprás vos (entre $3.000 y $15.000/año) y yo te la conecto <strong>gratis en 10 minutos</strong>.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-4">
-          ¿Qué necesito tener listo para empezar?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-4">
-          <div class="faq-a-inner">
-            Lo básico: <strong>a qué te dedicás</strong>, qué servicios o productos ofrecés, tus datos de contacto y alguna referencia de estilo que te guste. Las fotos e imágenes ayudan mucho — si no tenés, usamos recursos gratuitos de alta calidad. No necesitás saber nada de tecnología, yo me encargo de todo.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">📋 ¿Qué necesito tener listo para arrancar?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Solo tres cosas: <strong>a qué te dedicás</strong>, tus datos de contacto, y algún ejemplo de estilo que te guste. Si tenés fotos, mejor — si no, usamos imágenes de calidad gratuitas. No necesitás saber nada de tecnología.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-5">
-          ¿Puedo pedir cambios después de que esté publicada?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-5">
-          <div class="faq-a-inner">
-            Sí. Durante el <strong>primer mes de soporte incluido</strong> podés pedirme cambios de contenido, ajustes de diseño y correcciones sin costo adicional. A partir del segundo mes, podés continuar con un plan de mantenimiento mensual ($30.000 o $50.000/mes según el proyecto) o contratarme cambios puntuales.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">✏️ ¿Puedo pedir cambios después de que esté publicada?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Sí, siempre. El <strong>primer mes de soporte está incluido</strong> — cambios de texto, ajustes de diseño, lo que necesites. No te quedás solo una vez que se publica.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-6">
-          ¿La web se va a ver bien en el celular?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-6">
-          <div class="faq-a-inner">
-            Sí, siempre. Todas las webs que hago se ven bien en celular, tablet y computadora — probadas antes de publicarse. Más del 70% de las personas navegan desde el teléfono, así que eso no es opcional.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">📱 ¿Se va a ver bien en el celular?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Sí, 100%. Todas las webs las diseño primero para celular y las pruebo en varios dispositivos antes de publicarlas. El 70% de tus clientes entra desde el teléfono — eso no puede fallar.</div>
         </div>
       </div>
 
-      <div class="faq-item" data-card>
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-p-7">
-          ¿Trabajás con clientes de todo el país?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a" id="faq-p-7">
-          <div class="faq-a-inner">
-            Sí. Soy de Buenos Aires pero trabajo <strong>100% remoto</strong> con clientes de todo el país. Todo el proceso — presupuesto, diseño, revisiones y entrega — se hace por WhatsApp, Instagram o email. No hace falta reunirse en persona.
-          </div>
+      <div class="faq-pair" data-card>
+        <div class="faq-msg q">
+          <div class="faq-av">🙋</div>
+          <div class="faq-bubble">📍 ¿Trabajás solo en Buenos Aires o con todo el país?</div>
+        </div>
+        <div class="faq-msg a">
+          <div class="faq-av">DB</div>
+          <div class="faq-bubble">Con todo el país. Trabajo <strong>100% remoto</strong> — todo el proceso se hace por WhatsApp y online. No hace falta reunirse en persona ni estar en Buenos Aires.</div>
         </div>
       </div>
 
@@ -3066,26 +3060,7 @@
     });
   });
 
-  // ── FAQ ACCORDION ──
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const answer = item.querySelector('.faq-a');
-      const isOpen = item.classList.contains('open');
-      // Cierra todos
-      document.querySelectorAll('.faq-item.open').forEach(el => {
-        el.classList.remove('open');
-        el.querySelector('.faq-a').style.maxHeight = null;
-        el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      });
-      // Abre el clickeado si estaba cerrado
-      if (!isOpen) {
-        item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
+  // FAQ: chat estático — sin JS necesario
 
   // ── WHATSAPP FLOTANTE ──
   setTimeout(() => document.getElementById('waBtn').classList.add('show'), 1200);

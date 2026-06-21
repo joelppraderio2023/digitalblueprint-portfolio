@@ -804,21 +804,20 @@
       font-family: var(--f-mono); font-size: 10px;
       letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted);
     }
-    /* Card B: code */
+    /* Card B: wireframe */
     .feat:nth-child(2) .feat-vis {
-      flex: 1; flex-direction: column; align-items: flex-start;
-      padding: 14px 16px; gap: 5px; min-height: 110px;
-      font-family: var(--f-mono); font-size: 11px; line-height: 1.5;
+      flex: 1; flex-direction: column; align-items: stretch;
+      padding: 16px 18px; gap: 7px; min-height: 110px;
     }
-    .fv-cl { display: flex; gap: 10px; width: 100%; }
-    .fv-ln { color: rgba(255,255,255,.2); min-width: 14px; text-align: right; user-select: none; }
-    .fv-tag { color: #60a5fa; }
-    .fv-attr { color: #a78bfa; }
-    .fv-val { color: #34d399; }
-    .fv-txt { color: rgba(255,255,255,.65); }
-    .fv-comment { color: rgba(255,255,255,.28); font-style: italic; }
-    .fv-caret { color: var(--cyan); animation: blink .9s step-end infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
+    .fv-wf-nav { height: 9px; border-radius: 3px; background: rgba(6,182,212,.35); width: 100%; }
+    .fv-wf-hero { height: 32px; border-radius: 5px; border: 1.5px dashed rgba(6,182,212,.3); background: rgba(6,182,212,.05); position: relative; display: flex; align-items: center; justify-content: center; }
+    .fv-wf-hero::after { content: 'HERO'; font-family: var(--f-mono); font-size: 8px; letter-spacing: .12em; color: rgba(6,182,212,.4); }
+    .fv-wf-row { display: flex; gap: 6px; }
+    .fv-wf-col { flex: 1; height: 20px; border-radius: 4px; border: 1px dashed rgba(255,255,255,.1); background: rgba(255,255,255,.03); }
+    .fv-wf-col:first-child { flex: 1.6; }
+    .fv-wf-cursor { width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); position: absolute; right: 10px; bottom: 8px; animation: wfpulse 1.8s ease-in-out infinite; }
+    @keyframes wfpulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: .5; } }
+    .fv-wf-lbl { font-family: var(--f-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(6,182,212,.55); text-align: right; margin-top: 2px; }
     /* Card C: SERP */
     .feat:nth-child(3) .feat-vis {
       height: 80px; flex-direction: column;
@@ -2236,19 +2235,25 @@
         </div>
       </div>
 
-      <!-- Card B: Código propio (columna derecha, 2 filas) -->
+      <!-- Card B: Sin plantillas (columna derecha, 2 filas) -->
       <div class="feat" data-card>
         <div class="feat-vis">
-          <div class="fv-cl"><span class="fv-ln">1</span><span class="fv-tag">&lt;section</span>&nbsp;<span class="fv-attr">id</span>=<span class="fv-val">"hero"</span><span class="fv-tag">&gt;</span></div>
-          <div class="fv-cl"><span class="fv-ln">2</span>&nbsp;&nbsp;<span class="fv-tag">&lt;h1&gt;</span><span class="fv-txt">Tu Negocio</span><span class="fv-tag">&lt;/h1&gt;</span></div>
-          <div class="fv-cl"><span class="fv-ln">3</span>&nbsp;&nbsp;<span class="fv-comment">/* escrito a mano */</span></div>
-          <div class="fv-cl"><span class="fv-ln">4</span>&nbsp;&nbsp;<span class="fv-attr">color</span>: <span class="fv-val">var(--brand)</span>;</div>
-          <div class="fv-cl"><span class="fv-ln">5</span>&nbsp;&nbsp;<span class="fv-attr">font</span>: <span class="fv-val">"InterDisplay"</span>;</div>
-          <div class="fv-cl"><span class="fv-ln">6</span>&nbsp;&nbsp;<span class="fv-attr">unique</span>: <span class="fv-val">true</span>;<span class="fv-caret">▌</span></div>
+          <div class="fv-wf-nav"></div>
+          <div class="fv-wf-hero"><div class="fv-wf-cursor"></div></div>
+          <div class="fv-wf-row">
+            <div class="fv-wf-col"></div>
+            <div class="fv-wf-col"></div>
+          </div>
+          <div class="fv-wf-row">
+            <div class="fv-wf-col"></div>
+            <div class="fv-wf-col"></div>
+            <div class="fv-wf-col"></div>
+          </div>
+          <div class="fv-wf-lbl">diseñado desde cero ↗</div>
         </div>
         <div>
-          <h4 class="feat-title">Código propio, no plantillas</h4>
-          <p class="feat-desc">Cada web es código escrito a mano. Sin constructores, sin templates. Resultado: carga más rápida, mejor SEO y un sitio que nadie más tiene.</p>
+          <h4 class="feat-title">Pensado para vos, no copiado de nadie</h4>
+          <p class="feat-desc">Cada web se piensa y diseña de cero para tu negocio. Sin copiar plantillas de Wix ni WordPress. El resultado se nota: más única, más rápida y mejor posicionada.</p>
         </div>
       </div>
 

@@ -1648,25 +1648,14 @@
       .marquee-track { animation-play-state: paused; }
     }
 
-    /* ── CUSTOM CURSOR (solo desktop con mouse) ── */
+    /* ── CUSTOM CURSOR: TRAIL/COMETA (solo desktop con mouse) ── */
     @media (pointer: fine) {
       html { cursor: none; }
       a, button { cursor: none; }
-
-      .cursor-inv {
-        position: fixed; z-index: 99999; pointer-events: none;
-        width: 40px; height: 40px; border-radius: 50%;
-        background: #fff;
-        mix-blend-mode: difference;
-        top: 0; left: 0;
-        will-change: transform;
-        opacity: 0;
-        transition: width .28s cubic-bezier(.25,.46,.45,.94),
-                    height .28s cubic-bezier(.25,.46,.45,.94),
-                    opacity .3s ease;
-      }
-      .cursor-hover .cursor-inv {
-        width: 72px; height: 72px;
+      .td {
+        position: fixed; top: 0; left: 0; border-radius: 50%;
+        pointer-events: none; will-change: transform;
+        opacity: 0; z-index: 99999;
       }
     }
 
@@ -1988,8 +1977,7 @@
 <!-- GRAIN TEXTURE -->
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
-<!-- CURSOR (desktop only) -->
-<div class="cursor-inv" id="cursorInv" aria-hidden="true"></div>
+<!-- CURSOR: dots generados por JS -->
 
 <!-- ── INTRO FLUX ── -->
 <div id="intro" aria-hidden="true">
@@ -3213,30 +3201,54 @@
   })();
 
 
-  // ── CUSTOM CURSOR (blend mode difference) ──
+  // ── CUSTOM CURSOR: TRAIL/COMETA ──
   (function(){
     if (!matchMedia('(pointer: fine)').matches) return;
-    const inv = document.getElementById('cursorInv');
-    if (!inv) return;
 
-    let ready = false;
+    const CFG = [
+      { size: 8, color: '#ffffff',              lerp: 0.40 },
+      { size: 7, color: 'rgba(6,182,212,.95)',  lerp: 0.26 },
+      { size: 6, color: 'rgba(6,182,212,.75)',  lerp: 0.20 },
+      { size: 5, color: 'rgba(6,182,212,.55)',  lerp: 0.16 },
+      { size: 4, color: 'rgba(6,182,212,.38)',  lerp: 0.12 },
+      { size: 3, color: 'rgba(6,182,212,.22)',  lerp: 0.09 },
+      { size: 2, color: 'rgba(6,182,212,.11)',  lerp: 0.07 },
+    ];
+
+    const dots = CFG.map(c => {
+      const el = document.createElement('span');
+      el.className = 'td';
+      el.style.cssText = `width:${c.size}px;height:${c.size}px;background:${c.color};margin-left:-${c.size/2}px;margin-top:-${c.size/2}px`;
+      document.body.appendChild(el);
+      return { el, x: 0, y: 0, lerp: c.lerp };
+    });
+
+    let mx = 0, my = 0, ready = false;
 
     document.addEventListener('pointermove', e => {
-      inv.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
-      if (!ready) { ready = true; inv.style.opacity = '1'; }
+      mx = e.clientX; my = e.clientY;
+      if (!ready) {
+        ready = true;
+        dots.forEach(d => { d.x = mx; d.y = my; d.el.style.opacity = '1'; });
+      }
     });
 
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest('a, button, [data-card], .price-card, .svc-card, .p-card'))
-        document.body.classList.add('cursor-hover');
-    });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest('a, button, [data-card], .price-card, .svc-card, .p-card'))
-        document.body.classList.remove('cursor-hover');
-    });
+    (function loop(){
+      if (ready) {
+        dots[0].x += (mx - dots[0].x) * dots[0].lerp;
+        dots[0].y += (my - dots[0].y) * dots[0].lerp;
+        dots[0].el.style.transform = `translate(${dots[0].x}px,${dots[0].y}px)`;
+        for (let i = 1; i < dots.length; i++) {
+          dots[i].x += (dots[i-1].x - dots[i].x) * dots[i].lerp;
+          dots[i].y += (dots[i-1].y - dots[i].y) * dots[i].lerp;
+          dots[i].el.style.transform = `translate(${dots[i].x}px,${dots[i].y}px)`;
+        }
+      }
+      requestAnimationFrame(loop);
+    })();
 
-    document.addEventListener('mouseleave', () => { inv.style.opacity = '0'; ready = false; });
-    document.addEventListener('mouseenter', () => { inv.style.opacity = '1'; });
+    document.addEventListener('mouseleave', () => { dots.forEach(d => d.el.style.opacity = '0'); ready = false; });
+    document.addEventListener('mouseenter', () => { if (ready) dots.forEach(d => d.el.style.opacity = '1'); });
   })();
 
 </script>

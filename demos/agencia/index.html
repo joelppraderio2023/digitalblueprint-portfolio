@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VORTEX · Agencia creativa — Marcas que se notan (Demo)</title>
+  <meta name="description" content="Demo de sitio para agencia creativa / digital: servicios, portfolio y contacto. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">VORTEX<span class="blink">_</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#trabajos" onclick="closeMenu()">Trabajos</a>
+        <a href="#proceso" onclick="closeMenu()">Proceso</a>
+        <a href="#contacto" class="btn btn-grad sm" onclick="closeMenu()">Hablemos</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-content">
+      <p class="kicker">● Agencia creativa & digital</p>
+      <h1>Creamos marcas<br>que <span class="grad-text">se notan.</span></h1>
+      <p class="hero-sub">Diseño, desarrollo y estrategia para marcas que no quieren pasar desapercibidas. Pensamos distinto, ejecutamos rápido.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn btn-grad">Empecemos tu proyecto</a>
+        <a href="#trabajos" class="btn btn-line">Ver trabajos →</a>
+      </div>
+      <div class="hero-clients">
+        <span>Confían en nosotros:</span>
+        <div class="client-row"><b>Nova</b><b>Pulse</b><b>Quantum</b><b>Lumen</b><b>Drift</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services" id="servicios">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// Qué hacemos</p><h2>Servicios que<br>mueven la aguja</h2></div>
+      <div class="svc-grid" id="svcGrid"></div>
+    </div>
+  </section>
+
+  <section class="section work" id="trabajos">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// Portfolio</p><h2>Trabajos seleccionados</h2></div>
+      <div class="work-grid" id="workGrid"></div>
+    </div>
+  </section>
+
+  <section class="section process" id="proceso">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// Cómo trabajamos</p><h2>Nuestro proceso</h2></div>
+      <div class="step-grid" id="stepGrid"></div>
+    </div>
+  </section>
+
+  <section class="stats-band">
+    <div class="wrap stats-inner" id="statsInner"></div>
+  </section>
+
+  <section class="section contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-text">
+        <p class="eyebrow">// Hablemos</p>
+        <h2>¿Tenés un proyecto<br>en mente?</h2>
+        <p>Contanos qué necesitás y te respondemos en menos de 24 hs con ideas y un presupuesto claro.</p>
+        <div class="contact-meta">
+          <a href="mailto:hola@vortex.demo">hola@vortex.demo</a>
+          <a href="#">+54 11 0000-0000</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="field"><input type="text" required placeholder="Nombre" /></div>
+        <div class="field"><input type="email" required placeholder="Email" /></div>
+        <div class="field">
+          <select required><option value="">¿Qué necesitás?</option><option>Branding / Identidad</option><option>Diseño web</option><option>Desarrollo</option><option>Marketing</option><option>Todo el combo</option></select>
+        </div>
+        <div class="field"><textarea rows="3" placeholder="Contanos un poco sobre tu proyecto"></textarea></div>
+        <button type="submit" class="btn btn-grad full">Enviar mensaje</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand">VORTEX<span>_</span></a><p>Agencia creativa & digital.</p></div>
+      <div class="foot-links"><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#contacto">Contacto</a><a href="#">Instagram</a><a href="#">Behance</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 VORTEX — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

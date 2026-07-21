@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRAVO · Barbershop — Reservá tu turno (Demo)</title>
+  <meta name="description" content="Demo de sitio para barbería: servicios, precios y reserva de turnos. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">BRAVO<span>BARBERSHOP</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#barberos" onclick="closeMenu()">Barberos</a>
+        <a href="#galeria" onclick="closeMenu()">Trabajos</a>
+        <a href="#turno" class="btn btn-amber sm" onclick="closeMenu()">Reservar turno</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-content">
+      <p class="kicker">// Desde 2014 · Estilo que se respeta</p>
+      <h1>CORTES CON<br><span>ACTITUD.</span></h1>
+      <p class="hero-sub">Barbería clásica con onda moderna. Cortes, barba y afeitado a navaja en el corazón de la ciudad.</p>
+      <div class="hero-cta">
+        <a href="#turno" class="btn btn-amber">Reservar mi turno</a>
+        <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>+12K</strong><span>cortes hechos</span></div>
+        <div><strong>5</strong><span>barberos pro</span></div>
+        <div><strong>4.9★</strong><span>en Google</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee"><div class="marquee-track">
+    <span>CORTE ✦ BARBA ✦ AFEITADO ✦ COLOR ✦ DISEÑOS ✦ CEJAS ✦</span>
+    <span>CORTE ✦ BARBA ✦ AFEITADO ✦ COLOR ✦ DISEÑOS ✦ CEJAS ✦</span>
+  </div></div>
+
+  <section class="section services" id="servicios">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// Precios</p><h2>Nuestros servicios</h2></div>
+      <div class="svc-list" id="svcList"></div>
+    </div>
+  </section>
+
+  <section class="section barbers" id="barberos">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// El equipo</p><h2>Los barberos</h2></div>
+      <div class="barber-grid" id="barberGrid"></div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="galeria">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">// Portfolio</p><h2>Trabajos recientes</h2></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <section class="section booking" id="turno">
+    <div class="wrap booking-grid">
+      <div class="booking-info">
+        <p class="eyebrow">// Reservá</p>
+        <h2>Sacá tu turno</h2>
+        <p>Elegí servicio, barbero y horario. Te confirmamos por WhatsApp al toque.</p>
+        <ul class="booking-list">
+          <li>📍 Av. Corte 800, Tu Ciudad</li>
+          <li>🕒 Lun a Sáb · 10 a 21 hs</li>
+          <li>📞 +54 11 0000-0000</li>
+        </ul>
+      </div>
+      <form class="booking-form" onsubmit="submitForm(event)">
+        <h3>Pedí tu turno</h3>
+        <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre" /></div>
+        <div class="field"><label>Servicio</label><select id="bSvc" required><option value="">Elegí un servicio</option></select></div>
+        <div class="frow">
+          <div class="field"><label>Barbero</label><select required><option value="">Cualquiera</option><option>Nacho</option><option>Rama</option><option>Fede</option><option>Lucho</option></select></div>
+          <div class="field"><label>Día</label><input type="date" required /></div>
+        </div>
+        <div class="field"><label>Horario</label>
+          <div class="slots" id="slots"></div>
+        </div>
+        <button type="submit" class="btn btn-amber full">Confirmar turno</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand">BRAVO<span>BARBERSHOP</span></a><p>Cortes con actitud desde 2014.</p></div>
+      <div class="foot-links"><a href="#servicios">Servicios</a><a href="#barberos">Barberos</a><a href="#turno">Turnos</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 BRAVO Barbershop — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <a href="#turno" class="float-cta">Reservar turno</a>
+  <script src="script.js"></script>
+</body>
+</html>

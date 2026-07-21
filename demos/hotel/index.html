@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terrazas del Valle · Cabañas de montaña — Reservá tu escapada (Demo)</title>
+  <meta name="description" content="Demo de sitio para hotel / cabañas de turismo: habitaciones, tarifas, servicios y reservas. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">Terrazas <span>del Valle</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#cabanas" onclick="closeMenu()">Cabañas</a>
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#galeria" onclick="closeMenu()">Galería</a>
+        <a href="#reservar" class="btn btn-leaf sm" onclick="closeMenu()">Reservar</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-content">
+      <p class="kicker">✦ Cabañas de montaña · Valle de los Pinos</p>
+      <h1>Desconectá<br>en la naturaleza.</h1>
+      <p class="hero-sub">Cabañas de madera con vista a las sierras, pileta climatizada y el silencio que tu cabeza necesita.</p>
+      <div class="hero-cta">
+        <a href="#reservar" class="btn btn-leaf">Reservar mi escapada</a>
+        <a href="#cabanas" class="btn btn-ghost">Ver cabañas</a>
+      </div>
+    </div>
+    <div class="booking-strip">
+      <div class="bf"><label>Check-in</label><input type="date" /></div>
+      <div class="bf"><label>Check-out</label><input type="date" /></div>
+      <div class="bf"><label>Huéspedes</label><select><option>2 adultos</option><option>2 adultos + 1 niño</option><option>4 adultos</option><option>Familia (5+)</option></select></div>
+      <button class="btn btn-leaf" onclick="document.getElementById('cabanas').scrollIntoView({behavior:'smooth'})">Ver disponibilidad</button>
+    </div>
+  </section>
+
+  <section class="section cabins" id="cabanas">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Dónde vas a dormir</p><h2>Nuestras cabañas</h2></div>
+      <div class="cabin-grid" id="cabinGrid"></div>
+    </div>
+  </section>
+
+  <section class="section amenities" id="servicios">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Todo incluido</p><h2>Servicios del complejo</h2></div>
+      <div class="amen-grid" id="amenGrid"></div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="galeria">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">El lugar</p><h2>Un rincón para perderse</h2></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <section class="testi-band">
+    <div class="wrap">
+      <div class="stars">★★★★★</div>
+      <blockquote>"El lugar perfecto para descansar. Las cabañas impecables, la vista de película y la atención de diez. Volvemos seguro."</blockquote>
+      <cite>— Familia Gutiérrez, Córdoba</cite>
+    </div>
+  </section>
+
+  <section class="section reserve" id="reservar">
+    <div class="wrap reserve-grid">
+      <div class="reserve-info">
+        <p class="eyebrow">Reservas</p>
+        <h2>Asegurá tu lugar</h2>
+        <p>Dejanos tus datos y te confirmamos disponibilidad y tarifa por WhatsApp.</p>
+        <ul class="reserve-list">
+          <li>📍 Camino de los Pinos km 12, Valle</li>
+          <li>📞 +54 11 0000-0000</li>
+          <li>✉️ hola@terrazasdelvalle.demo</li>
+          <li>🕒 Check-in 14 hs · Check-out 10 hs</li>
+        </ul>
+      </div>
+      <form class="reserve-form" onsubmit="submitForm(event)">
+        <h3>Consultá disponibilidad</h3>
+        <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre" /></div>
+        <div class="frow">
+          <div class="field"><label>Check-in</label><input type="date" required /></div>
+          <div class="field"><label>Check-out</label><input type="date" required /></div>
+        </div>
+        <div class="field"><label>Cabaña de interés</label>
+          <select required><option value="">Elegí una</option><option>Cabaña Pinar (2 pers)</option><option>Cabaña Sierra (4 pers)</option><option>Cabaña Familiar (6 pers)</option><option>Suite Mirador (2 pers)</option></select>
+        </div>
+        <div class="field"><label>Teléfono</label><input type="tel" required placeholder="11 1234 5678" /></div>
+        <button type="submit" class="btn btn-leaf full">Consultar y reservar</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand">Terrazas <span>del Valle</span></a><p>Cabañas de montaña para desconectar.</p></div>
+      <div class="foot-links"><a href="#cabanas">Cabañas</a><a href="#servicios">Servicios</a><a href="#reservar">Reservar</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 Terrazas del Valle — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <a href="#reservar" class="float-cta">Reservar ✦</a>
+  <script src="script.js"></script>
+</body>
+</html>

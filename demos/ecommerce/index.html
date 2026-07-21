@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ÁMBAR · Indumentaria — Tienda online (Demo)</title>
+  <meta name="description" content="Demo de tienda online de indumentaria con catálogo, filtros y carrito de compras. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- DEMO BANNER -->
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — productos y precios ficticios</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <button class="icon-btn menu-toggle" aria-label="Menú" onclick="toggleMenu()">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="#" class="brand">ÁMBAR<span>.</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#catalogo" onclick="closeMenu()">Tienda</a>
+        <a href="#catalogo" data-cat="Mujer" onclick="filterFromNav('Mujer')">Mujer</a>
+        <a href="#catalogo" data-cat="Hombre" onclick="filterFromNav('Hombre')">Hombre</a>
+        <a href="#catalogo" data-cat="Accesorios" onclick="filterFromNav('Accesorios')">Accesorios</a>
+        <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
+      </nav>
+      <button class="icon-btn cart-btn" aria-label="Carrito" onclick="openCart()">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Nueva temporada · Otoño 2026</p>
+        <h1>Tu estilo,<br>sin esfuerzo.</h1>
+        <p class="lead">Prendas atemporales, hechas para durar. Diseño simple, materiales nobles y precios honestos.</p>
+        <a href="#catalogo" class="btn btn-dark">Ver colección</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card hc1"><span>Lino</span></div>
+        <div class="hero-card hc2"><span>Algodón</span></div>
+        <div class="hero-card hc3"><span>Denim</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS STRIP -->
+  <div class="benefits">
+    <div class="wrap benefits-inner">
+      <div><strong>Envío gratis</strong><span>en compras +$50.000</span></div>
+      <div><strong>3 cuotas sin interés</strong><span>con todas las tarjetas</span></div>
+      <div><strong>Cambios fáciles</strong><span>hasta 30 días</span></div>
+      <div><strong>Pago seguro</strong><span>protección al comprador</span></div>
+    </div>
+  </div>
+
+  <!-- CATALOG -->
+  <section class="catalog" id="catalogo">
+    <div class="wrap">
+      <div class="catalog-head">
+        <div>
+          <h2>Nuestra colección</h2>
+          <p id="resultCount">Mostrando todos los productos</p>
+        </div>
+        <div class="sort">
+          <label for="sortSel">Ordenar:</label>
+          <select id="sortSel" onchange="renderProducts()">
+            <option value="rel">Relevancia</option>
+            <option value="low">Precio: menor a mayor</option>
+            <option value="high">Precio: mayor a menor</option>
+            <option value="new">Novedades</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="chip active" data-cat="all" onclick="setFilter('all', this)">Todo</button>
+        <button class="chip" data-cat="Mujer" onclick="setFilter('Mujer', this)">Mujer</button>
+        <button class="chip" data-cat="Hombre" onclick="setFilter('Hombre', this)">Hombre</button>
+        <button class="chip" data-cat="Accesorios" onclick="setFilter('Accesorios', this)">Accesorios</button>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="wrap about-grid">
+      <div class="about-visual" aria-hidden="true"></div>
+      <div class="about-text">
+        <p class="eyebrow">Sobre ÁMBAR</p>
+        <h2>Moda consciente, hecha en Argentina.</h2>
+        <p>Trabajamos con talleres locales y materiales de bajo impacto. Cada prenda se produce en cantidades limitadas para evitar el desperdicio. Creemos en comprar menos, pero mejor.</p>
+        <div class="about-stats">
+          <div><strong>+8.000</strong><span>clientes felices</span></div>
+          <div><strong>100%</strong><span>producción local</span></div>
+          <div><strong>4.9★</strong><span>valoración media</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="wrap nl-inner">
+      <h2>Sumate al club ÁMBAR</h2>
+      <p>15% off en tu primera compra y acceso anticipado a las nuevas colecciones.</p>
+      <form class="nl-form" onsubmit="subscribe(event)">
+        <input type="email" placeholder="tu@email.com" required />
+        <button type="submit" class="btn btn-dark">Suscribirme</button>
+      </form>
+      <small id="nlMsg"></small>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a href="#" class="brand">ÁMBAR<span>.</span></a>
+        <p class="foot-tag">Prendas atemporales, hechas para durar.</p>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <a href="#catalogo">Mujer</a><a href="#catalogo">Hombre</a><a href="#catalogo">Accesorios</a><a href="#catalogo">Novedades</a>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <a href="#">Envíos y devoluciones</a><a href="#">Guía de talles</a><a href="#">Preguntas frecuentes</a><a href="#">Contacto</a>
+      </div>
+      <div>
+        <h4>Seguinos</h4>
+        <a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a>
+      </div>
+    </div>
+    <div class="wrap foot-bottom">
+      <span>© 2026 ÁMBAR Indumentaria — Demo de Digital Blueprint.</span>
+      <a href="../index.html">Ver otras demos →</a>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+    <div class="cart-header">
+      <h3>Tu carrito</h3>
+      <button class="icon-btn" onclick="closeCart()" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-row"><span>Subtotal</span><strong id="cartTotal">$0</strong></div>
+      <p class="cart-note">Envío e impuestos calculados al pagar.</p>
+      <button class="btn btn-dark full" onclick="checkout()">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-icon">✓</div>
+      <h3>¡Compra simulada con éxito!</h3>
+      <p>Esto es una <strong>demo</strong>: no se procesó ningún pago real. En tu tienda real, acá iría la pasarela de pago (Mercado Pago, tarjeta, etc.).</p>
+      <button class="btn btn-dark full" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

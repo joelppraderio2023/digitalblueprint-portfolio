@@ -4,7 +4,7 @@ const path = require('path');
 const SITES = [
   {
     name: 'woods-puppys',
-    url: 'https://wood-puppys-ar.netlify.app/',
+    url: 'https://woodspuppys.com.ar/',
     width: 1280,
     waitFor: 2500,
   },
@@ -31,6 +31,18 @@ const SITES = [
   {
     name: 'owen-house',
     url: 'https://owen-house-criadero.pages.dev/',
+    width: 1280,
+    waitFor: 3000,
+  },
+  {
+    name: 'manantial-de-bendiciones',
+    url: 'https://manantial-de-bendiciones.joelpgaming2023.workers.dev/',
+    width: 1280,
+    waitFor: 3000,
+  },
+  {
+    name: 'ayelen-productos-capilares',
+    url: 'https://ayelen-productos-capilares.pages.dev/',
     width: 1280,
     waitFor: 3000,
   },

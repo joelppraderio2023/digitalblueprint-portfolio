@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PULSO · Centro Fitness — Entrená sin excusas (Demo)</title>
+  <meta name="description" content="Demo de sitio web para gimnasio: clases, planes, coaches, horarios y contacto. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#inicio" class="brand">PULSO<span>/</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#clases" onclick="closeMenu()">Clases</a>
+        <a href="#planes" onclick="closeMenu()">Planes</a>
+        <a href="#coaches" onclick="closeMenu()">Coaches</a>
+        <a href="#horarios" onclick="closeMenu()">Horarios</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+        <a href="#planes" class="btn btn-lime nav-join" onclick="closeMenu()">Asociarme</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-content">
+      <p class="kicker">💪 +1.200 socios entrenando</p>
+      <h1>ENTRENÁ<br><span>SIN EXCUSAS</span></h1>
+      <p class="hero-sub">Musculación, funcional, clases grupales y coaches de verdad. Tu mejor versión empieza hoy, en PULSO.</p>
+      <div class="hero-cta">
+        <a href="#planes" class="btn btn-lime">Empezá gratis 7 días</a>
+        <a href="#clases" class="btn btn-outline">Ver clases</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>20+</strong><span>clases semanales</span></div>
+        <div><strong>8</strong><span>coaches certificados</span></div>
+        <div><strong>500m²</strong><span>de instalaciones</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASES -->
+  <section class="section classes" id="clases">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestras disciplinas</p>
+        <h2>Encontrá tu <span>entrenamiento</span></h2>
+      </div>
+      <div class="class-grid" id="classGrid"></div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section class="section plans" id="planes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Membresías</p>
+        <h2>Elegí tu <span>plan</span></h2>
+        <p class="section-desc">Sin permanencia. Cancelás cuando quieras.</p>
+      </div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <h3>Básico</h3>
+          <div class="plan-price">$18.900<span>/mes</span></div>
+          <ul>
+            <li>✓ Acceso a sala de musculación</li>
+            <li>✓ Horario de 8 a 16 hs</li>
+            <li>✓ App de seguimiento</li>
+            <li class="off">✗ Clases grupales</li>
+            <li class="off">✗ Coach personal</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline full">Elegir Básico</a>
+        </div>
+        <div class="plan-card featured">
+          <span class="plan-badge">Más elegido</span>
+          <h3>Full</h3>
+          <div class="plan-price">$27.900<span>/mes</span></div>
+          <ul>
+            <li>✓ Acceso ilimitado 24/7</li>
+            <li>✓ Todas las clases grupales</li>
+            <li>✓ App + plan de entrenamiento</li>
+            <li>✓ 1 evaluación física mensual</li>
+            <li class="off">✗ Coach personal</li>
+          </ul>
+          <a href="#contacto" class="btn btn-lime full">Elegir Full</a>
+        </div>
+        <div class="plan-card">
+          <h3>Premium</h3>
+          <div class="plan-price">$42.900<span>/mes</span></div>
+          <ul>
+            <li>✓ Todo lo del plan Full</li>
+            <li>✓ Coach personal (4 sesiones)</li>
+            <li>✓ Plan nutricional</li>
+            <li>✓ Acceso a sauna y spa</li>
+            <li>✓ Invitado free 1 vez/mes</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline full">Elegir Premium</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACHES -->
+  <section class="section coaches" id="coaches">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">El equipo</p>
+        <h2>Coaches que te <span>empujan</span></h2>
+      </div>
+      <div class="coach-grid" id="coachGrid"></div>
+    </div>
+  </section>
+
+  <!-- HORARIOS -->
+  <section class="section schedule" id="horarios">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Grilla semanal</p>
+        <h2>Horarios de <span>clases</span></h2>
+      </div>
+      <div class="schedule-wrap">
+        <table class="schedule-table" id="scheduleTable"></table>
+      </div>
+      <p class="schedule-note">* Las clases requieren reserva previa desde la app. Cupos limitados.</p>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="wrap">
+      <h2>Tu primera semana es <span>gratis</span>.</h2>
+      <p>Vení, conocé las instalaciones y entrená sin compromiso.</p>
+      <a href="#contacto" class="btn btn-lime">Reservar mi semana gratis</a>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow">Sumate hoy</p>
+        <h2>Empezá tu <span>cambio</span></h2>
+        <p class="section-desc">Dejanos tus datos y un asesor te contacta para coordinar tu clase de prueba.</p>
+        <ul class="contact-list">
+          <li>📍 Av. Siempre Activa 1234, Tu Ciudad</li>
+          <li>📞 +54 11 0000-0000</li>
+          <li>✉️ hola@pulsofitness.demo</li>
+          <li>🕒 Lun a Vie 6–23 hs · Sáb 8–20 hs</li>
+        </ul>
+        <div class="map-placeholder" aria-hidden="true"><span>📍 Mapa interactivo</span></div>
+      </div>
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <h3>Reservá tu clase de prueba</h3>
+        <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre" /></div>
+        <div class="field"><label>Teléfono / WhatsApp</label><input type="tel" required placeholder="11 1234 5678" /></div>
+        <div class="field"><label>¿Qué te interesa?</label>
+          <select required>
+            <option value="">Elegí una opción</option>
+            <option>Musculación</option><option>Funcional</option><option>Clases grupales</option>
+            <option>Coach personal</option><option>Todavía no sé</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-lime full">Quiero mi semana gratis</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a href="#inicio" class="brand">PULSO<span>/</span></a>
+        <p>Más que un gimnasio, una comunidad.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div><h4>Gimnasio</h4><a href="#clases">Clases</a><a href="#planes">Planes</a><a href="#coaches">Coaches</a></div>
+      <div><h4>Info</h4><a href="#horarios">Horarios</a><a href="#contacto">Contacto</a><a href="#">Reglamento</a></div>
+    </div>
+    <div class="wrap foot-bottom">
+      <span>© 2026 PULSO Centro Fitness — Demo de Digital Blueprint.</span>
+      <a href="../index.html">Ver otras demos →</a>
+    </div>
+  </footer>
+
+  <a href="#contacto" class="float-cta">Asociarme</a>
+
+  <script src="script.js"></script>
+</body>
+</html>

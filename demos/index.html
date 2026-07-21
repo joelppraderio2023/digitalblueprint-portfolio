@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demos · Digital Blueprint — Plantillas web para tu negocio</title>
+  <meta name="description" content="Demostraciones de páginas web profesionales: tienda online, sitio de negocio y landing page. Mirá ejemplos reales antes de empezar tu proyecto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --bg-soft: #12151d;
+      --card: #161a24;
+      --line: #232838;
+      --text: #f2f4f8;
+      --muted: #9aa3b5;
+      --accent: #6c8cff;
+      --accent-2: #b388ff;
+      --radius: 18px;
+      --maxw: 1140px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .logo { font-family: 'Sora', sans-serif; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,13,18,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 9px; }
+    .logo .dot { width: 11px; height: 11px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 14px var(--accent); }
+    .logo small { color: var(--muted); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.5px; text-transform: uppercase; }
+    .nav-cta {
+      font-size: 0.85rem; font-weight: 600; padding: 9px 16px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--bg-soft); transition: .2s;
+    }
+    .nav-cta:hover { border-color: var(--accent); color: #fff; }
+
+    /* HERO */
+    .hero { padding: 64px 0 48px; position: relative; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(60% 60% at 80% 0%, rgba(108,140,255,0.18), transparent 60%),
+        radial-gradient(50% 50% at 10% 20%, rgba(179,136,255,0.14), transparent 60%);
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; font-weight: 600; color: var(--muted);
+      border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; margin-bottom: 22px;
+    }
+    .badge .pulse { width: 7px; height: 7px; border-radius: 50%; background: #36d399; box-shadow: 0 0 0 0 rgba(54,211,153,.5); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(54,211,153,.5)} 70%{box-shadow:0 0 0 9px rgba(54,211,153,0)} 100%{box-shadow:0 0 0 0 rgba(54,211,153,0)} }
+    .hero h1 { font-size: clamp(2rem, 7vw, 3.4rem); font-weight: 800; letter-spacing: -1.5px; max-width: 14ch; }
+    .hero h1 span { background: linear-gradient(120deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--muted); font-size: 1.05rem; margin-top: 18px; max-width: 52ch; }
+
+    /* GRID */
+    .demos { padding: 16px 0 72px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden; transition: transform .3s ease, border-color .3s ease; position: relative;
+    }
+    .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .thumb { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--bg-soft); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .5s ease; }
+    .card:hover .thumb img { transform: scale(1.04); }
+    .thumb .preview { position: absolute; inset: 0; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .card-body { padding: 20px 22px 24px; }
+    .tag { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+    .card h3 { font-size: 1.3rem; font-weight: 700; margin: 8px 0 6px; letter-spacing: -0.4px; }
+    .card p { color: var(--muted); font-size: 0.92rem; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+    .features { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .features span { font-size: 0.72rem; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--line); padding: 4px 9px; border-radius: 7px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem;
+      padding: 11px 18px; border-radius: 11px; background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #fff; transition: .2s; box-shadow: 0 8px 24px -10px var(--accent);
+    }
+    .btn:hover { transform: translateX(2px); filter: brightness(1.08); }
+    .btn svg { transition: transform .2s; }
+    .card:hover .btn svg { transform: translateX(3px); }
+
+    /* PREVIEW MOCKUPS (CSS-only, sin imágenes externas) */
+    .pv-bar { display: flex; gap: 5px; }
+    .pv-bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.35); }
+    .pv-line { height: 8px; border-radius: 4px; background: rgba(255,255,255,.22); }
+    .pv-block { border-radius: 8px; background: rgba(255,255,255,.16); flex: 1; }
+    .pv-row { display: flex; gap: 8px; flex: 1; }
+    .pv-shop { background: linear-gradient(135deg, #2a2620, #4a3f2e); }
+    .pv-gym { background: linear-gradient(135deg, #0d0f0a, #1f2914); }
+    .pv-coach { background: linear-gradient(135deg, #0e2a2b, #134e4a); }
+    .pv-food { background: linear-gradient(135deg, #1a120e, #3a2418); }
+    .pv-real { background: linear-gradient(135deg, #16365c, #1d4ea0); }
+    .pv-barber { background: linear-gradient(135deg, #0c0c0d, #2a1f12); }
+    .pv-spa { background: linear-gradient(135deg, #8a9a7b, #d9b8a8); }
+    .pv-agency { background: linear-gradient(135deg, #3a1f5c, #0c2c33); }
+    .pv-dental { background: linear-gradient(135deg, #0fb6c4, #0a93a0); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--line); padding: 40px 0 56px; background: var(--bg-soft); }
+    .foot-grid { display: flex; flex-direction: column; gap: 24px; }
+    .foot-cta h3 { font-size: 1.4rem; letter-spacing: -0.5px; }
+    .foot-cta p { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+    .foot-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .btn-wa { background: #25D366; box-shadow: 0 8px 24px -10px #25D366; }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+    .btn-ghost:hover { border-color: var(--accent); }
+    .copy { color: var(--muted); font-size: 0.82rem; margin-top: 28px; border-top: 1px solid var(--line); padding-top: 22px; }
+
+    .filter-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 26px; -ms-overflow-style: none; scrollbar-width: none; }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .fchip { flex: 0 0 auto; font-family: inherit; font-size: 0.84rem; font-weight: 500; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-soft); color: var(--muted); cursor: pointer; transition: .2s; }
+    .fchip.active { background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #fff; border-color: transparent; }
+    .card.hide { display: none; }
+    .section-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.4px; margin: 8px 0 6px; }
+    .section-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 22px; }
+
+    @media (min-width: 680px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .foot-grid { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+    }
+    @media (min-width: 1000px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="logo">
+        <span class="dot"></span> Digital Blueprint <small>Demos</small>
+      </div>
+      <a class="nav-cta" href="https://digitalblueprint-portfolio.pages.dev/" target="_blank" rel="noopener">← Volver al portfolio</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge"><span class="pulse"></span> 12 plantillas demo · listas para personalizar</span>
+      <h1>Mirá cómo se vería <span>tu web</span> antes de empezar.</h1>
+      <p>Estas son demostraciones reales de distintos tipos de sitio y rubros. Navegalas en el celular o la compu, y elegí el estilo que va con tu negocio. Después lo adaptamos con tu marca, tus fotos y tus productos.</p>
+    </div>
+  </section>
+
+  <section class="demos">
+    <div class="wrap">
+      <div class="filter-bar" id="filterBar">
+        <button class="fchip active" data-f="all" onclick="filterDemos('all',this)">Todas (12)</button>
+        <button class="fchip" data-f="tienda" onclick="filterDemos('tienda',this)">🛒 Tiendas / catálogos</button>
+        <button class="fchip" data-f="negocio" onclick="filterDemos('negocio',this)">🏢 Sitios de negocio</button>
+        <button class="fchip" data-f="landing" onclick="filterDemos('landing',this)">🎯 Landings</button>
+      </div>
+
+      <div class="grid" id="demoGrid">
+
+        <!-- ÁMBAR -->
+        <article class="card" data-f="tienda">
+          <a href="./ecommerce/index.html"><div class="thumb"><img src="./assets/previews/ecommerce.webp" alt="Vista previa de la tienda ÁMBAR" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Tienda online</span>
+            <h3>ÁMBAR · Indumentaria</h3>
+            <p>E-commerce completo con catálogo, filtros, fichas y carrito de compras funcional.</p>
+            <div class="features"><span>🛒 Carrito</span><span>🔍 Filtros</span><span>💳 Checkout demo</span></div>
+            <div class="card-foot"><a class="btn" href="./ecommerce/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- PULSO -->
+        <article class="card" data-f="negocio">
+          <a href="./gimnasio/index.html"><div class="thumb"><img src="./assets/previews/gimnasio.webp" alt="Vista previa del gimnasio PULSO" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Gimnasio</span>
+            <h3>PULSO · Centro Fitness</h3>
+            <p>Sitio multi-sección con clases, planes, coaches, grilla de horarios y contacto.</p>
+            <div class="features"><span>💪 Planes</span><span>📅 Horarios</span><span>👥 Equipo</span></div>
+            <div class="card-foot"><a class="btn" href="./gimnasio/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- LUCÍA ROMERO -->
+        <article class="card" data-f="landing">
+          <a href="./landing/index.html"><div class="thumb"><img src="./assets/previews/landing.webp" alt="Vista previa de la landing de Lucía Romero" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Landing · Coach</span>
+            <h3>Lucía Romero · Coach</h3>
+            <p>Página única de marca personal: propuesta, servicios, testimonios y formulario.</p>
+            <div class="features"><span>🎯 Una página</span><span>⭐ Testimonios</span><span>📝 Form</span></div>
+            <div class="card-foot"><a class="btn" href="./landing/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- SAZÓN -->
+        <article class="card" data-f="negocio">
+          <a href="./restaurante/index.html"><div class="thumb"><img src="./assets/previews/restaurante.webp" alt="Vista previa del restaurante Sazón" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Restaurante</span>
+            <h3>Sazón · Cocina de autor</h3>
+            <p>Sitio con menú filtrable por categoría, galería, historia y reservas de mesa.</p>
+            <div class="features"><span>🍽️ Menú</span><span>🖼️ Galería</span><span>📅 Reservas</span></div>
+            <div class="card-foot"><a class="btn" href="./restaurante/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- TERRA -->
+        <article class="card" data-f="tienda">
+          <a href="./inmobiliaria/index.html"><div class="thumb"><img src="./assets/previews/inmobiliaria.webp" alt="Vista previa de la inmobiliaria Terra" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Inmobiliaria</span>
+            <h3>Terra · Inmobiliaria</h3>
+            <p>Portal de propiedades con buscador, filtros y ficha detallada de cada inmueble.</p>
+            <div class="features"><span>🏠 Propiedades</span><span>🔍 Filtros</span><span>📋 Fichas</span></div>
+            <div class="card-foot"><a class="btn" href="./inmobiliaria/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- BRAVO -->
+        <article class="card" data-f="negocio">
+          <a href="./barberia/index.html"><div class="thumb"><img src="./assets/previews/barberia.webp" alt="Vista previa de la barbería BRAVO" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Barbería</span>
+            <h3>BRAVO · Barbershop</h3>
+            <p>Servicios con precios, equipo de barberos y reserva de turnos con selección de horario.</p>
+            <div class="features"><span>💈 Servicios</span><span>🕒 Turnos</span><span>✂️ Equipo</span></div>
+            <div class="card-foot"><a class="btn" href="./barberia/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- AURA -->
+        <article class="card" data-f="negocio">
+          <a href="./spa/index.html"><div class="thumb"><img src="./assets/previews/spa.webp" alt="Vista previa del spa Aura" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Spa & estética</span>
+            <h3>Aura · Spa & Estética</h3>
+            <p>Tratamientos, experiencia, planes de precios y formulario para reservar tu sesión.</p>
+            <div class="features"><span>🌿 Tratamientos</span><span>💆 Precios</span><span>📅 Reservas</span></div>
+            <div class="card-foot"><a class="btn" href="./spa/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- VORTEX -->
+        <article class="card" data-f="landing">
+          <a href="./agencia/index.html"><div class="thumb"><img src="./assets/previews/agencia.webp" alt="Vista previa de la agencia VORTEX" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Agencia creativa</span>
+            <h3>VORTEX · Agencia digital</h3>
+            <p>Web de agencia con servicios, portfolio de trabajos, proceso y formulario de contacto.</p>
+            <div class="features"><span>⚡ Servicios</span><span>🎨 Portfolio</span><span>📈 Stats</span></div>
+            <div class="card-foot"><a class="btn" href="./agencia/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- SONRISA -->
+        <article class="card" data-f="negocio">
+          <a href="./consultorio/index.html"><div class="thumb"><img src="./assets/previews/consultorio.webp" alt="Vista previa del consultorio Sonrisa" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Consultorio</span>
+            <h3>Sonrisa · Odontología</h3>
+            <p>Sitio de consultorio con tratamientos, equipo, preguntas frecuentes y pedido de turno.</p>
+            <div class="features"><span>🦷 Servicios</span><span>❓ FAQ</span><span>🕒 Turnos</span></div>
+            <div class="card-foot"><a class="btn" href="./consultorio/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- TERRAZAS DEL VALLE -->
+        <article class="card" data-f="negocio">
+          <a href="./hotel/index.html"><div class="thumb"><img src="./assets/previews/hotel.webp" alt="Vista previa de las cabañas Terrazas del Valle" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Hotel · Cabañas</span>
+            <h3>Terrazas del Valle</h3>
+            <p>Sitio de turismo con buscador de fechas, cabañas con tarifas, servicios y reservas.</p>
+            <div class="features"><span>🏡 Cabañas</span><span>📅 Disponibilidad</span><span>🌲 Servicios</span></div>
+            <div class="card-foot"><a class="btn" href="./hotel/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- APRENDÉ+ -->
+        <article class="card" data-f="tienda">
+          <a href="./elearning/index.html"><div class="thumb"><img src="./assets/previews/elearning.webp" alt="Vista previa de la academia Aprendé+" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">E-learning</span>
+            <h3>Aprendé+ · Academia</h3>
+            <p>Plataforma de cursos online con catálogo filtrable, planes de precios y beneficios.</p>
+            <div class="features"><span>🎓 Cursos</span><span>🔍 Filtros</span><span>💳 Planes</span></div>
+            <div class="card-foot"><a class="btn" href="./elearning/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+        <!-- MÉNDEZ & ASOCIADOS -->
+        <article class="card" data-f="negocio">
+          <a href="./juridico/index.html"><div class="thumb"><img src="./assets/previews/juridico.webp" alt="Vista previa del estudio jurídico Méndez & Asociados" loading="lazy" width="1280" height="800" /></div></a>
+          <div class="card-body">
+            <span class="tag">Estudio jurídico</span>
+            <h3>Méndez & Asociados</h3>
+            <p>Sitio para abogados con áreas de práctica, equipo, y formulario de consulta gratuita.</p>
+            <div class="features"><span>⚖️ Áreas</span><span>👔 Equipo</span><span>📝 Consulta</span></div>
+            <div class="card-foot"><a class="btn" href="./juridico/index.html">Ver demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function filterDemos(f, el){
+      document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('#demoGrid .card').forEach(card=>{
+        card.classList.toggle('hide', f!=='all' && card.dataset.f!==f);
+      });
+    }
+  </script>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-cta">
+          <h3>¿Te gustó alguna? Hagamos la tuya.</h3>
+          <p>Cualquiera de estas plantillas se adapta a tu rubro, tu marca y tu presupuesto.</p>
+          <div class="foot-btns">
+            <a class="btn btn-wa" href="https://wa.me/000000000?text=Hola!%20Vi%20las%20demos%20y%20me%20interesa%20una%20web" target="_blank" rel="noopener">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23z"/></svg>
+              WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="https://digitalblueprint-portfolio.pages.dev/" target="_blank" rel="noopener">Ver portfolio completo</a>
+          </div>
+        </div>
+        <div class="logo" style="opacity:.8"><span class="dot"></span> Digital Blueprint</div>
+      </div>
+      <p class="copy">© 2026 Digital Blueprint — Diseño y desarrollo web. Las marcas, productos y precios de estas demos son ficticios y solo ilustran el diseño.</p>
+    </div>
+  </footer>
+</body>
+</html>

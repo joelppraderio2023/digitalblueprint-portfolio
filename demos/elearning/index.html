@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprendé+ · Academia online — Cursos que cambian tu carrera (Demo)</title>
+  <meta name="description" content="Demo de plataforma e-learning: catálogo de cursos, instructores y planes. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">Aprendé<span>+</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#cursos" onclick="closeMenu()">Cursos</a>
+        <a href="#beneficios" onclick="closeMenu()">Por qué nosotros</a>
+        <a href="#planes" onclick="closeMenu()">Planes</a>
+        <a href="#planes" class="btn btn-primary sm" onclick="closeMenu()">Empezar gratis</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="pill">🎓 +25.000 alumnos aprendiendo</p>
+        <h1>Aprendé algo<br><span class="grad">nuevo</span> hoy.</h1>
+        <p class="lead">Cursos online dictados por profesionales que la rompen. A tu ritmo, con certificado y acceso de por vida.</p>
+        <div class="hero-cta">
+          <a href="#cursos" class="btn btn-primary">Explorar cursos</a>
+          <a href="#planes" class="btn btn-soft">Ver planes</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>+120</strong><span>cursos</span></div>
+          <div><strong>4.8★</strong><span>valoración</span></div>
+          <div><strong>98%</strong><span>lo recomienda</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hv-card hv1">▶️ Clase en vivo</div>
+        <div class="hv-card hv2">📜 Certificado</div>
+        <div class="hv-card hv3">💬 Comunidad</div>
+        <div class="hv-main"><span>🎓</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section courses" id="cursos">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Catálogo</p><h2>Encontrá tu próximo curso</h2></div>
+      <div class="filters" id="filters"></div>
+      <div class="course-grid" id="courseGrid"></div>
+    </div>
+  </section>
+
+  <section class="section benefits" id="beneficios">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Por qué Aprendé+</p><h2>Pensado para que termines lo que empezás</h2></div>
+      <div class="benefit-grid" id="benefitGrid"></div>
+    </div>
+  </section>
+
+  <section class="section plans" id="planes">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Membresía</p><h2>Elegí cómo aprender</h2></div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <h3>Gratis</h3><div class="price">$0</div><span class="per">para siempre</span>
+          <ul><li>✓ Acceso a 10 cursos intro</li><li>✓ Comunidad abierta</li><li class="off">✗ Certificados</li><li class="off">✗ Cursos premium</li></ul>
+          <a href="#" class="btn btn-soft full">Crear cuenta</a>
+        </div>
+        <div class="plan-card feat">
+          <span class="badge">Recomendado</span>
+          <h3>Pro</h3><div class="price">$9.900<span>/mes</span></div><span class="per">facturado anual</span>
+          <ul><li>✓ Todos los cursos (+120)</li><li>✓ Certificados oficiales</li><li>✓ Proyectos con devolución</li><li>✓ Acceso de por vida a lo cursado</li></ul>
+          <a href="#" class="btn btn-primary full">Empezar 7 días gratis</a>
+        </div>
+        <div class="plan-card">
+          <h3>Equipos</h3><div class="price">A medida</div><span class="per">para empresas</span>
+          <ul><li>✓ Todo lo del plan Pro</li><li>✓ Panel de administración</li><li>✓ Reportes de progreso</li><li>✓ Soporte dedicado</li></ul>
+          <a href="#" class="btn btn-soft full">Hablar con ventas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Tu próxima habilidad te está esperando.</h2>
+      <p>Empezá gratis hoy. Sin tarjeta, sin compromiso.</p>
+      <a href="#planes" class="btn btn-light">Crear mi cuenta gratis</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand">Aprendé<span>+</span></a><p>Academia online para crecer profesionalmente.</p></div>
+      <div class="foot-links"><a href="#cursos">Cursos</a><a href="#planes">Planes</a><a href="#">Para empresas</a><a href="#">Ayuda</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 Aprendé+ — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

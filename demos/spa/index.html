@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura · Spa & Estética — Tu momento de calma (Demo)</title>
+  <meta name="description" content="Demo de sitio para spa y centro de estética: tratamientos, precios y reservas. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand">Aura<span>·</span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#tratamientos" onclick="closeMenu()">Tratamientos</a>
+        <a href="#experiencia" onclick="closeMenu()">Experiencia</a>
+        <a href="#precios" onclick="closeMenu()">Precios</a>
+        <a href="#reservar" class="btn btn-sage sm" onclick="closeMenu()">Reservar</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Spa & estética holística</p>
+        <h1>Tu momento<br>de calma.</h1>
+        <p class="lead">Un refugio para reconectar con vos. Tratamientos faciales, corporales y masajes pensados para tu bienestar integral.</p>
+        <div class="hero-cta">
+          <a href="#reservar" class="btn btn-sage">Reservar mi sesión</a>
+          <a href="#tratamientos" class="btn btn-soft">Ver tratamientos</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hv-circle"></div>
+        <div class="hv-img"><span>🌿</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon">
+    <div class="wrap ribbon-inner">
+      <span>🌸 Productos naturales</span><span>💆 Profesionales matriculadas</span><span>🕯️ Ambiente de relax</span><span>♻️ Cruelty free</span>
+    </div>
+  </div>
+
+  <section class="section treatments" id="tratamientos">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Lo que ofrecemos</p><h2>Tratamientos</h2></div>
+      <div class="treat-grid" id="treatGrid"></div>
+    </div>
+  </section>
+
+  <section class="section experience" id="experiencia">
+    <div class="wrap exp-grid">
+      <div class="exp-visual" aria-hidden="true"><span>🧖‍♀️</span></div>
+      <div class="exp-text">
+        <p class="eyebrow">La experiencia Aura</p>
+        <h2>Más que un tratamiento, un ritual.</h2>
+        <p>Desde que entrás, todo está pensado para que sueltes. Aromaterapia, música suave, infusiones y manos expertas que saben exactamente lo que tu cuerpo necesita.</p>
+        <ul class="exp-list">
+          <li>✿ Diagnóstico personalizado de tu piel</li>
+          <li>✿ Productos premium de cosmética natural</li>
+          <li>✿ Espacios privados y silenciosos</li>
+          <li>✿ Té de cortesía al finalizar</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pricing" id="precios">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Planes</p><h2>Elegí tu experiencia</h2></div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>Esencial</h3><div class="price">$22.000</div><span class="per">sesión individual</span>
+          <ul><li>✓ 1 tratamiento a elección</li><li>✓ 50 minutos</li><li>✓ Diagnóstico de piel</li></ul>
+          <a href="#reservar" class="btn btn-soft full">Reservar</a>
+        </div>
+        <div class="price-card feat">
+          <span class="badge">Más elegido</span>
+          <h3>Ritual completo</h3><div class="price">$38.000</div><span class="per">experiencia 2 hs</span>
+          <ul><li>✓ Facial + masaje descontracturante</li><li>✓ Aromaterapia</li><li>✓ Exfoliación corporal</li><li>✓ Té e infusiones</li></ul>
+          <a href="#reservar" class="btn btn-sage full">Reservar</a>
+        </div>
+        <div class="price-card">
+          <h3>Membresía</h3><div class="price">$60.000</div><span class="per">mensual · 4 sesiones</span>
+          <ul><li>✓ 4 tratamientos al mes</li><li>✓ 15% off en productos</li><li>✓ Prioridad en agenda</li></ul>
+          <a href="#reservar" class="btn btn-soft full">Sumarme</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reserve" id="reservar">
+    <div class="wrap reserve-card">
+      <div class="reserve-text">
+        <p class="eyebrow">Tu cita</p>
+        <h2>Reservá tu momento</h2>
+        <p>Dejanos tus datos y coordinamos el día y horario perfecto para vos.</p>
+        <ul class="reserve-info">
+          <li>📍 Calle Serena 120, Tu Ciudad</li>
+          <li>🕒 Lun a Sáb · 9 a 20 hs</li>
+          <li>📞 +54 11 0000-0000</li>
+        </ul>
+      </div>
+      <form class="reserve-form" onsubmit="submitForm(event)">
+        <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre" /></div>
+        <div class="field"><label>Tratamiento de interés</label>
+          <select required><option value="">Elegí uno</option><option>Facial</option><option>Masaje</option><option>Corporal</option><option>Ritual completo</option><option>No estoy segura</option></select>
+        </div>
+        <div class="field"><label>Teléfono</label><input type="tel" required placeholder="11 1234 5678" /></div>
+        <button type="submit" class="btn btn-sage full">Solicitar mi cita</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand">Aura<span>·</span></a><p>Spa & estética holística.</p></div>
+      <div class="foot-links"><a href="#tratamientos">Tratamientos</a><a href="#precios">Precios</a><a href="#reservar">Reservar</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 Aura Spa — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <a href="#reservar" class="float-cta">Reservar ✿</a>
+  <script src="script.js"></script>
+</body>
+</html>

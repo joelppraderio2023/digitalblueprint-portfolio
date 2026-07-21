@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terra · Inmobiliaria — Tu próximo hogar (Demo)</title>
+  <meta name="description" content="Demo de portal inmobiliario: búsqueda de propiedades con filtros y fichas. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — propiedades ficticias</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand"><span class="logo-mark">▰</span> Terra</a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#propiedades" onclick="closeMenu()">Propiedades</a>
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
+        <a href="#contacto" class="btn btn-primary sm" onclick="closeMenu()">Tasá tu propiedad</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="kicker">Más de 1.500 propiedades en cartera</p>
+      <h1>Encontrá el lugar<br>donde querés vivir.</h1>
+      <p class="hero-sub">Casas, departamentos y terrenos seleccionados. Asesoramiento honesto, de principio a fin.</p>
+      <div class="search-box">
+        <div class="sf"><label>Operación</label>
+          <select id="fOp"><option value="all">Comprar o alquilar</option><option>Venta</option><option>Alquiler</option></select>
+        </div>
+        <div class="sf"><label>Tipo</label>
+          <select id="fType"><option value="all">Todos</option><option>Casa</option><option>Departamento</option><option>Terreno</option></select>
+        </div>
+        <div class="sf"><label>Ambientes</label>
+          <select id="fRooms"><option value="all">Cualquiera</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        </div>
+        <button class="btn btn-primary search-btn" onclick="applyFilters()">🔍 Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section listings" id="propiedades">
+    <div class="wrap">
+      <div class="listings-head">
+        <div><h2>Propiedades destacadas</h2><p id="resultCount"></p></div>
+        <button class="clear-btn" onclick="resetFilters()">Limpiar filtros</button>
+      </div>
+      <div class="prop-grid" id="propGrid"></div>
+      <p class="no-results" id="noResults" style="display:none">No hay propiedades con esos filtros. Probá con otros criterios.</p>
+    </div>
+  </section>
+
+  <section class="section services" id="servicios">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Qué hacemos</p><h2>Te acompañamos en todo</h2></div>
+      <div class="svc-grid">
+        <div class="svc-card"><div class="svc-ic">🏠</div><h3>Compra y venta</h3><p>Tasación real de mercado y difusión en todos los portales para vender al mejor precio.</p></div>
+        <div class="svc-card"><div class="svc-ic">🔑</div><h3>Alquileres</h3><p>Gestión completa: contratos, garantías y administración mensual sin que te preocupes por nada.</p></div>
+        <div class="svc-card"><div class="svc-ic">📋</div><h3>Asesoría legal</h3><p>Escrituras, boletos y due diligence con escribanos de confianza.</p></div>
+        <div class="svc-card"><div class="svc-ic">📈</div><h3>Inversiones</h3><p>Te ayudamos a invertir en ladrillos con la mejor relación riesgo–retorno.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about" id="nosotros">
+    <div class="wrap about-grid">
+      <div class="about-text">
+        <p class="eyebrow">Sobre Terra</p>
+        <h2>20 años abriendo puertas.</h2>
+        <p>Somos una inmobiliaria familiar que cree en el trato directo y la transparencia. No vendemos propiedades: ayudamos a personas a encontrar su lugar.</p>
+        <div class="about-stats">
+          <div><strong>+3.500</strong><span>operaciones cerradas</span></div>
+          <div><strong>20</strong><span>años en el mercado</span></div>
+          <div><strong>4.8★</strong><span>en Google</span></div>
+        </div>
+      </div>
+      <div class="about-visual" aria-hidden="true"><span>🏘️</span></div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contacto">
+    <div class="wrap contact-card">
+      <div class="contact-text">
+        <h2>¿Querés tasar o publicar tu propiedad?</h2>
+        <p>Dejanos tus datos y un asesor te contacta sin cargo.</p>
+      </div>
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="field"><input type="text" required placeholder="Nombre" /></div>
+        <div class="field"><input type="tel" required placeholder="Teléfono / WhatsApp" /></div>
+        <button type="submit" class="btn btn-primary full">Solicitar tasación gratis</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand"><span class="logo-mark">▰</span> Terra</a><p>Inmobiliaria · Mat. 0000</p></div>
+      <div class="foot-links"><a href="#propiedades">Propiedades</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 Terra Inmobiliaria — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <!-- MODAL FICHA -->
+  <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal" id="modalContent"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

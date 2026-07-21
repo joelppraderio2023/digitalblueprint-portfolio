@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonrisa · Centro Odontológico — Tu mejor sonrisa (Demo)</title>
+  <meta name="description" content="Demo de sitio para consultorio odontológico: servicios, equipo y turnos. Plantilla de Digital Blueprint." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="demo-bar">
+    <span>🎨 Demo de Digital Blueprint — contenido ficticio</span>
+    <a href="../index.html">← Volver a demos</a>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand"><span class="logo-mark">🦷</span> Sonrisa</a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#equipo" onclick="closeMenu()">Equipo</a>
+        <a href="#faq" onclick="closeMenu()">Preguntas</a>
+        <a href="#turno" class="btn btn-primary sm" onclick="closeMenu()">Pedir turno</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Menú" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="pill">✓ Atención con obras sociales y prepagas</p>
+        <h1>Tu mejor <span>sonrisa</span> empieza acá.</h1>
+        <p class="lead">Odontología integral para toda la familia. Tecnología moderna, trato humano y sin dolor. Te esperamos.</p>
+        <div class="hero-cta">
+          <a href="#turno" class="btn btn-primary">Pedir un turno</a>
+          <a href="#servicios" class="btn btn-soft">Ver servicios</a>
+        </div>
+        <div class="hero-trust">
+          <div class="t-item"><strong>+20</strong><span>años de experiencia</span></div>
+          <div class="t-item"><strong>+15K</strong><span>pacientes atendidos</span></div>
+          <div class="t-item"><strong>4.9★</strong><span>valoración Google</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hv-card"><span>😁</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services" id="servicios">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Tratamientos</p><h2>Lo que hacemos</h2></div>
+      <div class="svc-grid" id="svcGrid"></div>
+    </div>
+  </section>
+
+  <section class="section feature">
+    <div class="wrap feat-grid">
+      <div class="feat-visual" aria-hidden="true"><span>🪥</span></div>
+      <div class="feat-text">
+        <p class="eyebrow">Por qué elegirnos</p>
+        <h2>Una experiencia diferente en el dentista.</h2>
+        <ul class="feat-list">
+          <li><b>Sin dolor</b><span>Técnicas modernas y anestesia de última generación.</span></li>
+          <li><b>Turnos puntuales</b><span>Respetamos tu tiempo: poca espera, atención dedicada.</span></li>
+          <li><b>Presupuesto claro</b><span>Sabés cuánto vas a pagar antes de empezar.</span></li>
+          <li><b>Para toda la familia</b><span>Desde los más chicos hasta los abuelos.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section team" id="equipo">
+    <div class="wrap">
+      <div class="section-head center"><p class="eyebrow">Nuestro equipo</p><h2>Profesionales que te cuidan</h2></div>
+      <div class="team-grid" id="teamGrid"></div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="wrap faq-wrap">
+      <div class="section-head"><p class="eyebrow">Dudas frecuentes</p><h2>Preguntas frecuentes</h2></div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <section class="section turno" id="turno">
+    <div class="wrap turno-card">
+      <div class="turno-text">
+        <p class="eyebrow light">Reservá online</p>
+        <h2>Pedí tu turno</h2>
+        <p>Completá el formulario y te confirmamos por WhatsApp el día y horario.</p>
+        <ul class="turno-info">
+          <li>📍 Av. Sonriente 350, Tu Ciudad</li>
+          <li>🕒 Lun a Vie 9–20 hs · Sáb 9–13 hs</li>
+          <li>📞 +54 11 0000-0000</li>
+          <li>🚨 Urgencias 24 hs</li>
+        </ul>
+      </div>
+      <form class="turno-form" onsubmit="submitForm(event)">
+        <h3>Solicitar turno</h3>
+        <div class="field"><label>Nombre y apellido</label><input type="text" required placeholder="Tu nombre" /></div>
+        <div class="field"><label>Teléfono</label><input type="tel" required placeholder="11 1234 5678" /></div>
+        <div class="field"><label>Motivo de consulta</label>
+          <select required><option value="">Elegí una opción</option><option>Control / Limpieza</option><option>Dolor / Urgencia</option><option>Ortodoncia</option><option>Implantes</option><option>Estética dental</option><option>Otro</option></select>
+        </div>
+        <div class="field"><label>Obra social (opcional)</label><input type="text" placeholder="Ej: OSDE, Swiss Medical..." /></div>
+        <button type="submit" class="btn btn-primary full">Solicitar turno</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap foot-inner">
+      <div><a href="#top" class="brand"><span class="logo-mark">🦷</span> Sonrisa</a><p>Centro odontológico · Mat. 0000</p></div>
+      <div class="foot-links"><a href="#servicios">Servicios</a><a href="#equipo">Equipo</a><a href="#turno">Turnos</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="wrap foot-bottom"><span>© 2026 Sonrisa — Demo de Digital Blueprint.</span><a href="../index.html">Ver otras demos →</a></div>
+  </footer>
+
+  <a href="#turno" class="float-cta">Pedir turno</a>
+  <script src="script.js"></script>
+</body>
+</html>

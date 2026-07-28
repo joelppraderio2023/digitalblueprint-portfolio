@@ -2133,13 +2133,20 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 12px 6vw 30px;
+      padding: 30px 6vw 40px;
+      perspective: 1400px;
     }
     .mcar::-webkit-scrollbar { display: none; }
     .mslide {
       flex: 0 0 auto;
       width: min(64vw, 235px);
       scroll-snap-align: center;
+      transform-origin: center center;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    /* coverflow desactivado si el usuario pide menos movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      .mslide { transform: none !important; opacity: 1 !important; }
     }
     .mphone {
       position: relative;
@@ -3976,16 +3983,48 @@
 
   if (ppSection) ppObserver.observe(ppSection);
 
-  // ── CARRUSEL MOBILE (flechas desktop) ──
+  // ── CARRUSEL MOBILE (flechas + coverflow 3D) ──
   (function(){
     const car = document.getElementById('mcar');
     if (!car) return;
-    const step = () => {
-      const slide = car.querySelector('.mslide');
-      return slide ? slide.offsetWidth + 26 : 260;
-    };
-    document.querySelector('.mcar-prev').addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
-    document.querySelector('.mcar-next').addEventListener('click', () => car.scrollBy({ left:  step(), behavior: 'smooth' }));
+    const slides = [...car.querySelectorAll('.mslide')];
+    const step = () => (slides[0] ? slides[0].offsetWidth + 26 : 260);
+    const prev = document.querySelector('.mcar-prev');
+    const next = document.querySelector('.mcar-next');
+    if (prev) prev.addEventListener('click', () => car.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => car.scrollBy({ left:  step(), behavior: 'smooth' }));
+
+    // Profundidad: el slide más cerca del centro va al frente; los de los costados retroceden.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = null;
+    function depth(){
+      raf = null;
+      const cr = car.getBoundingClientRect();
+      const center = cr.left + cr.width / 2;
+      for (const s of slides){
+        const r = s.getBoundingClientRect();
+        const c = r.left + r.width / 2;
+        // distancia normalizada al centro (-1 .. 1 aprox)
+        const d = Math.max(-1, Math.min(1, (c - center) / (cr.width * 0.5)));
+        const ad = Math.abs(d);
+        const rotY  = d * -20;              // grados: gira alejándose del centro
+        const scale = 1 - ad * 0.16;        // los de afuera más chicos
+        const tz    = -ad * 90;             // y hacia atrás en Z
+        const op    = 1 - ad * 0.42;        // y más tenues
+        s.style.transform = `rotateY(${rotY}deg) scale(${scale}) translateZ(${tz}px)`;
+        s.style.opacity = op.toFixed(3);
+      }
+    }
+    function onScroll(){ if (!raf) raf = requestAnimationFrame(depth); }
+
+    if (!reduce){
+      car.addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll);
+      // primera pasada (y de nuevo tras cargar imágenes, por si cambian medidas)
+      depth();
+      setTimeout(depth, 400);
+      addEventListener('load', () => setTimeout(depth, 100));
+    }
   })();
 
   // ── SCROLL PROGRESS ──

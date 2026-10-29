@@ -474,6 +474,76 @@
       transform: translateY(-2px);
     }
 
+    /* ── CHAT IA DE EJEMPLO (usa la base de .ig-card) ── */
+    .ig-card.chat-card { padding: 0; text-align: left; }
+    .chat-top {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(6,182,212,.12);
+      background: rgba(6,182,212,.05);
+    }
+    .chat-av {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), #0E7490, #0E2A47);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .chat-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .chat-name { font-family: var(--f-head); font-weight: 700; font-size: 14px; color: var(--white); white-space: nowrap; }
+    .chat-status { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-muted); }
+    .chat-on { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 8px #22C55E; }
+    .chat-biz {
+      margin-left: auto; white-space: nowrap;
+      background: rgba(6,182,212,.14); border: 1px solid rgba(6,182,212,.28);
+      color: var(--cyan); font-size: 10px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 100px;
+      transition: opacity .3s ease;
+    }
+    .chat-body {
+      height: 320px; padding: 16px;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+      overflow: hidden;
+      /* los mensajes viejos se desvanecen arriba en vez de cortarse */
+      -webkit-mask-image: linear-gradient(transparent, #000 48px);
+              mask-image: linear-gradient(transparent, #000 48px);
+      transition: opacity .35s ease;
+    }
+    .chat-msg {
+      max-width: 85%; padding: 9px 13px;
+      font-size: 13.5px; line-height: 1.45; color: var(--text);
+      border-radius: 16px;
+      animation: msgIn .35s ease both;
+    }
+    .chat-msg.u { align-self: flex-end; background: rgba(6,182,212,.22); border-bottom-right-radius: 4px; }
+    .chat-msg.b { align-self: flex-start; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.06); border-bottom-left-radius: 4px; }
+    .chat-typing { display: inline-flex; gap: 4px; padding: 12px 14px; }
+    .chat-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); animation: typeDot 1s ease-in-out infinite; }
+    .chat-typing i:nth-child(2) { animation-delay: .15s; }
+    .chat-typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes typeDot { 0%,60%,100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+    .chat-input {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 0 12px 12px; padding: 11px 14px;
+      border: 1px solid rgba(6,182,212,.14); border-radius: 100px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .chat-send { color: var(--cyan); }
+    .chat-note { margin-top: 12px; text-align: center; font-size: 12px; color: var(--text-muted); }
+
+    /* franja de clientes bajo la fila de credibilidad */
+    .hero-clients {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      margin-top: 26px; font-size: 13px;
+    }
+    .hc-lbl { width: 100%; font-size: 11px; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-clients a {
+      padding: 6px 12px; border-radius: 100px;
+      border: 1px solid var(--glass-b); color: var(--text-dim);
+      text-decoration: none; transition: color var(--ease), border-color var(--ease);
+    }
+    .hero-clients a:hover { color: var(--cyan); border-color: var(--cyan); }
+
     /* ── IG CARD ── */
     .ig-card {
       background: var(--glass);
@@ -2207,7 +2277,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 48px; text-align: center; }
-      .hero-right { order: -1; max-width: 360px; margin: 0 auto; }
+      .hero-right { width: 100%; max-width: 380px; margin: 0 auto; }
+      .hero-clients { justify-content: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-btns { justify-content: center; }
       .hero-chip { margin: 0 auto 26px; }
@@ -2660,7 +2731,7 @@
       <p class="hero-sub">Diseño a medida y código propio, con un asistente de inteligencia artificial que responde consultas, pasa precios y toma pedidos aunque vos no estés.</p>
       <div class="hero-btns">
         <a href="#contacto" class="btn-main">✦ Cotizar mi web</a>
-        <a href="#servicios" class="btn-ghost">Ver servicios ↓</a>
+        <a href="#demo-chat" class="btn-ghost">Ver cómo funciona ↓</a>
       </div>
       <p class="hero-urgency">
         <span class="hu-dot"></span>
@@ -2668,60 +2739,42 @@
       </p>
       <div class="trust">
         <div class="trust-item"><span class="trust-num"><em>8</em></span><span class="trust-lbl">Proyectos online</span></div>
-        <div class="trust-item"><span class="trust-num"><em>1</em>sem</span><span class="trust-lbl">Tu web lista</span></div>
-        <div class="trust-item"><span class="trust-num"><em>100%</em></span><span class="trust-lbl">A medida</span></div>
+        <div class="trust-item"><span class="trust-num"><em>24</em>/7</span><span class="trust-lbl">Atención con IA</span></div>
+        <div class="trust-item"><span class="trust-num"><em>100</em>%</span><span class="trust-lbl">A medida</span></div>
       </div>
+      <p class="hero-clients">
+        <span class="hc-lbl">Ya confían en mí</span>
+        <a href="#trabajos">Woods Puppys</a><a href="#trabajos">Electro Red</a><a href="#trabajos">Manantial de Bendiciones</a><a href="#trabajos">La Buena Semilla</a>
+      </p>
     </div>
 
-    <!-- RIGHT — IG CARD -->
-    <div class="hero-right">
+    <!-- RIGHT — CHAT IA DE EJEMPLO -->
+    <div class="hero-right" id="demo-chat">
       <div class="ig-tilt" id="tilt">
         <div class="badge-strip">
-          <div class="float-badge fb-1"><span class="fb-ico">⚡</span> Aparece en Google</div>
-          <div class="float-badge fb-2"><span class="fb-ico">📱</span> Se ve bien en el cel</div>
-          <div class="float-badge fb-3"><span class="fb-ico">🎨</span> Diseño único</div>
+          <div class="float-badge fb-1"><span class="fb-ico">⚡</span> Responde al instante</div>
+          <div class="float-badge fb-2"><span class="fb-ico">🕐</span> Atiende 24/7</div>
+          <div class="float-badge fb-3"><span class="fb-ico">💬</span> Web y WhatsApp</div>
         </div>
-      <div class="ig-card">
-        <div class="ig-card-top">
-          <div class="ig-av-wrap">
-            <div class="ig-av-ring"></div>
-            <div class="ig-av">
-          <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" width="36" height="36" aria-hidden="true">
-            <line x1="40" y1="216" x2="216" y2="216" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
-            <rect x="56" y="160" width="36" height="48" rx="6" fill="#fff"/>
-            <rect x="110" y="120" width="36" height="88" rx="6" fill="#fff"/>
-            <rect x="164" y="64" width="36" height="144" rx="6" fill="#06B6D4"/>
-          </svg>
+        <div class="ig-card chat-card">
+          <div class="chat-top">
+            <div class="chat-av" aria-hidden="true">
+              <svg viewBox="0 0 256 256" width="22" height="22">
+                <rect x="56" y="160" width="36" height="48" rx="6" fill="#fff"/>
+                <rect x="110" y="120" width="36" height="88" rx="6" fill="#fff"/>
+                <rect x="164" y="64" width="36" height="144" rx="6" fill="#06B6D4"/>
+              </svg>
+            </div>
+            <div class="chat-who">
+              <span class="chat-name">Asistente IA</span>
+              <span class="chat-status"><span class="chat-on"></span>en línea</span>
+            </div>
+            <span class="chat-biz" id="chatBiz">Electro · cuotas</span>
+          </div>
+          <div class="chat-body" id="chatBody" aria-hidden="true"></div>
+          <div class="chat-input" aria-hidden="true">Escribí tu consulta… <span class="chat-send">➤</span></div>
         </div>
-          </div>
-          <div class="ig-info">
-            <div class="ig-handle">@digitalblueprint_ar</div>
-            <span class="ig-badge">Producto / servicio</span>
-          </div>
-        </div>
-        <p class="ig-bio">
-          🌐 Webs que trabajan por tu negocio<br>
-          ✏️ Diseño a medida · SEO incluido<br>
-          📍 Buenos Aires · Online para toda Argentina
-        </p>
-        <div class="ig-stats">
-          <div class="ig-stat">
-            <span class="ig-num">8</span>
-            <span class="ig-lbl">Proyectos</span>
-          </div>
-          <div class="ig-stat">
-            <span class="ig-num">1 sem</span>
-            <span class="ig-lbl">Entrega</span>
-          </div>
-          <div class="ig-stat">
-            <span class="ig-num">100%</span>
-            <span class="ig-lbl">Custom</span>
-          </div>
-        </div>
-        <a href="https://instagram.com/digitalblueprint_ar" target="_blank" rel="noopener noreferrer" class="ig-btn">
-          Seguir en Instagram →
-        </a>
-      </div>
+        <p class="chat-note">Ejemplo de cómo atiende tu asistente</p>
       </div>
     </div>
 
@@ -3906,6 +3959,73 @@
       tilt.style.transform = `rotateY(${px*12}deg) rotateX(${-py*12}deg)`;
     });
     zone.addEventListener('pointerleave', () => { tilt.style.transform = 'rotateY(0) rotateX(0)'; });
+  })();
+
+  // ===== Chat IA de ejemplo: conversaciones que rotan por rubro =====
+  (function(){
+    const body = document.getElementById('chatBody');
+    const biz  = document.getElementById('chatBiz');
+    if (!body) return;
+    const CHATS = [
+      { biz: 'Electro · cuotas', msgs: [
+        ['u', '¡Hola! ¿Tienen la heladera no frost? ¿En cuántas cuotas?'],
+        ['b', '¡Hola! Sí 🙌 Sale $32.000 por semana en 12 cuotas, sin tarjeta.'],
+        ['b', '¿Querés que te la reserve?'],
+        ['u', 'Dale, sí'],
+        ['b', 'Listo ✅ Te paso con Juan para coordinar la entrega.'] ] },
+      { biz: 'Peluquería · turnos', msgs: [
+        ['u', 'Hola, ¿tenés turno para corte el sábado?'],
+        ['b', '¡Hola! El sábado tengo 10:30 y 16:00 ✂️ ¿Cuál te queda mejor?'],
+        ['u', '10:30'],
+        ['b', 'Agendado ✅ Sábado 10:30. ¡Te esperamos!'] ] },
+      { biz: 'Verdulería · delivery', msgs: [
+        ['u', '¿Hacen envíos a Martínez?'],
+        ['b', '¡Sí! 🛵 Hoy entregamos de 17 a 20 hs.'],
+        ['u', 'Genial, quiero hacer un pedido'],
+        ['b', '¡Buenísimo! Te paso el catálogo para que elijas 👇'] ] },
+    ];
+    const add = (who, html) => {
+      const el = document.createElement('div');
+      el.className = 'chat-msg ' + who;
+      el.innerHTML = html;
+      body.appendChild(el);
+      return el;
+    };
+
+    // Sin animaciones: se muestra la primera conversación completa y quieta
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      CHATS[0].msgs.forEach(([w, t]) => add(w, t));
+      return;
+    }
+
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    let visible = false;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(body);
+    const whenVisible = async () => { while (!visible || document.hidden) await wait(400); };
+
+    (async function loop(){
+      for (let i = 0; ; i = (i + 1) % CHATS.length) {
+        const c = CHATS[i];
+        biz.textContent = c.biz;
+        body.innerHTML = '';
+        body.style.opacity = 1;
+        await wait(500);
+        for (const [who, text] of c.msgs) {
+          await whenVisible();
+          if (who === 'b') {
+            const typing = add('b chat-typing', '<i></i><i></i><i></i>');
+            await wait(900);
+            typing.remove();
+          } else {
+            await wait(700);
+          }
+          add(who, text);
+        }
+        await wait(3200);
+        body.style.opacity = 0;
+        await wait(400);
+      }
+    })();
   })();
 
   // Nav scroll

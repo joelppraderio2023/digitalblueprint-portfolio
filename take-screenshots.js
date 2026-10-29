@@ -46,6 +46,12 @@ const SITES = [
     width: 1280,
     waitFor: 3000,
   },
+  {
+    name: 'electro-red',
+    url: 'https://electroredcuotas.com.ar/',
+    width: 1280,
+    waitFor: 3000,
+  },
 ];
 
 const OUT = path.join(__dirname, 'assets', 'screenshots');

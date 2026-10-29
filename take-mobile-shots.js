@@ -9,6 +9,8 @@ const SITES = [
   { slug: 'la-buena-semilla',  url: 'https://la-buenasemilla.netlify.app/' },
   { slug: 'owen-house',        url: 'https://owen-house-criadero.pages.dev/' },
   { slug: 'ayelen',            url: 'https://ayelen-productos-capilares.pages.dev/' },
+  { slug: 'electro-red',       url: 'https://electroredcuotas.com.ar/' },
+  { slug: 'manantial-de-bendiciones', url: 'https://manantial-de-bendiciones.joelpgaming2023.workers.dev/' },
 ];
 
 (async () => {

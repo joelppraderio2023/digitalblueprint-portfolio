@@ -4,7 +4,7 @@ Sitio web de portfolio y servicios de **DigitalBlueprint**, desarrollador web fr
 
 ## 🚀 Ver en vivo
 
-> [digitalblueprint.netlify.app](https://digitalblueprint.netlify.app) *(próximamente con dominio propio)*
+> [digitalblueprint-portfolio.pages.dev](https://digitalblueprint-portfolio.pages.dev) *(próximamente con dominio propio)*
 
 ## 📁 Estructura
 

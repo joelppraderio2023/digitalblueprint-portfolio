@@ -6,7 +6,7 @@ const SITES = [
   { slug: 'woods-puppys',      url: 'https://woodspuppys.com.ar/' },
   { slug: 'mf-tramites',       url: 'https://joelppraderio2023.github.io/mf-tramites-vehiculares/' },
   { slug: 'silvia-fotografia', url: 'https://silvia-gomez-fotografia.pages.dev/' },
-  { slug: 'la-buena-semilla',  url: 'https://la-buenasemilla.netlify.app/' },
+  { slug: 'la-buena-semilla',  url: 'https://buenasemilla.com.ar/' },
   { slug: 'owen-house',        url: 'https://owen-house-criadero.pages.dev/' },
   { slug: 'ayelen',            url: 'https://ayelen-productos-capilares.pages.dev/' },
   { slug: 'electro-red',       url: 'https://electroredcuotas.com.ar/' },

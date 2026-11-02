@@ -19,7 +19,7 @@ const SITES = [
   },
   {
     name: 'la-buena-semilla',
-    url: 'https://la-buenasemilla.netlify.app/',
+    url: 'https://buenasemilla.com.ar/',
     waitFor: 3000,
     count: 4,
   },

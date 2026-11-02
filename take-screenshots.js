@@ -23,7 +23,7 @@ const SITES = [
   {
     name: 'la-buena-semilla',
     // carpeta local de Next.js — intenta la URL deployada si existe, si no salta
-    url: 'https://la-buenasemilla.netlify.app/',
+    url: 'https://buenasemilla.com.ar/',
     width: 1280,
     waitFor: 3000,
     fallbackLocal: true,

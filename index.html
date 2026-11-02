@@ -128,7 +128,7 @@
                 "@type": "UnitPriceSpecification",
                 "price": "179900",
                 "priceCurrency": "ARS",
-                "description": "Entrada de $179.900 ARS + cuota mensual de $29.900 ARS (mínimo 6 meses), incluye dominio .com, hosting, mantenimiento y soporte."
+                "description": "Entrada de $179.900 ARS + cuota mensual de $34.900 ARS (mínimo 6 meses), incluye dominio .com, hosting, mantenimiento y soporte."
               }
             },
             {
@@ -146,7 +146,7 @@
                 "@type": "UnitPriceSpecification",
                 "price": "349900",
                 "priceCurrency": "ARS",
-                "description": "Entrada de $349.900 ARS + cuota mensual de $49.900 ARS (mínimo 6 meses), incluye dominio .com, hosting, mantenimiento y soporte."
+                "description": "Entrada de $349.900 ARS + cuota mensual de $59.900 ARS (mínimo 6 meses), incluye dominio .com, hosting, mantenimiento y soporte."
               }
             },
             {
@@ -170,7 +170,7 @@
             "name": "¿Cuánto cuesta hacer una página web profesional en Argentina?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "En Lógica trabajamos con entrada + cuota mensual (mínimo 6 meses): Landing desde $99.900 + $19.900/mes, Sitio web completo desde $179.900 + $29.900/mes y Tienda online desde $349.900 + $49.900/mes. Todos incluyen diseño a medida, dominio, hosting, mantenimiento, soporte y SEO real."
+              "text": "En Lógica trabajamos con entrada + cuota mensual (mínimo 6 meses): Landing desde $99.900 + $19.900/mes, Sitio web completo desde $179.900 + $34.900/mes y Tienda online desde $349.900 + $59.900/mes. Todos incluyen diseño a medida, dominio, hosting, mantenimiento, soporte y SEO real."
             }
           },
           {
@@ -412,6 +412,25 @@
     .soon { display: inline-block; background: var(--black); color: var(--lime); border-radius: 100px; padding: 1px 8px; font-size: 10px; vertical-align: middle; }
     .plan.dark .soon { background: var(--lime); color: var(--black); }
     .addon a { font-weight: 800; text-decoration: underline; white-space: nowrap; }
+    /* detalle desplegable de cada plan */
+    .incl { border-top: 2px dashed currentColor; padding-top: 10px; }
+    .incl summary { cursor: pointer; font-weight: 800; min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
+    .incl summary::-webkit-details-marker { display: none; }
+    .incl summary::after { content: '+'; margin-left: auto; width: 28px; height: 28px; border: 2px solid currentColor; border-radius: 50%; display: grid; place-items: center; transition: rotate .2s; }
+    .incl[open] summary::after { rotate: 45deg; }
+    .incl .mono { margin: 10px 0 6px; opacity: .7; }
+    .incl ul { list-style: none; display: grid; gap: 6px; font-size: 14.5px; }
+    .incl li::before { content: '✓ '; font-weight: 800; }
+    /* qué incluye la cuota + talles */
+    .incluye { display: grid; gap: 22px; margin-top: 30px; }
+    .incluye h3 { font-weight: 800; font-size: 26px; letter-spacing: -.03em; line-height: 1.05; margin: 6px 0 14px; }
+    .incluye .ticks li::before { content: '✓ '; }
+    .incluye .small { font-size: 14px; margin-top: 14px; opacity: .8; }
+    .talles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .talles div { border: 2px solid var(--black); border-radius: 14px; padding: 12px; background: var(--cream); display: grid; gap: 2px; align-content: start; }
+    .talles b { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+    .talles strong { font-size: 20px; letter-spacing: -.02em; }
+    .talles span { font-size: 13.5px; line-height: 1.3; }
     .note { margin-top: 30px; background: #fff; border: var(--b); border-radius: 18px; padding: 18px 20px; font-size: 15px; }
     .guarantee { margin-top: 26px; display: grid; gap: 14px; }
     .guarantee h3 { font-weight: 800; font-size: 30px; letter-spacing: -.03em; line-height: 1; }
@@ -485,7 +504,7 @@
       .grid3 { grid-template-columns: repeat(3, 1fr); }
       .works { grid-template-columns: repeat(2, 1fr); gap: 30px; }
       .feats { grid-template-columns: repeat(2, 1fr); }
-      .compare, .plans { grid-template-columns: 1fr 1fr; }
+      .compare, .plans, .incluye { grid-template-columns: 1fr 1fr; }
       .band .wrap { grid-template-columns: 1fr auto; }
       .guarantee { grid-template-columns: 220px 1fr; align-items: start; }
       .phone { flex-basis: 250px; }
@@ -713,7 +732,12 @@
         <p>Una página potente para que tu negocio exista en Google y te escriban por WhatsApp.</p>
         <div class="price">$99.900 <small>de entrada</small></div>
         <div class="monthly">+ $19.900<small>/mes · unos $660 por día</small></div>
-        <ul class="ticks"><li>Página única con todas tus secciones</li><li>Botón directo a WhatsApp</li><li>Aparece en Google</li><li>Perfecta en el celular</li><li>Dominio incluido, sin trámites</li><li>Hosting, mantenimiento y soporte</li></ul>
+        <ul class="ticks"><li>1 página con hasta 6 secciones</li><li>Textos redactados por nosotros</li><li>Botón directo a WhatsApp</li><li>Aparece en Google</li><li>Dominio incluido, sin trámites</li><li>Lista en 5 a 7 días</li></ul>
+        <details class="incl"><summary>Ver todo lo que incluye</summary>
+          <p class="mono">La entrada incluye</p>
+          <ul><li>Diseño a medida, pensado primero para el celular</li><li>1 página con hasta 6 secciones (inicio, servicios, sobre vos, galería, preguntas, contacto)</li><li>Textos redactados por nosotros con lo que nos contás</li><li>Botón de WhatsApp y links a tus redes y a tu ubicación</li><li>SEO básico: que te encuentren por tu nombre y rubro</li><li>Dominio el primer año, a tu nombre, y seguridad (SSL)</li><li>2 rondas de ajustes antes de publicar</li></ul>
+          <p class="mono">Opcional</p><ul><li>Asistente con IA, como adicional</li></ul>
+        </details>
         <a href="https://wa.me/5491121165767?text=Hola%21%20Vi%20tu%20web%20y%20me%20interesa%20el%20plan%20Landing." target="_blank" rel="noopener noreferrer" class="btn btn-w"><svg class="ico-wa" aria-hidden="true"><use href="#wa"/></svg>Quiero la Landing</a>
       </div>
       <div class="card plan pop rv">
@@ -721,21 +745,56 @@
         <div class="ico">🌐</div><span class="mono">Sitio web completo</span><h3>Negocio</h3>
         <p>Tu web completa, con todo lo que tu negocio necesita para que te encuentren y te escriban.</p>
         <div class="price">$179.900 <small>de entrada</small></div>
-        <div class="monthly">+ $29.900<small>/mes · menos de $1.000 por día</small></div>
-        <ul class="ticks"><li><strong>Asistente con IA</strong> <span class="soon mono">Próximamente</span></li><li>Varias secciones o páginas</li><li>Diseño único para tu marca</li><li>Aparece en Google y en redes</li><li>Dominio .com incluido, sin trámites</li><li>Hosting, mantenimiento y soporte</li></ul>
+        <div class="monthly">+ $34.900<small>/mes · unos $1.160 por día</small></div>
+        <ul class="ticks"><li><strong>Asistente con IA</strong> <span class="soon mono">Próximamente</span></li><li>Hasta 5 páginas</li><li>Textos redactados por nosotros</li><li>Alta en Google Maps</li><li>Dominio .com incluido, sin trámites</li><li>Lista en 7 días</li></ul>
+        <details class="incl"><summary>Ver todo lo que incluye</summary>
+          <p class="mono">La entrada incluye</p>
+          <ul><li>Diseño a medida para tu marca, pensado primero para el celular</li><li>Hasta 5 páginas</li><li>Textos redactados por nosotros con lo que nos contás</li><li>WhatsApp, formulario de contacto y mapa</li><li>Galería o portfolio y preguntas frecuentes</li><li>SEO completo y alta en Google Maps</li><li>Estadísticas de visitas</li><li>Asistente con IA configurado con la info de tu negocio (próximamente)</li><li>Dominio .com el primer año, a tu nombre, y seguridad (SSL)</li><li>3 rondas de ajustes antes de publicar</li></ul>
+        </details>
         <a href="https://wa.me/5491121165767?text=Hola%21%20Vi%20tu%20web%20y%20me%20interesa%20el%20plan%20Negocio%20con%20IA." target="_blank" rel="noopener noreferrer" class="btn"><svg class="ico-wa" aria-hidden="true"><use href="#wa"/></svg>Quiero el plan Negocio</a>
       </div>
       <div class="card plan dark rv">
         <div class="ico">🛒</div><span class="mono">Tienda online</span><h3>Tienda</h3>
         <p>Catálogo, carrito y cobro funcionando solos. Tu tienda vende aunque vos no estés.</p>
         <div class="price">$349.900 <small>de entrada</small></div>
-        <div class="monthly">+ $49.900<small>/mes · unos $1.660 por día</small></div>
-        <ul class="ticks"><li><strong>Asistente con IA</strong> <span class="soon mono">Próximamente</span></li><li>Catálogo y carrito de compras</li><li>WhatsApp + MercadoPago</li><li>Panel para cargar productos y precios</li><li>Dominio .com incluido, sin trámites</li><li>Hosting, mantenimiento y soporte</li></ul>
+        <div class="monthly">+ $59.900<small>/mes · menos de $2.000 por día</small></div>
+        <ul class="ticks"><li><strong>Asistente con IA</strong> <span class="soon mono">Próximamente</span></li><li>Carga inicial de 50 productos</li><li>Carrito + cobro con MercadoPago</li><li>Panel para productos y precios</li><li>Video tutorial del panel</li><li>Lista en 10 a 14 días</li></ul>
+        <details class="incl"><summary>Ver todo lo que incluye</summary>
+          <p class="mono">La entrada incluye</p>
+          <ul><li>Todo lo del plan Negocio</li><li>Catálogo con carga inicial de hasta 50 productos (fotos y descripciones)</li><li>Carrito, pedidos por WhatsApp y cobro con MercadoPago</li><li>Panel para cargar productos y cambiar precios cuando quieras</li><li>Video tutorial para usar el panel</li><li>Asistente con IA configurado con tu catálogo (próximamente)</li><li>Dominio .com el primer año, a tu nombre, y seguridad (SSL)</li><li>3 rondas de ajustes antes de publicar</li></ul>
+        </details>
         <a href="https://wa.me/5491121165767?text=Hola%21%20Vi%20tu%20web%20y%20me%20interesa%20el%20plan%20Tienda%20Online." target="_blank" rel="noopener noreferrer" class="btn"><svg class="ico-wa" aria-hidden="true"><use href="#wa"/></svg>Quiero mi Tienda</a>
       </div>
     </div>
     <p class="addon rv">🤖 <strong>Próximamente: asistente con IA para tu web y tu WhatsApp.</strong> Se va a sumar a cualquier plan. Si te interesa, anotate y te aviso primero. <a href="https://wa.me/5491121165767?text=Hola%21%20Me%20interesa%20el%20asistente%20con%20IA.%20Avisame%20cuando%20est%C3%A9%20listo." target="_blank" rel="noopener noreferrer">Avisame →</a></p>
-    <p class="note rv"><strong>Cómo funciona el pago:</strong> la entrada la podés pagar en <strong>2 partes</strong> (la mitad al arrancar y la otra mitad al publicar). Después, una cuota mensual (mínimo 6 meses) con hosting, mantenimiento y soporte. El dominio lo compro y configuro yo, sin que hagas ningún trámite, y queda registrado a <strong>tu nombre</strong> desde el primer día. Si dejás de pagar la cuota, el sitio se da de baja, pero el dominio sigue siendo tuyo.</p>
+    <div class="incluye">
+      <div class="card cuota rv">
+        <span class="mono">Todos los meses</span>
+        <h3>Tu cuota incluye</h3>
+        <ul class="ticks">
+          <li>Hosting y dominio funcionando</li>
+          <li>Seguridad, actualizaciones y copias de seguridad</li>
+          <li>Si algo deja de andar, lo arreglamos sin costo</li>
+          <li><strong>Hasta 5 cambios chicos por mes</strong>: textos, fotos, horarios, precios, promos (en 48 a 72 horas)</li>
+          <li>En la Tienda, además, <strong>hasta 10 productos nuevos o modificados por mes</strong></li>
+          <li>Soporte por WhatsApp, con respuesta en 24 horas hábiles</li>
+        </ul>
+        <p class="small">Los cambios no usados no se acumulan al mes siguiente.</p>
+      </div>
+      <div class="card extras rv">
+        <span class="mono">¿Querés algo más?</span>
+        <h3>Precio fijo, sin sorpresas</h3>
+        <div class="talles">
+          <div><b>Chico</b><strong>$9.000</strong><span>Un cambio puntual extra</span></div>
+          <div><b>Mediano</b><strong>$45.000</strong><span>Una sección nueva o una galería</span></div>
+          <div><b>Grande</b><strong>desde $90.000</strong><span>Una página o función nueva (turnos, integraciones)</span></div>
+          <div><b>Proyecto</b><strong>a medida</strong><span>Rediseño o pasar de web a tienda</span></div>
+        </div>
+        <p class="small">Productos extra en la Tienda: $1.000 c/u. Urgencias en el día: +50%. <strong>Siempre te paso el precio antes</strong> y no hago nada sin tu ok.</p>
+      </div>
+    </div>
+    <p class="note rv"><strong>Cómo funciona el pago:</strong> la entrada la podés pagar en <strong>2 partes</strong>: la mitad al arrancar y la otra mitad cuando aprobás el diseño, antes de publicar. Después, una cuota mensual (mínimo 6 meses), que se actualiza por inflación cada 6 meses. El dominio lo compro y configuro yo, sin que hagas ningún trámite, y queda registrado a <strong>tu nombre</strong>; desde el segundo año la renovación se cobra a precio de costo. Si dejás de pagar la cuota, el sitio se da de baja, pero el dominio sigue siendo tuyo. Para cumplir los plazos, necesito el contenido al arrancar: si pasan más de 30 días sin recibirlo, el proyecto se pausa.</p>
+    <p class="note rv"><strong>No incluido en los planes</strong> (te lo cotizo si lo necesitás): diseño de logo, fotos profesionales, otros idiomas, y cambiar el diseño completo después de aprobado.</p>
     <div class="card c-lime guarantee rv">
       <h3>Sin riesgo para vos 🛡️</h3>
       <ul>
@@ -795,11 +854,12 @@
     <h2 class="h2 rv">Te respondo <em>todo</em></h2>
     <p class="sub rv">Las preguntas que más me hacen antes de arrancar.</p>
     <div class="faq">
-      <details class="rv"><summary>⏱️ ¿Cuánto tarda en estar lista mi web?</summary><p>Un sitio web completo o una tienda online la tenés en <strong>1 semana</strong>. El único requisito es que me des el contenido desde el inicio; de ahí me encargo yo de todo.</p></details>
-      <details class="rv"><summary>💳 ¿Tengo que pagar todo antes de empezar?</summary><p>No. Pagás una <strong>entrada</strong>, que podés dividir en 2 partes (la mitad al arrancar y la otra al publicar), y después una <strong>cuota mensual</strong> (mínimo 6 meses) que incluye hosting, mantenimiento y soporte. Podés pagar por transferencia o MercadoPago.</p></details>
+      <details class="rv"><summary>⏱️ ¿Cuánto tarda en estar lista mi web?</summary><p>Una landing o un sitio web los tenés en <strong>5 a 7 días</strong>, y una tienda online en <strong>10 a 14 días</strong>. El único requisito es que me des el contenido desde el inicio; de ahí me encargo yo de todo.</p></details>
+      <details class="rv"><summary>💳 ¿Tengo que pagar todo antes de empezar?</summary><p>No. Pagás una <strong>entrada</strong>, que podés dividir en 2 partes (la mitad al arrancar y la otra cuando aprobás el diseño), y después una <strong>cuota mensual</strong> (mínimo 6 meses) que incluye hosting, mantenimiento y soporte. Podés pagar por transferencia o MercadoPago.</p></details>
       <details class="rv"><summary>🌐 ¿Tengo que comprar el dominio yo?</summary><p>No, de eso me encargo yo: lo compro, lo configuro y queda registrado a <strong>tu nombre</strong>. Vos no hacés ningún trámite. La entrada ya cubre tu dominio <strong>.com</strong> del primer año. Desde el segundo año, la renovación (unos $15.000 a $18.000 por año) se cobra aparte, a precio de costo.</p></details>
-      <details class="rv"><summary>📋 ¿Qué necesito tener listo para arrancar?</summary><p>Solo tres cosas: <strong>a qué te dedicás</strong>, tus datos de contacto y algún ejemplo de estilo que te guste. Si tenés fotos, mejor; si no, usamos imágenes de calidad gratuitas. No necesitás saber nada de tecnología.</p></details>
-      <details class="rv"><summary>✏️ ¿Puedo pedir cambios después de publicada?</summary><p>Sí, siempre. Los <strong>precios los cambiás vos al instante</strong> desde tu panel. El resto (textos, fotos, ajustes) entra en tu cuota como <strong>una tanda de cambios por mes</strong>, que aplico en 48 a 72 horas. Algo más grande, como una sección nueva, lo presupuestamos aparte.</p></details>
+      <details class="rv"><summary>📋 ¿Qué necesito tener listo para arrancar?</summary><p>Solo tres cosas: <strong>a qué te dedicás</strong>, tus datos de contacto y algún ejemplo de estilo que te guste. <strong>Los textos los redactamos nosotros</strong> con lo que nos contás. Si tenés fotos, mejor; si no, usamos imágenes de calidad gratuitas. No necesitás saber nada de tecnología.</p></details>
+      <details class="rv"><summary>🧩 ¿Y si quiero algo que no está en mi plan?</summary><p>Lo cotizamos con <strong>precio fijo</strong> según el tamaño: un cambio extra <strong>$9.000</strong>, una sección nueva <strong>$45.000</strong>, una página o función nueva <strong>desde $90.000</strong>. Siempre te paso el precio antes y no hago nada sin tu ok. Logo, fotos profesionales u otros idiomas también se cotizan aparte.</p></details>
+      <details class="rv"><summary>✏️ ¿Puedo pedir cambios después de publicada?</summary><p>Sí, siempre. Tu cuota incluye <strong>hasta 5 cambios chicos por mes</strong> (textos, fotos, horarios, precios, promos), que aplico en 48 a 72 horas; en la Tienda, además, hasta 10 productos por mes, y los precios los cambiás vos al instante desde tu panel. Algo nuevo, como una sección o una función, se cotiza aparte con precio fijo.</p></details>
       <details class="rv"><summary>📱 ¿Se va a ver bien en el celular?</summary><p>Sí, 100%. Diseño primero para celular y pruebo cada web en varios dispositivos antes de publicarla.</p></details>
       <details class="rv"><summary>📍 ¿Trabajás solo en Buenos Aires?</summary><p>Con todo el país. Trabajo <strong>100% remoto</strong>: todo el proceso se hace por WhatsApp y online.</p></details>
     </div>

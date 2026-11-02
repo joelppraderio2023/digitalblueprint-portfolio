@@ -26,5 +26,5 @@ node take-screenshots.js
 
 ## 📬 Contacto
 
-- Instagram: [@digitalblue_print7](https://instagram.com/digitalblue_print7)
+- Instagram: [@logica.webs](https://instagram.com/logica.webs)
 - Email: joelpgaming2023@gmail.com

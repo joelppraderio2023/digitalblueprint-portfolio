@@ -1,5 +1,5 @@
 # robots.txt — DigitalBlueprint
-# https://digitalblueprint-portfolio.pages.dev
+# https://logicawebs.com.ar
 
 User-agent: *
 Allow: /
@@ -7,4 +7,4 @@ Allow: /
 # Bloquear archivos de sistema
 Disallow: /.netlify/
 
-Sitemap: https://digitalblueprint-portfolio.pages.dev/sitemap.xml
+Sitemap: https://logicawebs.com.ar/sitemap.xml

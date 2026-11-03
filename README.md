@@ -4,7 +4,7 @@ Sitio web de portfolio y servicios de **DigitalBlueprint**, desarrollador web fr
 
 ## 🚀 Ver en vivo
 
-> [digitalblueprint-portfolio.pages.dev](https://digitalblueprint-portfolio.pages.dev) *(próximamente con dominio propio)*
+> [logicawebs.com.ar](https://logicawebs.com.ar)
 
 ## 📁 Estructura
 

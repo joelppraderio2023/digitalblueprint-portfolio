@@ -1,0 +1,28 @@
+# LógIcA
+
+> LógIcA (Lógica) diseña páginas web a medida, tiendas online y asistentes con inteligencia artificial para negocios de toda Argentina. Trabaja 100% remoto por WhatsApp, con precio fijo, dominio incluido y soporte mensual. Lema: "Vos delegá, nosotros lo resolvemos."
+
+## Planes (pesos argentinos, entrada + cuota mensual, mínimo 6 meses)
+
+- Presencia: $99.900 + $19.900/mes. Página única con hasta 6 secciones, textos redactados por Lógica, botón de WhatsApp, dominio el primer año. Lista en 5 a 7 días.
+- Negocio: $179.900 + $34.900/mes. Hasta 5 páginas, formulario, mapa, galería, alta en Google Maps, estadísticas, dominio .com el primer año. Lista en 7 días.
+- Tienda: $349.900 + $59.900/mes. Tienda online con 50 productos cargados, carrito, pedidos por WhatsApp, cobro con MercadoPago y panel para productos y precios. Lista en 10 a 14 días.
+
+La cuota incluye la web online todo el año, seguridad, copias de respaldo, hasta 5 cambios por mes y soporte por WhatsApp. Los extras se cobran con precio fijo. El dominio queda a nombre del cliente.
+
+## Trabajos
+
+- [Woods Puppys](https://woodspuppys.com.ar/): criadero de Dachshund Mini.
+- [Electro Red](https://electroredcuotas.com.ar/): catálogo de electrodomésticos en cuotas semanales con panel propio.
+- [Manantial de Bendiciones](https://www.manantialsanisidro.org/): iglesia en San Isidro.
+- [La Buena Semilla](https://buenasemilla.com.ar/): verdulería con tienda online en San Martín.
+- [Silvia Gómez Fotografía](https://silvia-gomez-fotografia.pages.dev/): fotografía de eventos.
+- [Owen House](https://owen-house-criadero.pages.dev/): criadero de American Bully y Dachshund.
+- [Ayelén Productos Capilares](https://ayelen-productos-capilares.pages.dev/): catálogo de productos.
+- [MF Trámites Vehiculares](https://joelppraderio2023.github.io/mf-tramites-vehiculares/): gestoría del automotor.
+
+## Contacto
+
+- WhatsApp: https://wa.me/5491121165767 (+54 9 11 2116-5767)
+- Instagram: https://www.instagram.com/logica.webs/
+- Web: https://logicawebs.com.ar/

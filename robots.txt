@@ -1,10 +1,19 @@
-# robots.txt — DigitalBlueprint
+# robots.txt — LógIcA
 # https://logicawebs.com.ar
 
 User-agent: *
 Allow: /
 
-# Bloquear archivos de sistema
-Disallow: /.netlify/
+# Archivos internos del proyecto (no son contenido para buscadores)
+Disallow: /README.md
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /og-image-template.html
+Disallow: /check-responsive.js
+Disallow: /generate-og-image.js
+Disallow: /take-mobile-shots.js
+Disallow: /take-screenshots.js
+Disallow: /take-section-screenshots.js
+Disallow: /fetch-instagram.js
 
 Sitemap: https://logicawebs.com.ar/sitemap.xml

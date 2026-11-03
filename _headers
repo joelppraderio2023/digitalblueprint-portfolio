@@ -8,3 +8,17 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+
+# Las demos son negocios de ejemplo: se pueden ver pero no deben aparecer en Google
+/demos/*
+  X-Robots-Tag: noindex, follow
+
+# Archivos internos del proyecto
+/README.md
+  X-Robots-Tag: noindex
+/og-image-template.html
+  X-Robots-Tag: noindex
+/package.json
+  X-Robots-Tag: noindex
+/package-lock.json
+  X-Robots-Tag: noindex

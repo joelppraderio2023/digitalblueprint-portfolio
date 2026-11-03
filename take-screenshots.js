@@ -36,7 +36,7 @@ const SITES = [
   },
   {
     name: 'manantial-de-bendiciones',
-    url: 'https://manantial-de-bendiciones.joelpgaming2023.workers.dev/',
+    url: 'https://www.manantialsanisidro.org/',
     width: 1280,
     waitFor: 3000,
   },

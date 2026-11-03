@@ -494,6 +494,21 @@
     .sticky-cta strong { font-size: 17px; letter-spacing: -.02em; }
     .wa-float { display: none; }
 
+    /* testimonios */
+    .testis { display: grid; gap: 22px; }
+    .testi { display: flex; flex-direction: column; gap: 18px; margin: 0; }
+    .testi .q { font-weight: 800; font-size: 64px; line-height: .5; height: 26px; color: var(--blue); }
+    .testi.c-blue .q { color: var(--lime); }
+    .testi blockquote { font-weight: 700; font-size: 20px; line-height: 1.35; letter-spacing: -.01em; }
+    .testi blockquote mark { background: var(--pink); color: var(--black); padding: 0 .15em; border-radius: 4px; }
+    .testi.c-blue blockquote mark { background: var(--lime); }
+    .testi .who { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 6px; }
+    .testi .who img { width: 56px; height: 56px; border-radius: 50%; border: var(--b); background: #fff; object-fit: cover; flex-shrink: 0; }
+    .testi .who b { display: block; font-size: 17px; }
+    .testi .who a { color: inherit; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; display: inline-block; padding: 12px 0; margin: -12px 0; }
+    .testi .stars { color: var(--blue); letter-spacing: .1em; font-size: 15px; }
+    .testi.c-blue .stars { color: var(--lime); }
+
     /* reveal */
     .rv { opacity: 0; translate: 0 26px; transition: opacity .6s ease, translate .6s cubic-bezier(.3,1.4,.6,1); }
     .rv.in { opacity: 1; translate: 0 0; }
@@ -502,6 +517,8 @@
     @media (min-width: 760px) {
       :root { --gut: 32px; }
       .grid3 { grid-template-columns: repeat(3, 1fr); }
+      .testis { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .testi blockquote { font-size: 23px; }
       .works { grid-template-columns: repeat(2, 1fr); gap: 30px; }
       .feats { grid-template-columns: repeat(2, 1fr); }
       .compare, .plans, .incluye { grid-template-columns: 1fr 1fr; }
@@ -673,6 +690,27 @@
       <div class="phone"><div class="phone-frame"><img src="assets/screenshots/mobile/mf-tramites.jpg" alt="MF Trámites en celular" loading="lazy"></div><b>MF Trámites</b><a href="https://joelppraderio2023.github.io/mf-tramites-vehiculares/" target="_blank" rel="noopener noreferrer">Ver en vivo →</a></div>
     </div>
     <p class="mono scroll-hint">← Deslizá para ver más →</p>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios" style="padding-top:8px">
+  <div class="wrap">
+    <span class="mono">// Lo que dicen</span>
+    <h2 class="h2 rv">Clientes <em>contentos</em></h2>
+    <p class="sub rv">Lo que opinan los dueños de los negocios con los que trabajamos.</p>
+    <div class="testis">
+      <figure class="card testi c-lime rv">
+        <div class="q" aria-hidden="true">“</div>
+        <blockquote>Joel, de Lógica, entendió enseguida lo que queríamos transmitir. La web quedó hermosa, las familias nos encuentran y consultan directo, y la lista de espera nos ordenó todo. <mark>100% recomendable.</mark></blockquote>
+        <figcaption class="who"><img src="assets/clientes/woods-puppys.jpg" alt="" width="56" height="56" loading="lazy"><div><b>Woods Puppys</b><div class="stars" aria-label="5 estrellas">★★★★★</div><a href="https://woodspuppys.com.ar/" target="_blank" rel="noopener noreferrer">woodspuppys.com.ar</a></div></figcaption>
+      </figure>
+      <figure class="card testi c-blue rv">
+        <div class="q" aria-hidden="true">“</div>
+        <blockquote>Ahora los promotores mandan el link del catálogo y el cliente ya elige solo, con la cuota a la vista. <mark>Nos ahorra tiempo en cada venta.</mark> Gracias, Joel y Lógica.</blockquote>
+        <figcaption class="who"><img src="assets/clientes/electro-red.jpg" alt="" width="56" height="56" loading="lazy"><div><b>Electro Red</b><div class="stars" aria-label="5 estrellas">★★★★★</div><a href="https://electroredcuotas.com.ar/" target="_blank" rel="noopener noreferrer">electroredcuotas.com.ar</a></div></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 

@@ -10,4 +10,17 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://logicawebs.com.ar/cuanto-cuesta-una-pagina-web/</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+
+  <url>
+    <loc>https://logicawebs.com.ar/tienda-online/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <image:image>
+      <image:loc>https://logicawebs.com.ar/assets/screenshots/la-buena-semilla-s1.webp</image:loc>
+    </image:image>
+  </url>
+
 </urlset>

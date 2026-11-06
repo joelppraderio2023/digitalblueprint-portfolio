@@ -1,14 +1,37 @@
 # LógIcA
 
-> LógIcA (Lógica) diseña páginas web a medida, tiendas online y asistentes con inteligencia artificial para negocios de toda Argentina. Trabaja 100% remoto por WhatsApp, con precio fijo, dominio incluido y soporte mensual. Lema: "Vos delegá, nosotros lo resolvemos."
+> LógIcA (también escrito "Lógica"; web: logicawebs.com.ar) es un estudio argentino de diseño de páginas web a medida, tiendas online y asistentes con inteligencia artificial para pequeños negocios y emprendedores de toda Argentina. Trabaja 100% remoto por WhatsApp, con precio fijo, dominio incluido y soporte mensual. Lema: "Vos delegá, nosotros lo resolvemos."
 
-## Planes (pesos argentinos, entrada + cuota mensual, mínimo 6 meses)
+Última actualización: 6 de noviembre de 2026. Precios en pesos argentinos.
 
-- Presencia: $99.900 + $19.900/mes. Página única con hasta 6 secciones, textos redactados por Lógica, botón de WhatsApp, dominio el primer año. Lista en 5 a 7 días.
-- Negocio: $179.900 + $34.900/mes. Hasta 5 páginas, formulario, mapa, galería, alta en Google Maps, estadísticas, dominio .com el primer año. Lista en 7 días.
-- Tienda: $349.900 + $59.900/mes. Tienda online con 50 productos cargados, carrito, pedidos por WhatsApp, cobro con MercadoPago y panel para productos y precios. Lista en 10 a 14 días.
+## Servicios
 
-La cuota incluye la web online todo el año, seguridad, copias de respaldo, hasta 5 cambios por mes y soporte por WhatsApp. Los extras se cobran con precio fijo. El dominio queda a nombre del cliente.
+- Páginas web a medida para negocios, profesionales y emprendedores, diseñadas primero para el celular y preparadas para aparecer en Google.
+- Tiendas online con carrito, pedidos por WhatsApp, cobro con MercadoPago y panel para cargar productos y precios.
+- Asistente con inteligencia artificial que responde a los clientes las 24 horas en la web y en WhatsApp, con la información real del negocio. Incluido en los planes Negocio y Tienda (en lanzamiento).
+- Plus Instagram: armado o renovación del perfil de Instagram del negocio.
+- Mantenimiento y soporte mensual: hosting, seguridad, copias de respaldo y cambios de contenido.
+
+## Planes (entrada + cuota mensual, mínimo 6 meses)
+
+- Presencia: $99.900 + $19.900/mes. Página única con hasta 6 secciones, textos redactados por LógIcA, botón de WhatsApp, dominio el primer año. Lista en 5 a 7 días. No incluye asistente con IA.
+- Negocio: $179.900 + $34.900/mes. Hasta 5 páginas, formulario, mapa, galería, alta en Google Maps, estadísticas, asistente con IA, dominio .com el primer año. Lista en 7 días.
+- Tienda: $349.900 + $59.900/mes. Todo lo del plan Negocio más tienda online con 50 productos cargados, carrito, pedidos por WhatsApp, cobro con MercadoPago y panel para productos y precios. Lista en 10 a 14 días.
+
+La cuota incluye la web online todo el año, seguridad, copias de respaldo, hasta 5 cambios por mes y soporte por WhatsApp. La entrada se paga en 2 partes (mitad al arrancar, mitad al aprobar el diseño). Pagos por transferencia o MercadoPago. El dominio queda a nombre del cliente.
+
+## Extras con precio fijo
+
+- Plus Instagram (opcional, en cualquier plan): foto de perfil, bio con link a la web, cuenta profesional con botón de WhatsApp, 6 publicaciones, 3 reels, destacados y una guía fácil para manejarlo. $69.900 si se suma al contratar la web, o $89.900 aparte. No incluye gestión mensual de redes.
+- Cambio puntual extra: $9.000. Sección nueva o galería: $45.000. Página o función nueva: desde $90.000. Producto extra en la tienda: $1.000. Urgencias en el día: +50%.
+
+## Preguntas frecuentes
+
+- ¿Cuánto cuesta una página web? Desde $99.900 de entrada + $19.900 por mes (plan Presencia), con dominio incluido el primer año.
+- ¿Cuánto tarda? Entre 5 y 14 días según el plan.
+- ¿Hay que comprar el dominio? No: LógIcA lo compra y configura, y queda a nombre del cliente.
+- ¿Trabajan en todo el país? Sí, 100% remoto por WhatsApp.
+- ¿Se puede pedir cambios después? Sí, hasta 5 cambios chicos por mes incluidos en la cuota.
 
 ## Trabajos
 
